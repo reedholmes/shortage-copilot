@@ -499,12 +499,12 @@ export function planSku(
       `On hand: ${cs(a.effOnHand)}${a.inTransitCounted ? ` (includes ${cs(a.inTransitCounted)} arriving within ${settings.inTransitOnHandDays} days)` : ''} = ${days(a.dohToday)} on hand.`,
     )
     if (a.inboundBeforeRun) reasons.push(`Plus ${cs(a.inboundBeforeRun)} inbound later, before the run (not counted as on hand).`)
-    if (a.transferIn) reasons.push(`Receives a ${cs(a.transferIn)} transfer from a sister market (arrives in ${settings.transferLeadDays} days).`)
+    if (a.transferIn) reasons.push(`Receives a ${cs(a.transferIn)} intracompany transfer from another of this distributor's markets (arrives in ${settings.transferLeadDays} days).`)
     if (a.transferIn && a.dohToday < settings.transferLeadDays)
       reasons.push(
         `Watch: only ${days(a.dohToday)} on hand and the transfer lands in ${settings.transferLeadDays}, so about ${days(settings.transferLeadDays - a.dohToday)} at risk unless stock arrives sooner.`,
       )
-    if (a.transferOut) reasons.push(`Sends a ${cs(a.transferOut)} transfer to a sister market that is short.`)
+    if (a.transferOut) reasons.push(`Sends a ${cs(a.transferOut)} intracompany transfer to another of this distributor's markets that is short.`)
 
     // Decision
     switch (rule) {

@@ -30,3 +30,7 @@ dist-ssr
 
 # Local editor/agent settings
 .claude
+
+.dev.vars*
+!.dev.vars.example
+!.env.example

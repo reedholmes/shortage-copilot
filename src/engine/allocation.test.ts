@@ -209,7 +209,7 @@ describe('Step 6: priority and spreading', () => {
 })
 
 describe('Step 7: transfers', () => {
-  it('moves stock from a long market to a short sister market with a 1-week lead time', () => {
+  it('moves stock from a long market to a short market of the same distributor (intracompany) with a 1-week lead time', () => {
     const w = world(
       [
         { id: 'TX', dist: 'D1', rate: 10, doh: 150, order: 0 },

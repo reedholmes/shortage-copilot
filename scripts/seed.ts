@@ -115,7 +115,7 @@ const SCENARIOS: Scenario[] = [
     skuId: 'AGS-750',
     title: 'One market long, another short',
     story:
-      'Summit Crest bought heavily into Texas ahead of a promotion that slipped, leaving about 140 days on hand there while its Florida market is nearly out. A sister-market transfer can fix Florida faster than the plant can.',
+      'Summit Crest bought heavily into Texas ahead of a promotion that slipped, leaving about 140 days on hand there while its Florida market is nearly out. An intracompany transfer can fix Florida faster than the plant can.',
   },
   {
     skuId: 'NSB-750',

@@ -65,13 +65,14 @@ export default function Overview({ world, settings, onOpen }: Props) {
               <div className="risk">
                 <span>Markets running out before the run</span>
                 <strong>
-                  {s.marketsAtRiskBefore} <span className="muted">if nothing ships</span> → {s.marketsAtRiskAfter}{' '}
+                  {s.marketsAtRiskBefore} <span className="muted">if nothing ships</span> →{' '}
+                  <span className="green-text">{s.marketsAtRiskAfter}</span>{' '}
                   <span className="muted">with plan</span>
                 </strong>
               </div>
               {s.transferCount > 0 && (
                 <p className="transfer-note">
-                  ⇄ {s.transferCount} sister-market transfer{s.transferCount > 1 ? 's' : ''} suggested
+                  ⇄ {s.transferCount} intracompany transfer{s.transferCount > 1 ? 's' : ''} suggested
                 </p>
               )}
               <button className="primary" onClick={() => onOpen(s.skuId)}>

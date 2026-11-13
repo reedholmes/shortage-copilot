@@ -171,7 +171,7 @@ export default function AllocationView(props: Props) {
 
       {plan.transfers.length > 0 && (
         <div className="transfers">
-          <h3>⇄ Suggested transfers between a distributor's own markets</h3>
+          <h3>⇄ Suggested intracompany transfers (between a distributor's own markets)</h3>
           {plan.transfers.map((t) => (
             <div key={t.fromMarketId + t.toMarketId} className="transfer">
               <div className="transfer-head">

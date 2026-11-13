@@ -58,7 +58,7 @@ Buffer 10 days (7-day base buffer; +3 days: top-quartile volume SKU). Hold line 
 
 ## One market long, another short: Agave Sol Blanco Tequila 750ml
 
-Summit Crest bought heavily into Texas ahead of a promotion that slipped, leaving about 140 days on hand there while its Florida market is nearly out. A sister-market transfer can fix Florida faster than the plant can.
+Summit Crest bought heavily into Texas ahead of a promotion that slipped, leaving about 140 days on hand there while its Florida market is nearly out. An intracompany transfer can fix Florida faster than the plant can.
 
 Buffer 7 days (7-day base buffer). Hold line = 42 days of cover. Spread level reached: 45 days. Unallocated: 0 cs.
 
