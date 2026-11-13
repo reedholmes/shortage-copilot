@@ -35,7 +35,7 @@ export default function HowItWorks() {
           about the same days of cover, never more than they ordered.
         </li>
         <li>
-          <strong>Transfer within a distributor.</strong> If one of a distributor's markets is long (over 90 days) and
+          <strong>Intracompany transfers.</strong> If one of a distributor's markets is long (over 90 days) and
           another would run out, suggest moving stock between them. One-week lead time, and the long market keeps enough
           to reach the run.
         </li>
@@ -44,8 +44,18 @@ export default function HowItWorks() {
         <h3>Under the hood</h3>
         <p>
           The allocation logic is plain TypeScript running in your browser, so overrides recalculate instantly. It is
-          covered by automated tests. The data is 100% synthetic, from a seed script. The customer-note AI call runs on a
-          small server function so the API key never reaches the browser.
+          covered by automated tests. The data is 100% synthetic, from a seed script.
+        </p>
+        <p>
+          The customer note is written by Claude (Opus 5.5) on a small Cloudflare server function. The browser sends only
+          IDs and numbers; the server recomputes the facts with the same engine and asks Claude for a JSON email. The AI
+          writes the words, never the numbers. Per-visitor rate limits, a daily cap and saved drafts keep the demo cheap,
+          and a template email takes over if the AI is unavailable.
+        </p>
+        <p>
+          <a href="https://github.com/reedholmes/shortage-copilot" target="_blank" rel="noreferrer">
+            Source code and full write-up on GitHub →
+          </a>
         </p>
       </div>
     </section>
