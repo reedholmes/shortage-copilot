@@ -254,6 +254,15 @@ describe('Planner overrides', () => {
     expect(line(over, 'Y').ship).toBe(50)
   })
 
+  it('shows the lost-sales cost of an override (demand at risk)', () => {
+    // Run in 28 days. X has 5 days, Y has 30 (covered). 100 cases of supply.
+    const w = world([{ id: 'X', rate: 10, doh: 5, order: 500 }, { id: 'Y', rate: 10, doh: 30, order: 500 }], 100, 4, 4)
+    // Recommended: all 100 to X -> 15 days cover -> 13 days short x 10/day = 130 cs at risk.
+    expect(planSku(w, 'A').summary.demandAtRiskCases).toBe(130)
+    // Override: send it all to Y instead -> X is 23 days short = 230 cs at risk.
+    expect(planSku(w, 'A', DEFAULT_SETTINGS, { X: 0, Y: 100 }).summary.demandAtRiskCases).toBe(230)
+  })
+
   it('flags over-allocation when overrides exceed plant supply', () => {
     const w = world([{ id: 'X', rate: 10, doh: 5, order: 500 }, { id: 'Y', rate: 10, doh: 5, order: 500 }], 200, 4, 4)
     const plan = planSku(w, 'A', DEFAULT_SETTINGS, { X: 260 })

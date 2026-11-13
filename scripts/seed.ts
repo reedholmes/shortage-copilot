@@ -125,6 +125,23 @@ const SCENARIOS: Scenario[] = [
   },
 ]
 
+/**
+ * Week-by-week shipment multiplier vs depletions, by SKU and market. Real-world stories:
+ *  - Sparkling: distributors load ahead of the holidays, then stop ordering in January.
+ *  - Bourbon: gift-season pre-load in the first weeks, flat after.
+ *  - Tequila: Summit Crest TX is destocking after the slipped promo; Florida markets are
+ *    loading for a spring promo, so their shipment forecast runs well above depletions.
+ */
+function shipPattern(skuId: string, marketId: string): (week: number) => number {
+  if (skuId === 'NSB-750') return (w) => (w <= 2 ? 1.45 : w <= 5 ? 1.0 : 0.6)
+  if (skuId === 'HRB-750') return (w) => (w <= 3 ? 1.3 : 0.95)
+  if (skuId === 'AGS-750') {
+    if (marketId === 'D01-TX') return () => 0.35
+    if (marketId.endsWith('-FL')) return (w) => (w <= 5 ? 1.5 : 1.1)
+  }
+  return () => 1
+}
+
 // --- Build -------------------------------------------------------------------
 function build(): World {
   const markets: Market[] = DISTRIBUTORS.flatMap((d) =>
@@ -143,8 +160,17 @@ function build(): World {
       const depFcst = Array.from({ length: WEEKS }, (_, w) =>
         Math.max(1, Math.round(spec.base * size * (spec.season?.(w) ?? 1) * (1 + noise(spec.sd)))),
       )
-      // Shipments track depletions but are lumpier and run a little ahead (distributors build stock).
-      const shipFcst = depFcst.map((d) => Math.max(0, Math.round(d * between(0.85, 1.25))))
+      // Shipments = depletions x a "channel" factor. This gap is what the blend slider arbitrates:
+      // above 1 the distributor is loading inventory, below 1 it is drawing stock down.
+      // Each market's habitual ordering pattern. On short SKUs about a third of distributors
+      // inflate their orders to win a bigger share of allocation, a classic shortage behavior.
+      // That is exactly why a planner trusts depletions over shipments in the near term.
+      const isShortSku = spec.supplyRatio < 1
+      const bias = isShortSku && rand() < 0.35 ? between(1.4, 1.8) : between(0.85, 1.15)
+      const channel = shipPattern(spec.id, m.id)
+      const shipFcst = depFcst.map((d, w) =>
+        Math.max(0, Math.round(d * bias * channel(w) * (1 + noise(0.05)))),
+      )
       const dailyNear = (depFcst[0] + depFcst[1] + depFcst[2] + depFcst[3]) / 28
 
       const coverDays = COVER_OVERRIDES[spec.id]?.[m.id] ?? between(22, 45)

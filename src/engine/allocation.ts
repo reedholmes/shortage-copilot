@@ -617,6 +617,10 @@ export function planSku(
       ? lines.filter((l) => l.orderQty > 0 && (l.effOnHand + l.inboundBeforeRun) / l.avgDaily < ctx.daysToRun).length
       : 0,
     marketsAtRiskAfter: relevant.filter((l) => l.stockoutBeforeRun).length,
+    // For each market that runs dry: days without stock before the run x cases per day.
+    demandAtRiskCases: Math.round(
+      sum(relevant.filter((l) => l.stockoutBeforeRun).map((l) => (ctx.daysToRun - l.coverAfter) * l.avgDaily)),
+    ),
     backorderQty: sum(lines.map((l) => l.backorderQty)),
     transferCount: transfers.length,
   }

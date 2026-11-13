@@ -157,6 +157,8 @@ export interface SkuSummary {
   highVelocity: boolean
   marketsAtRiskBefore: number
   marketsAtRiskAfter: number
+  /** Cases of consumer demand that go unserved before the run lands (lost-sales risk). */
+  demandAtRiskCases: number
   backorderQty: number
   transferCount: number
 }
