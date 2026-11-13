@@ -6,7 +6,7 @@ A working demo of how a supply planner allocates scarce inventory across distrib
 
 **[Live demo →](https://shortage-copilot.reedholmes9.workers.dev)** · Built by Reed Holmes, supply chain planner (7 years in CPG supply chain). All companies, brands and numbers are synthetic.
 
-![Allocation screen: plant supply, impact tiles, suggested intracompany transfers and the ranked allocation table](docs/images/allocation.png)
+![25-second tour: shortage overview, intracompany transfer, row reasoning, an override and its cost, the forecast blend slider, and the AI customer note](docs/images/demo.gif)
 
 ## The problem
 
@@ -22,6 +22,8 @@ In practice this lives in spreadsheets, gut feel and long email threads. The log
 4. **Type a different Ship quantity.** The rest of the supply re-spreads and the tiles show the cost of your override in lost sales.
 5. **Move the forecast blend slider** and watch the plan change when you trust depletions over (inflated) orders.
 6. **Customer note:** pick a backordered distributor and have Claude draft the out-of-stock email.
+
+![Allocation screen: plant supply, impact tiles, suggested intracompany transfers and the ranked allocation table](docs/images/allocation.png)
 
 ## The method
 
@@ -135,6 +137,7 @@ npm test             # allocation engine and API guardrail tests
 npm run seed         # regenerate the synthetic data
 npm run report       # planner-readable review in docs/allocation-review.md
 npm run screenshots  # refresh the README images from the live site
+npm run gif          # rebuild the README demo GIF (also needs Python with Pillow)
 npm run deploy       # build and deploy to Cloudflare
 ```
 

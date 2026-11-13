@@ -12,7 +12,8 @@
                     "test":  "vitest run",
                     "report":  "tsx scripts/report.ts",
                     "deploy":  "npm run build \u0026\u0026 wrangler deploy",
-                    "screenshots":  "tsx scripts/screenshots.ts"
+                    "screenshots":  "tsx scripts/screenshots.ts",
+                    "gif":  "tsx scripts/demo-frames.ts && python scripts/make_gif.py"
                 },
     "dependencies":  {
                          "@anthropic-ai/sdk":  "^1.8.0",
