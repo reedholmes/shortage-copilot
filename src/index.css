@@ -155,7 +155,17 @@ table.mini { border-collapse: collapse; width: 100%; font-size: 13px; }
 /* Customer note */
 .note-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .json { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 14px; font-size: 13px; overflow: auto; margin: 0; }
-.placeholder { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.tiny-note { font-size: 12px; margin: 8px 0 0; }
+.draft-card { display: flex; flex-direction: column; gap: 12px; }
+.draft-head { display: flex; justify-content: space-between; align-items: center; }
+.draft-head h3 { margin: 0; }
+.draft-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+.email { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.email-subject { padding: 10px 14px; background: #fafbfc; border-bottom: 1px solid var(--line); font-weight: 600; }
+.email-body { padding: 14px; white-space: pre-wrap; line-height: 1.6; }
+.draft-foot { display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 13px; }
+.raw-json summary { cursor: pointer; color: var(--accent); font-size: 13px; font-weight: 500; }
+.raw-json pre { margin-top: 8px; }
 
 /* How it works */
 .steps { max-width: 820px; padding-left: 20px; margin: 0 0 20px; }

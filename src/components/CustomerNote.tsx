@@ -1,11 +1,12 @@
 /**
  * Screen 3: Customer note.
- * Milestone 2 shows the facts the AI will be given. Milestone 4 adds the AI draft.
- * Keeping the facts separate (and computed by the engine, not the AI) means the
- * email can't invent quantities or dates: the AI only writes the words.
+ * The engine computes the facts; the server recomputes them and asks Claude to write
+ * the email as JSON (subject, body, summary). The AI only writes words, never numbers.
  */
-import { fmtDate, planSku } from '../engine/allocation'
+import { useState } from 'react'
+import { planSku } from '../engine/allocation'
 import type { Overrides } from '../engine/allocation'
+import { buildNoteFacts } from '../engine/noteFacts'
 import type { Settings, World } from '../engine/types'
 import { n } from '../ui/format'
 
@@ -19,22 +20,71 @@ interface Props {
   setMarketId: (id: string | null) => void
 }
 
+interface DraftResult {
+  source: 'ai' | 'cache' | 'fallback'
+  reason?: 'rate_limited' | 'daily_cap' | 'not_configured' | 'ai_unavailable'
+  draft: { subject: string; body: string; summary: string }
+}
+
+const SOURCE_LABEL: Record<DraftResult['source'], string> = {
+  ai: 'Drafted by Claude Opus 5.5',
+  cache: 'Claude draft (saved copy for these exact facts)',
+  fallback: 'Template version',
+}
+const REASON_LABEL: Record<NonNullable<DraftResult['reason']>, string> = {
+  rate_limited: 'You hit the demo limit of 5 AI drafts a minute. Showing the template version.',
+  daily_cap: "The demo's daily AI budget is used up. Showing the template version.",
+  not_configured: 'AI drafting is not configured here. Showing the template version.',
+  ai_unavailable: "The AI service didn't respond. Showing the template version.",
+}
+
 export default function CustomerNote({ world, skuId, setSkuId, settings, overrides, marketId, setMarketId }: Props) {
   const plan = planSku(world, skuId, settings, overrides)
   const affected = plan.lines.filter((l) => l.backorderQty > 0)
   const line = affected.find((l) => l.marketId === marketId) ?? affected[0]
-  const sku = world.skus.find((k) => k.id === skuId)!
+  const facts = line ? buildNoteFacts(world, skuId, line.marketId, settings, overrides) : null
 
-  const facts = line && {
-    distributor: line.distributorName,
-    market: line.state,
-    sku: sku.name,
-    orderedCases: line.orderQty,
-    shippingNowCases: line.ship,
-    backorderedCases: line.backorderQty,
-    supplyLandsOn: fmtDate(plan.summary.runDate),
-    daysOrdersWillSit: plan.summary.daysToRun,
-    transferIncomingCases: line.transferIn || undefined,
+  // A draft belongs to the exact facts it was written from; if the facts change, it is stale.
+  const factsKey = JSON.stringify(facts)
+  const [result, setResult] = useState<{ key: string; data: DraftResult } | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
+  const current = result?.key === factsKey ? result.data : null
+
+  async function draft() {
+    if (!line) return
+    setLoading(true)
+    setError(null)
+    setCopied(false)
+    try {
+      const res = await fetch('/api/draft-note', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          skuId,
+          marketId: line.marketId,
+          nearDepletionWeight: settings.nearDepletionWeight,
+          overrides,
+        }),
+      })
+      if (!res.ok) throw new Error(`Server returned ${res.status}`)
+      setResult({ key: factsKey, data: (await res.json()) as DraftResult })
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Something went wrong')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function copy() {
+    if (!current) return
+    try {
+      await navigator.clipboard.writeText(`Subject: ${current.draft.subject}\n\n${current.draft.body}`)
+      setCopied(true)
+    } catch {
+      /* clipboard can be blocked; nothing else to do */
+    }
   }
 
   return (
@@ -42,8 +92,8 @@ export default function CustomerNote({ world, skuId, setSkuId, settings, overrid
       <div className="intro">
         <h2>Out-of-stock note</h2>
         <p>
-          Pick a distributor with a backorder. The engine supplies the facts. In the next milestone an AI model will draft
-          the email from these facts and return it as structured JSON.
+          Pick a distributor with a backorder. The allocation engine supplies the facts and Claude writes the email. The
+          AI only writes words: every number and date comes from the engine.
         </p>
       </div>
       <div className="toolbar">
@@ -73,20 +123,57 @@ export default function CustomerNote({ world, skuId, setSkuId, settings, overrid
         </label>
       </div>
 
-      {!line ? (
+      {!facts ? (
         <p className="muted">No backorders on this SKU. Every open order ships in full.</p>
       ) : (
         <div className="note-grid">
           <div className="card">
             <h3>Facts sent to the AI</h3>
             <pre className="json">{JSON.stringify(facts, null, 2)}</pre>
+            <p className="muted tiny-note">
+              The server recomputes these from the same engine, so the browser can't send it made-up facts.
+            </p>
           </div>
-          <div className="card placeholder">
-            <h3>Draft email</h3>
-            <p className="muted">Coming in Milestone 4: subject line, body and a summary, drafted by AI from these facts.</p>
-            <button className="primary" disabled>
-              Draft with AI
-            </button>
+          <div className="card draft-card">
+            <div className="draft-head">
+              <h3>Draft email</h3>
+              <button className="primary" onClick={draft} disabled={loading}>
+                {loading ? 'Drafting…' : current ? 'Redraft' : 'Draft with AI'}
+              </button>
+            </div>
+            {error && <div className="banner alert">Couldn't reach the server ({error}). Try again.</div>}
+            {loading && <p className="muted">Claude is writing… this takes a few seconds.</p>}
+            {!loading && !current && !error && (
+              <p className="muted">Click "Draft with AI" to write the email from these facts.</p>
+            )}
+            {!loading && current && (
+              <>
+                <div className="draft-meta">
+                  <span className={current.source === 'fallback' ? 'pill amber' : 'pill green'}>
+                    {SOURCE_LABEL[current.source]}
+                  </span>
+                  {current.reason && <span className="muted">{REASON_LABEL[current.reason]}</span>}
+                </div>
+                <div className="email">
+                  <div className="email-subject">
+                    <span className="muted">Subject:</span> {current.draft.subject}
+                  </div>
+                  <div className="email-body">{current.draft.body}</div>
+                </div>
+                <div className="draft-foot">
+                  <span className="muted">
+                    <strong>Log summary:</strong> {current.draft.summary}
+                  </span>
+                  <button className="secondary" onClick={copy}>
+                    {copied ? 'Copied ✓' : 'Copy email'}
+                  </button>
+                </div>
+                <details className="raw-json">
+                  <summary>Raw JSON response</summary>
+                  <pre className="json">{JSON.stringify(current.draft, null, 2)}</pre>
+                </details>
+              </>
+            )}
           </div>
         </div>
       )}
