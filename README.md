@@ -1,54 +1,35 @@
-# React + TypeScript + Vite
+# Shortage Allocation Copilot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A working demo of how a supply planner allocates scarce inventory across distributors during a shortage, then drafts the customer communication.
 
-Currently, two official plugins are available:
+Built by Reed Holmes, supply chain planner (6 years in CPG, wine and spirits). All companies, brands and numbers are synthetic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> Work in progress. Full write-up, screenshots and architecture diagram coming soon.
 
-## Expanding the ESLint configuration
+## What it does
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Shortage overview**: which SKUs are short, by how much, and until when.
+2. **Allocation**: recommended ship / hold / transfer for every distributor market, with the reasoning on every line. Override any quantity and see the impact (markets stocking out, lost sales) update instantly.
+3. **Customer note**: the out-of-stock email to an affected distributor (AI drafting in progress).
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## The planning method
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Blend shipment and depletion forecasts (depletions weighted near term, adjustable)
+2. Days on hand per market (in-transit arriving within a week counts as on hand)
+3. Flag open orders the shortage will backorder
+4. Rank markets by cover, lowest first
+5. Hold orders for markets covered to the next production run plus a safety buffer
+6. Ship priority accounts at stockout risk first, then spread supply toward equal days of cover
+7. Suggest transfers between a distributor's own markets (long to short, 1-week lead time)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The logic lives in [`src/engine/allocation.ts`](src/engine/allocation.ts) and is covered by tests in [`src/engine/allocation.test.ts`](src/engine/allocation.test.ts).
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Run it locally
+
+```bash
+npm install
+npm run dev      # app at http://localhost:5173
+npm test         # allocation tests
+npm run seed     # regenerate synthetic data
+npm run report   # planner-readable review in docs/allocation-review.md
 ```

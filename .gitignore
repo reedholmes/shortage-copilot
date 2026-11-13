@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cloudflare local files and secrets (never publish)
+.wrangler
+.dev.vars
+.env*
+
+# Local editor/agent settings
+.claude
