@@ -65,8 +65,9 @@ Guardrails, because this is a public demo:
 ## Architecture
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph Browser["Browser"]
+    direction LR
     UI["React app<br/>overview, allocation, note"]
     ENG["Allocation engine<br/>TypeScript, tested"]
     DATA[("Synthetic data<br/>world.json")]
@@ -74,6 +75,7 @@ flowchart LR
     ENG --> DATA
   end
   subgraph CF["Cloudflare Worker"]
+    direction LR
     API["POST /api/draft-note"]
     GUARD["Validate input<br/>rate limit, daily cap"]
     FACTS["Same engine<br/>recomputes the facts"]
