@@ -1,0 +1,174 @@
+// Data shapes shared by the seed script, the allocation engine and the UI.
+// All quantities are 9L cases. All "weeks" are weekly buckets starting at World.asOf.
+
+export interface InTransit {
+  qty: number
+  /** Days from the as-of date until this shipment arrives at the distributor. */
+  arrivesInDays: number
+}
+
+export interface OpenOrder {
+  id: string
+  qty: number
+  /** Week (0 = this week) the distributor asked for the order to ship. */
+  requestedWeek: number
+}
+
+export type PriorityType = 'National account' | 'Key distributor' | null
+
+export interface Distributor {
+  id: string
+  name: string
+  priority: PriorityType
+}
+
+/** One distributor operating in one state. A distributor can have several markets. */
+export interface Market {
+  id: string
+  distributorId: string
+  state: string
+}
+
+export interface Sku {
+  id: string
+  name: string
+  category: string
+  /** Cases at the plant, free to ship today. */
+  availableNow: number
+  nextRun: {
+    /** Weeks from the as-of date until the next production run lands at distributors. */
+    inWeeks: number
+    qty: number
+  }
+}
+
+/** One SKU in one market: the planner's row-level inputs. */
+export interface Position {
+  skuId: string
+  marketId: string
+  onHand: number
+  inTransit: InTransit[]
+  /** Our shipments to the distributor, by week (13 values). */
+  shipFcst: number[]
+  /** The distributor's sales to retail, by week (13 values). */
+  depFcst: number[]
+  openOrders: OpenOrder[]
+}
+
+export interface Scenario {
+  skuId: string
+  title: string
+  story: string
+}
+
+export interface World {
+  asOf: string
+  horizonWeeks: number
+  skus: Sku[]
+  distributors: Distributor[]
+  markets: Market[]
+  positions: Position[]
+  scenarios: Scenario[]
+}
+
+/** Every planning knob in one place. The UI exposes the blend slider. */
+export interface Settings {
+  /** Depletion weight in week 1. It slides linearly to (1 - this) by the last week. */
+  nearDepletionWeight: number
+  baseBufferDays: number
+  highVelocityExtraDays: number
+  highVariabilityExtraDays: number
+  /** Coefficient of variation above which a SKU counts as "volatile". */
+  highVariabilityCv: number
+  /** Days on hand above which a market is "long". */
+  longThresholdDays: number
+  transferLeadDays: number
+  /** In-transit arriving within this many days counts as on hand. */
+  inTransitOnHandDays: number
+  /** Ignore transfers smaller than this (not worth a truck). */
+  minTransferQty: number
+}
+
+export type Action = 'SHIP' | 'PARTIAL' | 'HOLD' | 'NO ORDER'
+
+export interface OrderFill {
+  id: string
+  qty: number
+  requestedWeek: number
+  filled: number
+  backordered: number
+}
+
+export interface AccountLine {
+  marketId: string
+  distributorId: string
+  distributorName: string
+  state: string
+  priority: PriorityType
+  avgDaily: number
+  effOnHand: number
+  inboundBeforeRun: number
+  dohToday: number
+  orderQty: number
+  transferIn: number
+  transferOut: number
+  /** Days of cover before any plant shipment (includes inbound and transfers). */
+  coverBefore: number
+  recommendedShip: number
+  ship: number
+  overridden: boolean
+  backorderQty: number
+  coverAfter: number
+  stockoutBeforeRun: boolean
+  /** The rule that decided this line. */
+  rule: 'FULL' | 'HOLD' | 'PRIORITY' | 'SPREAD' | 'RELEASED' | 'OVERRIDE' | 'NO ORDER'
+  action: Action
+  reasons: string[]
+  orders: OrderFill[]
+}
+
+export interface Transfer {
+  distributorId: string
+  distributorName: string
+  fromMarketId: string
+  fromState: string
+  toMarketId: string
+  toState: string
+  qty: number
+  arrivesInDays: number
+  reason: string
+}
+
+export interface SkuSummary {
+  skuId: string
+  name: string
+  category: string
+  isShort: boolean
+  openOrderQty: number
+  availableNow: number
+  gapQty: number
+  fillRate: number
+  daysToRun: number
+  runDate: string
+  runQty: number
+  bufferDays: number
+  bufferWhy: string[]
+  cv: number
+  highVelocity: boolean
+  marketsAtRiskBefore: number
+  marketsAtRiskAfter: number
+  backorderQty: number
+  transferCount: number
+}
+
+export interface Plan {
+  summary: SkuSummary
+  lines: AccountLine[]
+  transfers: Transfer[]
+  /** Plant cases left unshipped. */
+  unallocated: number
+  /** Cases shipped beyond what the plant has (only possible through overrides). */
+  overAllocated: number
+  /** Common cover level (days) reached by the spread step, if it ran. */
+  spreadLevelDays: number | null
+}

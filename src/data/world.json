@@ -1,0 +1,9454 @@
+{
+ "asOf": "2026-11-16",
+ "horizonWeeks": 13,
+ "skus": [
+  {
+   "id": "HRB-750",
+   "name": "Harbor Ridge Bourbon 750ml",
+   "category": "Bourbon",
+   "availableNow": 1427,
+   "nextRun": {
+    "inWeeks": 6,
+    "qty": 7920
+   }
+  },
+  {
+   "id": "AGS-750",
+   "name": "Agave Sol Blanco Tequila 750ml",
+   "category": "Tequila",
+   "availableNow": 1285,
+   "nextRun": {
+    "inWeeks": 5,
+    "qty": 6006
+   }
+  },
+  {
+   "id": "NSB-750",
+   "name": "North Shore Sparkling Brut 750ml",
+   "category": "Sparkling wine",
+   "availableNow": 1130,
+   "nextRun": {
+    "inWeeks": 4,
+    "qty": 3378
+   }
+  },
+  {
+   "id": "CVK-1L",
+   "name": "Coastline Vodka 1L",
+   "category": "Vodka",
+   "availableNow": 3945,
+   "nextRun": {
+    "inWeeks": 3,
+    "qty": 9138
+   }
+  },
+  {
+   "id": "IBR-750",
+   "name": "Ironbridge Rye 750ml",
+   "category": "Rye whiskey",
+   "availableNow": 887,
+   "nextRun": {
+    "inWeeks": 6,
+    "qty": 2046
+   }
+  },
+  {
+   "id": "HFG-750",
+   "name": "Highfield Dry Gin 750ml",
+   "category": "Gin",
+   "availableNow": 1386,
+   "nextRun": {
+    "inWeeks": 4,
+    "qty": 2592
+   }
+  },
+  {
+   "id": "CPN-750",
+   "name": "Cascade Pinot Noir 750ml",
+   "category": "Red wine",
+   "availableNow": 1096,
+   "nextRun": {
+    "inWeeks": 5,
+    "qty": 3264
+   }
+  },
+  {
+   "id": "VCB-750",
+   "name": "Valley Crest Cabernet 750ml",
+   "category": "Red wine",
+   "availableNow": 2157,
+   "nextRun": {
+    "inWeeks": 8,
+    "qty": 4560
+   }
+  }
+ ],
+ "distributors": [
+  {
+   "id": "D01",
+   "name": "Summit Crest Distributing",
+   "priority": "National account"
+  },
+  {
+   "id": "D02",
+   "name": "Gulfline Wine & Spirits",
+   "priority": "Key distributor"
+  },
+  {
+   "id": "D03",
+   "name": "Pacific Bluff Beverage",
+   "priority": "National account"
+  },
+  {
+   "id": "D04",
+   "name": "Empire Harbor Distributors",
+   "priority": "Key distributor"
+  },
+  {
+   "id": "D05",
+   "name": "Lakefront Beverage Co.",
+   "priority": null
+  },
+  {
+   "id": "D06",
+   "name": "Keystone Valley Wine & Spirits",
+   "priority": null
+  },
+  {
+   "id": "D07",
+   "name": "Piedmont Spirits Group",
+   "priority": null
+  },
+  {
+   "id": "D08",
+   "name": "Front Range Beverage",
+   "priority": null
+  },
+  {
+   "id": "D09",
+   "name": "Buckeye Junction Distributing",
+   "priority": null
+  },
+  {
+   "id": "D10",
+   "name": "Desert Mesa Wine Co.",
+   "priority": null
+  },
+  {
+   "id": "D11",
+   "name": "Prairie Lantern Beverage",
+   "priority": null
+  },
+  {
+   "id": "D12",
+   "name": "Longhorn Plains Beverage",
+   "priority": null
+  },
+  {
+   "id": "D13",
+   "name": "Golden Coast Fine Wine",
+   "priority": null
+  },
+  {
+   "id": "D14",
+   "name": "Hudson & Pine Spirits",
+   "priority": null
+  },
+  {
+   "id": "D15",
+   "name": "Magnolia Coast Distributing",
+   "priority": null
+  },
+  {
+   "id": "D16",
+   "name": "Tidewater Atlantic Beverage",
+   "priority": null
+  }
+ ],
+ "markets": [
+  {
+   "id": "D01-TX",
+   "distributorId": "D01",
+   "state": "TX"
+  },
+  {
+   "id": "D01-FL",
+   "distributorId": "D01",
+   "state": "FL"
+  },
+  {
+   "id": "D01-AZ",
+   "distributorId": "D01",
+   "state": "AZ"
+  },
+  {
+   "id": "D02-FL",
+   "distributorId": "D02",
+   "state": "FL"
+  },
+  {
+   "id": "D02-GA",
+   "distributorId": "D02",
+   "state": "GA"
+  },
+  {
+   "id": "D03-CA",
+   "distributorId": "D03",
+   "state": "CA"
+  },
+  {
+   "id": "D03-CO",
+   "distributorId": "D03",
+   "state": "CO"
+  },
+  {
+   "id": "D04-NY",
+   "distributorId": "D04",
+   "state": "NY"
+  },
+  {
+   "id": "D04-NJ",
+   "distributorId": "D04",
+   "state": "NJ"
+  },
+  {
+   "id": "D05-IL",
+   "distributorId": "D05",
+   "state": "IL"
+  },
+  {
+   "id": "D05-OH",
+   "distributorId": "D05",
+   "state": "OH"
+  },
+  {
+   "id": "D06-PA",
+   "distributorId": "D06",
+   "state": "PA"
+  },
+  {
+   "id": "D06-NJ",
+   "distributorId": "D06",
+   "state": "NJ"
+  },
+  {
+   "id": "D07-NC",
+   "distributorId": "D07",
+   "state": "NC"
+  },
+  {
+   "id": "D07-GA",
+   "distributorId": "D07",
+   "state": "GA"
+  },
+  {
+   "id": "D08-CO",
+   "distributorId": "D08",
+   "state": "CO"
+  },
+  {
+   "id": "D09-OH",
+   "distributorId": "D09",
+   "state": "OH"
+  },
+  {
+   "id": "D10-AZ",
+   "distributorId": "D10",
+   "state": "AZ"
+  },
+  {
+   "id": "D11-IL",
+   "distributorId": "D11",
+   "state": "IL"
+  },
+  {
+   "id": "D12-TX",
+   "distributorId": "D12",
+   "state": "TX"
+  },
+  {
+   "id": "D13-CA",
+   "distributorId": "D13",
+   "state": "CA"
+  },
+  {
+   "id": "D14-NY",
+   "distributorId": "D14",
+   "state": "NY"
+  },
+  {
+   "id": "D15-FL",
+   "distributorId": "D15",
+   "state": "FL"
+  },
+  {
+   "id": "D16-NC",
+   "distributorId": "D16",
+   "state": "NC"
+  },
+  {
+   "id": "D16-PA",
+   "distributorId": "D16",
+   "state": "PA"
+  }
+ ],
+ "positions": [
+  {
+   "skuId": "HRB-750",
+   "marketId": "D01-TX",
+   "onHand": 311,
+   "inTransit": [],
+   "shipFcst": [
+    54,
+    71,
+    56,
+    70,
+    67,
+    64,
+    67,
+    61,
+    79,
+    54,
+    86,
+    71,
+    68
+   ],
+   "depFcst": [
+    58,
+    64,
+    59,
+    64,
+    55,
+    65,
+    54,
+    61,
+    63,
+    61,
+    69,
+    69,
+    68
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1000",
+     "qty": 67,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1001",
+     "qty": 51,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D01-FL",
+   "onHand": 57,
+   "inTransit": [],
+   "shipFcst": [
+    68,
+    44,
+    56,
+    59,
+    54,
+    54,
+    59,
+    63,
+    47,
+    67,
+    50,
+    51,
+    48
+   ],
+   "depFcst": [
+    55,
+    42,
+    48,
+    55,
+    56,
+    61,
+    50,
+    53,
+    51,
+    57,
+    49,
+    49,
+    50
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1002",
+     "qty": 74,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1003",
+     "qty": 70,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D01-AZ",
+   "onHand": 179,
+   "inTransit": [],
+   "shipFcst": [
+    48,
+    42,
+    40,
+    46,
+    47,
+    38,
+    39,
+    37,
+    38,
+    52,
+    46,
+    46,
+    44
+   ],
+   "depFcst": [
+    41,
+    36,
+    42,
+    40,
+    38,
+    38,
+    43,
+    42,
+    35,
+    44,
+    42,
+    38,
+    37
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D02-FL",
+   "onHand": 263,
+   "inTransit": [],
+   "shipFcst": [
+    69,
+    78,
+    67,
+    55,
+    68,
+    74,
+    58,
+    71,
+    75,
+    78,
+    77,
+    82,
+    64
+   ],
+   "depFcst": [
+    56,
+    71,
+    70,
+    62,
+    61,
+    68,
+    57,
+    68,
+    66,
+    71,
+    63,
+    70,
+    68
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D02-GA",
+   "onHand": 277,
+   "inTransit": [],
+   "shipFcst": [
+    41,
+    48,
+    44,
+    50,
+    32,
+    54,
+    44,
+    39,
+    49,
+    40,
+    37,
+    49,
+    45
+   ],
+   "depFcst": [
+    48,
+    42,
+    41,
+    46,
+    38,
+    49,
+    46,
+    44,
+    46,
+    42,
+    43,
+    49,
+    47
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1004",
+     "qty": 111,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D03-CA",
+   "onHand": 450,
+   "inTransit": [],
+   "shipFcst": [
+    107,
+    105,
+    108,
+    91,
+    135,
+    104,
+    93,
+    93,
+    98,
+    111,
+    117,
+    113,
+    100
+   ],
+   "depFcst": [
+    103,
+    93,
+    106,
+    104,
+    109,
+    98,
+    84,
+    98,
+    92,
+    96,
+    116,
+    106,
+    102
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1005",
+     "qty": 219,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D03-CO",
+   "onHand": 148,
+   "inTransit": [],
+   "shipFcst": [
+    24,
+    31,
+    29,
+    32,
+    23,
+    18,
+    23,
+    22,
+    21,
+    20,
+    29,
+    22,
+    22
+   ],
+   "depFcst": [
+    22,
+    25,
+    26,
+    27,
+    24,
+    19,
+    25,
+    24,
+    22,
+    23,
+    25,
+    23,
+    22
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D04-NY",
+   "onHand": 375,
+   "inTransit": [],
+   "shipFcst": [
+    83,
+    71,
+    62,
+    69,
+    75,
+    92,
+    63,
+    72,
+    81,
+    61,
+    65,
+    60,
+    53
+   ],
+   "depFcst": [
+    70,
+    59,
+    68,
+    69,
+    73,
+    74,
+    62,
+    70,
+    65,
+    62,
+    76,
+    62,
+    60
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1006",
+     "qty": 196,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D04-NJ",
+   "onHand": 239,
+   "inTransit": [],
+   "shipFcst": [
+    48,
+    49,
+    66,
+    54,
+    52,
+    63,
+    64,
+    53,
+    68,
+    53,
+    40,
+    61,
+    64
+   ],
+   "depFcst": [
+    53,
+    53,
+    55,
+    53,
+    50,
+    52,
+    56,
+    51,
+    57,
+    52,
+    47,
+    58,
+    58
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1007",
+     "qty": 40,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1008",
+     "qty": 50,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D05-IL",
+   "onHand": 154,
+   "inTransit": [],
+   "shipFcst": [
+    76,
+    80,
+    85,
+    62,
+    61,
+    90,
+    59,
+    80,
+    81,
+    70,
+    62,
+    84,
+    80
+   ],
+   "depFcst": [
+    77,
+    80,
+    85,
+    66,
+    69,
+    74,
+    68,
+    67,
+    65,
+    68,
+    72,
+    71,
+    68
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1009",
+     "qty": 74,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1010",
+     "qty": 107,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D05-OH",
+   "onHand": 183,
+   "inTransit": [],
+   "shipFcst": [
+    52,
+    47,
+    40,
+    44,
+    41,
+    48,
+    48,
+    38,
+    42,
+    55,
+    49,
+    57,
+    51
+   ],
+   "depFcst": [
+    42,
+    44,
+    41,
+    46,
+    43,
+    45,
+    45,
+    43,
+    42,
+    46,
+    52,
+    46,
+    44
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1011",
+     "qty": 47,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1012",
+     "qty": 48,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D06-PA",
+   "onHand": 279,
+   "inTransit": [],
+   "shipFcst": [
+    35,
+    46,
+    55,
+    49,
+    39,
+    47,
+    57,
+    51,
+    39,
+    53,
+    41,
+    53,
+    51
+   ],
+   "depFcst": [
+    40,
+    46,
+    47,
+    45,
+    45,
+    43,
+    48,
+    44,
+    43,
+    49,
+    46,
+    47,
+    43
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1013",
+     "qty": 82,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D06-NJ",
+   "onHand": 173,
+   "inTransit": [],
+   "shipFcst": [
+    43,
+    40,
+    37,
+    39,
+    33,
+    39,
+    36,
+    36,
+    43,
+    37,
+    31,
+    35,
+    31
+   ],
+   "depFcst": [
+    37,
+    33,
+    35,
+    40,
+    35,
+    33,
+    34,
+    36,
+    36,
+    35,
+    33,
+    34,
+    32
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1014",
+     "qty": 89,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D07-NC",
+   "onHand": 229,
+   "inTransit": [],
+   "shipFcst": [
+    42,
+    44,
+    46,
+    50,
+    56,
+    42,
+    50,
+    39,
+    51,
+    51,
+    58,
+    51,
+    53
+   ],
+   "depFcst": [
+    45,
+    41,
+    42,
+    42,
+    48,
+    49,
+    50,
+    45,
+    50,
+    54,
+    49,
+    44,
+    46
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1015",
+     "qty": 47,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1016",
+     "qty": 58,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D07-GA",
+   "onHand": 122,
+   "inTransit": [],
+   "shipFcst": [
+    32,
+    28,
+    28,
+    39,
+    32,
+    30,
+    36,
+    39,
+    32,
+    45,
+    29,
+    38,
+    38
+   ],
+   "depFcst": [
+    30,
+    30,
+    32,
+    33,
+    34,
+    34,
+    34,
+    33,
+    29,
+    38,
+    29,
+    35,
+    33
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1017",
+     "qty": 66,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D08-CO",
+   "onHand": 109,
+   "inTransit": [],
+   "shipFcst": [
+    18,
+    19,
+    29,
+    17,
+    25,
+    23,
+    25,
+    19,
+    25,
+    24,
+    17,
+    25,
+    23
+   ],
+   "depFcst": [
+    21,
+    21,
+    24,
+    18,
+    23,
+    22,
+    24,
+    21,
+    23,
+    24,
+    19,
+    26,
+    26
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1018",
+     "qty": 16,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1019",
+     "qty": 18,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D09-OH",
+   "onHand": 578,
+   "inTransit": [],
+   "shipFcst": [
+    58,
+    56,
+    74,
+    58,
+    58,
+    59,
+    56,
+    52,
+    50,
+    68,
+    51,
+    58,
+    45
+   ],
+   "depFcst": [
+    55,
+    56,
+    60,
+    60,
+    51,
+    51,
+    48,
+    57,
+    55,
+    62,
+    48,
+    48,
+    48
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1020",
+     "qty": 48,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1021",
+     "qty": 58,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D10-AZ",
+   "onHand": 235,
+   "inTransit": [
+    {
+     "qty": 31,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    53,
+    52,
+    54,
+    43,
+    52,
+    53,
+    47,
+    47,
+    33,
+    37,
+    42,
+    36,
+    47
+   ],
+   "depFcst": [
+    46,
+    44,
+    44,
+    42,
+    46,
+    45,
+    41,
+    49,
+    36,
+    38,
+    42,
+    39,
+    48
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D11-IL",
+   "onHand": 163,
+   "inTransit": [],
+   "shipFcst": [
+    37,
+    47,
+    44,
+    40,
+    50,
+    50,
+    45,
+    38,
+    34,
+    47,
+    43,
+    42,
+    50
+   ],
+   "depFcst": [
+    36,
+    42,
+    39,
+    34,
+    44,
+    46,
+    41,
+    42,
+    37,
+    39,
+    46,
+    44,
+    44
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1022",
+     "qty": 102,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D12-TX",
+   "onHand": 74,
+   "inTransit": [],
+   "shipFcst": [
+    73,
+    93,
+    93,
+    113,
+    109,
+    96,
+    84,
+    89,
+    99,
+    82,
+    94,
+    107,
+    106
+   ],
+   "depFcst": [
+    78,
+    91,
+    86,
+    91,
+    94,
+    82,
+    75,
+    93,
+    83,
+    76,
+    90,
+    86,
+    87
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1023",
+     "qty": 191,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D13-CA",
+   "onHand": 643,
+   "inTransit": [],
+   "shipFcst": [
+    76,
+    66,
+    74,
+    51,
+    58,
+    56,
+    66,
+    63,
+    53,
+    56,
+    65,
+    59,
+    61
+   ],
+   "depFcst": [
+    66,
+    56,
+    60,
+    58,
+    62,
+    59,
+    58,
+    64,
+    52,
+    61,
+    55,
+    62,
+    67
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1024",
+     "qty": 76,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1025",
+     "qty": 62,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D14-NY",
+   "onHand": 104,
+   "inTransit": [],
+   "shipFcst": [
+    80,
+    85,
+    75,
+    90,
+    89,
+    96,
+    71,
+    91,
+    84,
+    73,
+    71,
+    90,
+    72
+   ],
+   "depFcst": [
+    84,
+    79,
+    84,
+    77,
+    79,
+    92,
+    74,
+    82,
+    78,
+    79,
+    71,
+    80,
+    66
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1026",
+     "qty": 102,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1027",
+     "qty": 94,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D15-FL",
+   "onHand": 365,
+   "inTransit": [],
+   "shipFcst": [
+    65,
+    66,
+    66,
+    65,
+    58,
+    69,
+    61,
+    71,
+    56,
+    61,
+    58,
+    52,
+    66
+   ],
+   "depFcst": [
+    65,
+    65,
+    66,
+    64,
+    67,
+    62,
+    59,
+    68,
+    62,
+    66,
+    60,
+    57,
+    65
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D16-NC",
+   "onHand": 187,
+   "inTransit": [
+    {
+     "qty": 43,
+     "arrivesInDays": 4
+    }
+   ],
+   "shipFcst": [
+    32,
+    39,
+    44,
+    38,
+    42,
+    45,
+    42,
+    36,
+    43,
+    41,
+    40,
+    36,
+    37
+   ],
+   "depFcst": [
+    37,
+    39,
+    46,
+    36,
+    41,
+    39,
+    42,
+    37,
+    41,
+    38,
+    39,
+    41,
+    39
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1028",
+     "qty": 74,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HRB-750",
+   "marketId": "D16-PA",
+   "onHand": 183,
+   "inTransit": [],
+   "shipFcst": [
+    67,
+    68,
+    63,
+    44,
+    48,
+    49,
+    61,
+    67,
+    46,
+    52,
+    48,
+    47,
+    54
+   ],
+   "depFcst": [
+    55,
+    56,
+    51,
+    44,
+    53,
+    49,
+    55,
+    61,
+    48,
+    53,
+    52,
+    45,
+    54
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1029",
+     "qty": 61,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1030",
+     "qty": 62,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D01-TX",
+   "onHand": 835,
+   "inTransit": [],
+   "shipFcst": [
+    45,
+    39,
+    44,
+    39,
+    44,
+    45,
+    59,
+    46,
+    38,
+    41,
+    51,
+    58,
+    39
+   ],
+   "depFcst": [
+    37,
+    43,
+    42,
+    45,
+    50,
+    47,
+    52,
+    52,
+    35,
+    46,
+    43,
+    49,
+    42
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D01-FL",
+   "onHand": 35,
+   "inTransit": [],
+   "shipFcst": [
+    46,
+    45,
+    37,
+    36,
+    43,
+    26,
+    36,
+    35,
+    49,
+    40,
+    43,
+    40,
+    41
+   ],
+   "depFcst": [
+    43,
+    45,
+    40,
+    34,
+    38,
+    29,
+    36,
+    38,
+    41,
+    42,
+    37,
+    43,
+    40
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1031",
+     "qty": 101,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D01-AZ",
+   "onHand": 118,
+   "inTransit": [],
+   "shipFcst": [
+    35,
+    28,
+    22,
+    35,
+    27,
+    26,
+    30,
+    29,
+    31,
+    27,
+    28,
+    32,
+    26
+   ],
+   "depFcst": [
+    30,
+    26,
+    25,
+    29,
+    30,
+    27,
+    34,
+    25,
+    30,
+    28,
+    27,
+    28,
+    25
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1032",
+     "qty": 30,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1033",
+     "qty": 41,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D02-FL",
+   "onHand": 77,
+   "inTransit": [],
+   "shipFcst": [
+    47,
+    56,
+    50,
+    47,
+    56,
+    43,
+    44,
+    69,
+    53,
+    44,
+    56,
+    58,
+    41
+   ],
+   "depFcst": [
+    49,
+    49,
+    45,
+    53,
+    49,
+    47,
+    51,
+    56,
+    43,
+    41,
+    49,
+    49,
+    46
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1034",
+     "qty": 116,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D02-GA",
+   "onHand": 180,
+   "inTransit": [],
+   "shipFcst": [
+    28,
+    42,
+    40,
+    32,
+    34,
+    25,
+    33,
+    28,
+    32,
+    38,
+    36,
+    32,
+    35
+   ],
+   "depFcst": [
+    29,
+    36,
+    36,
+    32,
+    28,
+    28,
+    36,
+    31,
+    34,
+    31,
+    32,
+    31,
+    34
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1035",
+     "qty": 74,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D03-CA",
+   "onHand": 323,
+   "inTransit": [
+    {
+     "qty": 58,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    79,
+    96,
+    71,
+    101,
+    92,
+    90,
+    83,
+    91,
+    76,
+    77,
+    77,
+    102,
+    68
+   ],
+   "depFcst": [
+    78,
+    90,
+    66,
+    88,
+    74,
+    83,
+    76,
+    78,
+    74,
+    76,
+    80,
+    84,
+    73
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1036",
+     "qty": 215,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D03-CO",
+   "onHand": 66,
+   "inTransit": [],
+   "shipFcst": [
+    16,
+    18,
+    17,
+    20,
+    18,
+    17,
+    18,
+    19,
+    18,
+    18,
+    16,
+    15,
+    20
+   ],
+   "depFcst": [
+    16,
+    17,
+    16,
+    16,
+    16,
+    17,
+    18,
+    15,
+    18,
+    17,
+    17,
+    17,
+    19
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1037",
+     "qty": 33,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D04-NY",
+   "onHand": 287,
+   "inTransit": [],
+   "shipFcst": [
+    48,
+    46,
+    61,
+    68,
+    55,
+    48,
+    53,
+    63,
+    64,
+    55,
+    48,
+    43,
+    50
+   ],
+   "depFcst": [
+    47,
+    52,
+    57,
+    55,
+    45,
+    49,
+    47,
+    58,
+    52,
+    50,
+    47,
+    46,
+    48
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1038",
+     "qty": 50,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1039",
+     "qty": 51,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D04-NJ",
+   "onHand": 160,
+   "inTransit": [],
+   "shipFcst": [
+    44,
+    39,
+    49,
+    43,
+    38,
+    51,
+    43,
+    40,
+    48,
+    44,
+    49,
+    34,
+    45
+   ],
+   "depFcst": [
+    43,
+    42,
+    41,
+    36,
+    42,
+    45,
+    42,
+    43,
+    43,
+    45,
+    42,
+    35,
+    39
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1040",
+     "qty": 42,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1041",
+     "qty": 44,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D05-IL",
+   "onHand": 248,
+   "inTransit": [
+    {
+     "qty": 48,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    56,
+    57,
+    63,
+    52,
+    52,
+    68,
+    61,
+    52,
+    47,
+    73,
+    60,
+    56,
+    65
+   ],
+   "depFcst": [
+    55,
+    49,
+    57,
+    55,
+    56,
+    56,
+    52,
+    60,
+    50,
+    59,
+    59,
+    61,
+    57
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1042",
+     "qty": 107,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D05-OH",
+   "onHand": 185,
+   "inTransit": [],
+   "shipFcst": [
+    41,
+    42,
+    49,
+    37,
+    29,
+    39,
+    34,
+    36,
+    38,
+    40,
+    28,
+    34,
+    28
+   ],
+   "depFcst": [
+    38,
+    36,
+    40,
+    36,
+    34,
+    34,
+    32,
+    38,
+    37,
+    34,
+    32,
+    32,
+    28
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1043",
+     "qty": 85,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D06-PA",
+   "onHand": 304,
+   "inTransit": [],
+   "shipFcst": [
+    32,
+    36,
+    32,
+    36,
+    30,
+    32,
+    30,
+    31,
+    32,
+    32,
+    26,
+    30,
+    39
+   ],
+   "depFcst": [
+    35,
+    32,
+    30,
+    36,
+    32,
+    36,
+    32,
+    31,
+    29,
+    32,
+    30,
+    26,
+    35
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1044",
+     "qty": 78,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D06-NJ",
+   "onHand": 105,
+   "inTransit": [],
+   "shipFcst": [
+    27,
+    30,
+    24,
+    30,
+    30,
+    29,
+    28,
+    26,
+    25,
+    31,
+    28,
+    30,
+    22
+   ],
+   "depFcst": [
+    30,
+    25,
+    26,
+    27,
+    28,
+    23,
+    28,
+    24,
+    25,
+    33,
+    24,
+    30,
+    24
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D07-NC",
+   "onHand": 120,
+   "inTransit": [],
+   "shipFcst": [
+    35,
+    37,
+    30,
+    36,
+    28,
+    27,
+    39,
+    35,
+    46,
+    37,
+    31,
+    43,
+    25
+   ],
+   "depFcst": [
+    39,
+    39,
+    30,
+    32,
+    31,
+    31,
+    33,
+    37,
+    41,
+    33,
+    36,
+    41,
+    29
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1045",
+     "qty": 34,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1046",
+     "qty": 33,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D07-GA",
+   "onHand": 92,
+   "inTransit": [],
+   "shipFcst": [
+    22,
+    29,
+    22,
+    22,
+    23,
+    23,
+    27,
+    29,
+    26,
+    25,
+    29,
+    22,
+    31
+   ],
+   "depFcst": [
+    23,
+    23,
+    21,
+    22,
+    25,
+    21,
+    27,
+    25,
+    23,
+    23,
+    24,
+    23,
+    26
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1047",
+     "qty": 25,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1048",
+     "qty": 34,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D08-CO",
+   "onHand": 72,
+   "inTransit": [],
+   "shipFcst": [
+    16,
+    24,
+    15,
+    17,
+    18,
+    19,
+    15,
+    24,
+    19,
+    23,
+    16,
+    18,
+    16
+   ],
+   "depFcst": [
+    17,
+    19,
+    14,
+    18,
+    16,
+    18,
+    16,
+    19,
+    18,
+    20,
+    16,
+    17,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1049",
+     "qty": 27,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1050",
+     "qty": 21,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D09-OH",
+   "onHand": 164,
+   "inTransit": [
+    {
+     "qty": 44,
+     "arrivesInDays": 4
+    }
+   ],
+   "shipFcst": [
+    42,
+    41,
+    49,
+    43,
+    39,
+    37,
+    44,
+    43,
+    36,
+    39,
+    43,
+    42,
+    46
+   ],
+   "depFcst": [
+    34,
+    43,
+    41,
+    41,
+    36,
+    42,
+    37,
+    35,
+    39,
+    35,
+    40,
+    35,
+    40
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1051",
+     "qty": 32,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1052",
+     "qty": 48,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D10-AZ",
+   "onHand": 100,
+   "inTransit": [],
+   "shipFcst": [
+    30,
+    31,
+    25,
+    40,
+    27,
+    47,
+    34,
+    27,
+    30,
+    34,
+    24,
+    38,
+    34
+   ],
+   "depFcst": [
+    29,
+    26,
+    27,
+    32,
+    29,
+    38,
+    37,
+    29,
+    29,
+    29,
+    26,
+    33,
+    34
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1053",
+     "qty": 76,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D11-IL",
+   "onHand": 123,
+   "inTransit": [],
+   "shipFcst": [
+    38,
+    33,
+    36,
+    32,
+    41,
+    24,
+    37,
+    38,
+    41,
+    39,
+    39,
+    31,
+    31
+   ],
+   "depFcst": [
+    33,
+    32,
+    33,
+    31,
+    33,
+    27,
+    33,
+    31,
+    34,
+    31,
+    35,
+    33,
+    31
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D12-TX",
+   "onHand": 193,
+   "inTransit": [],
+   "shipFcst": [
+    57,
+    55,
+    89,
+    59,
+    54,
+    67,
+    50,
+    74,
+    70,
+    61,
+    64,
+    74,
+    71
+   ],
+   "depFcst": [
+    64,
+    53,
+    72,
+    53,
+    60,
+    54,
+    54,
+    65,
+    61,
+    54,
+    60,
+    68,
+    64
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1054",
+     "qty": 142,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D13-CA",
+   "onHand": 192,
+   "inTransit": [
+    {
+     "qty": 43,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    48,
+    38,
+    42,
+    34,
+    42,
+    45,
+    44,
+    33,
+    48,
+    45,
+    39,
+    42,
+    37
+   ],
+   "depFcst": [
+    48,
+    43,
+    49,
+    39,
+    38,
+    43,
+    47,
+    38,
+    48,
+    45,
+    41,
+    42,
+    38
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1055",
+     "qty": 52,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1056",
+     "qty": 56,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D14-NY",
+   "onHand": 300,
+   "inTransit": [],
+   "shipFcst": [
+    79,
+    74,
+    47,
+    72,
+    69,
+    63,
+    84,
+    77,
+    56,
+    69,
+    68,
+    72,
+    68
+   ],
+   "depFcst": [
+    70,
+    64,
+    52,
+    72,
+    65,
+    51,
+    69,
+    62,
+    58,
+    67,
+    63,
+    62,
+    65
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1057",
+     "qty": 74,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1058",
+     "qty": 81,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D15-FL",
+   "onHand": 87,
+   "inTransit": [],
+   "shipFcst": [
+    54,
+    50,
+    44,
+    42,
+    49,
+    40,
+    60,
+    36,
+    71,
+    48,
+    52,
+    58,
+    56
+   ],
+   "depFcst": [
+    45,
+    50,
+    45,
+    47,
+    48,
+    45,
+    53,
+    38,
+    61,
+    48,
+    45,
+    54,
+    47
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1059",
+     "qty": 61,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1060",
+     "qty": 55,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D16-NC",
+   "onHand": 110,
+   "inTransit": [],
+   "shipFcst": [
+    27,
+    31,
+    33,
+    30,
+    35,
+    37,
+    35,
+    36,
+    31,
+    23,
+    29,
+    32,
+    36
+   ],
+   "depFcst": [
+    29,
+    30,
+    28,
+    31,
+    31,
+    31,
+    31,
+    29,
+    31,
+    24,
+    34,
+    33,
+    29
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1061",
+     "qty": 30,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1062",
+     "qty": 41,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "AGS-750",
+   "marketId": "D16-PA",
+   "onHand": 94,
+   "inTransit": [
+    {
+     "qty": 35,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    35,
+    40,
+    44,
+    40,
+    42,
+    34,
+    37,
+    49,
+    42,
+    47,
+    42,
+    45,
+    38
+   ],
+   "depFcst": [
+    40,
+    42,
+    40,
+    35,
+    40,
+    40,
+    40,
+    39,
+    36,
+    45,
+    36,
+    38,
+    44
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1063",
+     "qty": 40,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1064",
+     "qty": 44,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D01-TX",
+   "onHand": 288,
+   "inTransit": [],
+   "shipFcst": [
+    21,
+    69,
+    38,
+    60,
+    58,
+    79,
+    75,
+    23,
+    28,
+    32,
+    27,
+    24,
+    28
+   ],
+   "depFcst": [
+    24,
+    69,
+    43,
+    55,
+    61,
+    66,
+    70,
+    27,
+    31,
+    31,
+    24,
+    25,
+    28
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1065",
+     "qty": 88,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D01-FL",
+   "onHand": 39,
+   "inTransit": [],
+   "shipFcst": [
+    21,
+    49,
+    46,
+    50,
+    45,
+    35,
+    46,
+    25,
+    25,
+    21,
+    29,
+    24,
+    25
+   ],
+   "depFcst": [
+    20,
+    42,
+    47,
+    45,
+    51,
+    39,
+    46,
+    23,
+    21,
+    18,
+    24,
+    20,
+    22
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1066",
+     "qty": 71,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D01-AZ",
+   "onHand": 152,
+   "inTransit": [],
+   "shipFcst": [
+    19,
+    42,
+    37,
+    42,
+    39,
+    41,
+    41,
+    14,
+    13,
+    19,
+    19,
+    23,
+    11
+   ],
+   "depFcst": [
+    17,
+    37,
+    36,
+    39,
+    33,
+    38,
+    39,
+    14,
+    15,
+    15,
+    16,
+    19,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1067",
+     "qty": 33,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1068",
+     "qty": 27,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D02-FL",
+   "onHand": 274,
+   "inTransit": [],
+   "shipFcst": [
+    30,
+    76,
+    54,
+    69,
+    59,
+    63,
+    61,
+    25,
+    28,
+    35,
+    32,
+    32,
+    27
+   ],
+   "depFcst": [
+    27,
+    62,
+    58,
+    71,
+    66,
+    66,
+    63,
+    26,
+    24,
+    30,
+    27,
+    29,
+    26
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1069",
+     "qty": 117,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D02-GA",
+   "onHand": 140,
+   "inTransit": [],
+   "shipFcst": [
+    19,
+    55,
+    41,
+    43,
+    45,
+    43,
+    28,
+    20,
+    21,
+    25,
+    20,
+    14,
+    20
+   ],
+   "depFcst": [
+    17,
+    45,
+    37,
+    43,
+    39,
+    48,
+    29,
+    20,
+    22,
+    20,
+    20,
+    15,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1070",
+     "qty": 44,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1071",
+     "qty": 46,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D03-CA",
+   "onHand": 61,
+   "inTransit": [],
+   "shipFcst": [
+    41,
+    105,
+    98,
+    146,
+    90,
+    85,
+    92,
+    37,
+    59,
+    55,
+    54,
+    39,
+    45
+   ],
+   "depFcst": [
+    38,
+    100,
+    84,
+    119,
+    77,
+    87,
+    77,
+    39,
+    51,
+    47,
+    48,
+    37,
+    46
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1072",
+     "qty": 137,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D03-CO",
+   "onHand": 55,
+   "inTransit": [
+    {
+     "qty": 19,
+     "arrivesInDays": 4
+    }
+   ],
+   "shipFcst": [
+    11,
+    27,
+    22,
+    30,
+    30,
+    19,
+    28,
+    12,
+    8,
+    13,
+    10,
+    10,
+    10
+   ],
+   "depFcst": [
+    11,
+    23,
+    21,
+    26,
+    26,
+    21,
+    25,
+    10,
+    9,
+    11,
+    10,
+    11,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1073",
+     "qty": 45,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D04-NY",
+   "onHand": 72,
+   "inTransit": [],
+   "shipFcst": [
+    34,
+    58,
+    70,
+    65,
+    77,
+    70,
+    85,
+    27,
+    34,
+    24,
+    27,
+    28,
+    23
+   ],
+   "depFcst": [
+    31,
+    61,
+    57,
+    53,
+    75,
+    62,
+    68,
+    26,
+    31,
+    27,
+    28,
+    30,
+    27
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1074",
+     "qty": 89,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D04-NJ",
+   "onHand": 272,
+   "inTransit": [],
+   "shipFcst": [
+    27,
+    41,
+    68,
+    74,
+    53,
+    47,
+    69,
+    27,
+    30,
+    25,
+    24,
+    23,
+    19
+   ],
+   "depFcst": [
+    23,
+    46,
+    55,
+    66,
+    44,
+    52,
+    57,
+    22,
+    26,
+    27,
+    20,
+    20,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1075",
+     "qty": 27,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1076",
+     "qty": 40,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D05-IL",
+   "onHand": 394,
+   "inTransit": [],
+   "shipFcst": [
+    38,
+    72,
+    80,
+    67,
+    57,
+    72,
+    63,
+    31,
+    26,
+    32,
+    37,
+    34,
+    32
+   ],
+   "depFcst": [
+    32,
+    65,
+    83,
+    73,
+    66,
+    68,
+    59,
+    30,
+    29,
+    26,
+    31,
+    30,
+    31
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1077",
+     "qty": 61,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1078",
+     "qty": 42,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D05-OH",
+   "onHand": 178,
+   "inTransit": [],
+   "shipFcst": [
+    22,
+    58,
+    49,
+    41,
+    39,
+    47,
+    43,
+    26,
+    18,
+    20,
+    14,
+    20,
+    23
+   ],
+   "depFcst": [
+    19,
+    49,
+    41,
+    34,
+    43,
+    41,
+    43,
+    22,
+    15,
+    20,
+    17,
+    19,
+    19
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1079",
+     "qty": 43,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1080",
+     "qty": 34,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D06-PA",
+   "onHand": 156,
+   "inTransit": [],
+   "shipFcst": [
+    18,
+    36,
+    36,
+    42,
+    48,
+    38,
+    35,
+    18,
+    18,
+    19,
+    17,
+    17,
+    22
+   ],
+   "depFcst": [
+    18,
+    36,
+    39,
+    46,
+    41,
+    40,
+    37,
+    16,
+    18,
+    17,
+    17,
+    15,
+    23
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1081",
+     "qty": 27,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1082",
+     "qty": 26,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D06-NJ",
+   "onHand": 131,
+   "inTransit": [
+    {
+     "qty": 30,
+     "arrivesInDays": 4
+    }
+   ],
+   "shipFcst": [
+    15,
+    39,
+    46,
+    35,
+    26,
+    26,
+    43,
+    14,
+    16,
+    20,
+    18,
+    15,
+    15
+   ],
+   "depFcst": [
+    16,
+    38,
+    37,
+    29,
+    28,
+    28,
+    39,
+    15,
+    17,
+    17,
+    16,
+    16,
+    13
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1083",
+     "qty": 28,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1084",
+     "qty": 24,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D07-NC",
+   "onHand": 211,
+   "inTransit": [],
+   "shipFcst": [
+    23,
+    41,
+    37,
+    51,
+    46,
+    37,
+    56,
+    30,
+    27,
+    16,
+    20,
+    23,
+    20
+   ],
+   "depFcst": [
+    24,
+    44,
+    37,
+    43,
+    42,
+    44,
+    50,
+    25,
+    22,
+    18,
+    17,
+    22,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1085",
+     "qty": 39,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1086",
+     "qty": 43,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D07-GA",
+   "onHand": 119,
+   "inTransit": [],
+   "shipFcst": [
+    16,
+    35,
+    43,
+    27,
+    29,
+    42,
+    32,
+    12,
+    18,
+    16,
+    13,
+    13,
+    12
+   ],
+   "depFcst": [
+    13,
+    31,
+    36,
+    31,
+    27,
+    35,
+    29,
+    13,
+    15,
+    16,
+    13,
+    14,
+    13
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1087",
+     "qty": 47,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D08-CO",
+   "onHand": 58,
+   "inTransit": [
+    {
+     "qty": 20,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    10,
+    24,
+    17,
+    25,
+    26,
+    25,
+    17,
+    10,
+    8,
+    10,
+    9,
+    8,
+    11
+   ],
+   "depFcst": [
+    10,
+    22,
+    20,
+    21,
+    24,
+    21,
+    18,
+    10,
+    8,
+    8,
+    10,
+    8,
+    11
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1088",
+     "qty": 35,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D09-OH",
+   "onHand": 279,
+   "inTransit": [],
+   "shipFcst": [
+    20,
+    60,
+    74,
+    42,
+    69,
+    62,
+    64,
+    32,
+    30,
+    20,
+    19,
+    27,
+    29
+   ],
+   "depFcst": [
+    23,
+    56,
+    61,
+    43,
+    56,
+    55,
+    57,
+    26,
+    25,
+    20,
+    20,
+    25,
+    24
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1089",
+     "qty": 43,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1090",
+     "qty": 49,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D10-AZ",
+   "onHand": 168,
+   "inTransit": [],
+   "shipFcst": [
+    20,
+    36,
+    45,
+    46,
+    31,
+    43,
+    38,
+    15,
+    21,
+    15,
+    19,
+    22,
+    15
+   ],
+   "depFcst": [
+    20,
+    39,
+    42,
+    38,
+    36,
+    41,
+    43,
+    15,
+    19,
+    17,
+    16,
+    18,
+    16
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1091",
+     "qty": 73,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D11-IL",
+   "onHand": 212,
+   "inTransit": [],
+   "shipFcst": [
+    14,
+    38,
+    38,
+    44,
+    39,
+    42,
+    44,
+    19,
+    15,
+    18,
+    15,
+    18,
+    19
+   ],
+   "depFcst": [
+    16,
+    40,
+    35,
+    41,
+    43,
+    41,
+    42,
+    18,
+    16,
+    19,
+    16,
+    18,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1092",
+     "qty": 47,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D12-TX",
+   "onHand": 257,
+   "inTransit": [],
+   "shipFcst": [
+    40,
+    87,
+    69,
+    78,
+    75,
+    100,
+    92,
+    33,
+    40,
+    33,
+    28,
+    48,
+    29
+   ],
+   "depFcst": [
+    35,
+    73,
+    68,
+    74,
+    85,
+    83,
+    89,
+    28,
+    32,
+    35,
+    33,
+    39,
+    32
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1093",
+     "qty": 128,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D13-CA",
+   "onHand": 271,
+   "inTransit": [],
+   "shipFcst": [
+    35,
+    58,
+    46,
+    69,
+    47,
+    59,
+    68,
+    21,
+    26,
+    19,
+    20,
+    25,
+    22
+   ],
+   "depFcst": [
+    32,
+    51,
+    51,
+    59,
+    42,
+    64,
+    65,
+    22,
+    27,
+    22,
+    17,
+    28,
+    25
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1094",
+     "qty": 52,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1095",
+     "qty": 61,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D14-NY",
+   "onHand": 388,
+   "inTransit": [
+    {
+     "qty": 57,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    34,
+    111,
+    83,
+    84,
+    75,
+    95,
+    75,
+    28,
+    35,
+    36,
+    34,
+    48,
+    24
+   ],
+   "depFcst": [
+    31,
+    90,
+    87,
+    80,
+    80,
+    77,
+    77,
+    30,
+    33,
+    40,
+    31,
+    44,
+    27
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1096",
+     "qty": 162,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D15-FL",
+   "onHand": 281,
+   "inTransit": [],
+   "shipFcst": [
+    32,
+    65,
+    68,
+    80,
+    70,
+    74,
+    61,
+    38,
+    28,
+    28,
+    37,
+    25,
+    26
+   ],
+   "depFcst": [
+    28,
+    71,
+    56,
+    65,
+    66,
+    66,
+    58,
+    33,
+    25,
+    26,
+    33,
+    28,
+    28
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1097",
+     "qty": 51,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1098",
+     "qty": 56,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D16-NC",
+   "onHand": 163,
+   "inTransit": [],
+   "shipFcst": [
+    14,
+    36,
+    25,
+    37,
+    39,
+    44,
+    41,
+    15,
+    18,
+    19,
+    23,
+    18,
+    15
+   ],
+   "depFcst": [
+    14,
+    40,
+    27,
+    37,
+    32,
+    40,
+    36,
+    14,
+    17,
+    17,
+    19,
+    16,
+    14
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1099",
+     "qty": 46,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "NSB-750",
+   "marketId": "D16-PA",
+   "onHand": 208,
+   "inTransit": [
+    {
+     "qty": 29,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    22,
+    37,
+    49,
+    44,
+    48,
+    58,
+    43,
+    29,
+    17,
+    29,
+    29,
+    27,
+    20
+   ],
+   "depFcst": [
+    24,
+    43,
+    43,
+    47,
+    45,
+    50,
+    48,
+    28,
+    19,
+    26,
+    25,
+    22,
+    20
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1100",
+     "qty": 74,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D01-TX",
+   "onHand": 264,
+   "inTransit": [],
+   "shipFcst": [
+    60,
+    71,
+    83,
+    83,
+    78,
+    67,
+    91,
+    64,
+    70,
+    69,
+    72,
+    78,
+    70
+   ],
+   "depFcst": [
+    69,
+    72,
+    71,
+    76,
+    72,
+    69,
+    74,
+    75,
+    78,
+    77,
+    70,
+    76,
+    74
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1101",
+     "qty": 60,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1102",
+     "qty": 74,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D01-FL",
+   "onHand": 341,
+   "inTransit": [],
+   "shipFcst": [
+    70,
+    60,
+    67,
+    58,
+    44,
+    54,
+    67,
+    52,
+    63,
+    65,
+    61,
+    49,
+    50
+   ],
+   "depFcst": [
+    60,
+    68,
+    67,
+    61,
+    50,
+    56,
+    62,
+    57,
+    61,
+    58,
+    51,
+    55,
+    53
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1103",
+     "qty": 51,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1104",
+     "qty": 69,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D01-AZ",
+   "onHand": 154,
+   "inTransit": [],
+   "shipFcst": [
+    50,
+    50,
+    43,
+    48,
+    43,
+    48,
+    44,
+    42,
+    40,
+    48,
+    44,
+    40,
+    37
+   ],
+   "depFcst": [
+    42,
+    41,
+    40,
+    44,
+    40,
+    48,
+    48,
+    36,
+    41,
+    46,
+    42,
+    45,
+    40
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D02-FL",
+   "onHand": 324,
+   "inTransit": [
+    {
+     "qty": 75,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    84,
+    81,
+    87,
+    67,
+    86,
+    84,
+    82,
+    90,
+    93,
+    78,
+    62,
+    62,
+    72
+   ],
+   "depFcst": [
+    80,
+    81,
+    84,
+    73,
+    77,
+    75,
+    70,
+    74,
+    80,
+    78,
+    67,
+    66,
+    76
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1105",
+     "qty": 70,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1106",
+     "qty": 97,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D02-GA",
+   "onHand": 248,
+   "inTransit": [],
+   "shipFcst": [
+    52,
+    52,
+    59,
+    48,
+    61,
+    43,
+    56,
+    56,
+    59,
+    64,
+    55,
+    41,
+    47
+   ],
+   "depFcst": [
+    53,
+    50,
+    58,
+    47,
+    57,
+    50,
+    50,
+    47,
+    48,
+    60,
+    47,
+    46,
+    52
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1107",
+     "qty": 102,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D03-CA",
+   "onHand": 481,
+   "inTransit": [],
+   "shipFcst": [
+    99,
+    122,
+    138,
+    135,
+    112,
+    121,
+    111,
+    109,
+    128,
+    110,
+    117,
+    99,
+    109
+   ],
+   "depFcst": [
+    112,
+    126,
+    114,
+    126,
+    108,
+    110,
+    120,
+    110,
+    111,
+    126,
+    114,
+    112,
+    99
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1108",
+     "qty": 234,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D03-CO",
+   "onHand": 155,
+   "inTransit": [],
+   "shipFcst": [
+    31,
+    26,
+    26,
+    31,
+    25,
+    32,
+    29,
+    28,
+    28,
+    37,
+    28,
+    29,
+    28
+   ],
+   "depFcst": [
+    32,
+    25,
+    26,
+    28,
+    26,
+    30,
+    27,
+    27,
+    28,
+    30,
+    26,
+    32,
+    28
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1109",
+     "qty": 25,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1110",
+     "qty": 36,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D04-NY",
+   "onHand": 257,
+   "inTransit": [],
+   "shipFcst": [
+    93,
+    97,
+    98,
+    75,
+    100,
+    73,
+    68,
+    68,
+    71,
+    76,
+    83,
+    64,
+    72
+   ],
+   "depFcst": [
+    76,
+    83,
+    83,
+    72,
+    82,
+    78,
+    78,
+    77,
+    72,
+    74,
+    84,
+    70,
+    74
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1111",
+     "qty": 195,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D04-NJ",
+   "onHand": 282,
+   "inTransit": [],
+   "shipFcst": [
+    62,
+    77,
+    62,
+    52,
+    76,
+    79,
+    80,
+    75,
+    65,
+    65,
+    61,
+    64,
+    67
+   ],
+   "depFcst": [
+    70,
+    67,
+    67,
+    61,
+    63,
+    72,
+    67,
+    64,
+    58,
+    61,
+    62,
+    58,
+    57
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1112",
+     "qty": 163,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D05-IL",
+   "onHand": 295,
+   "inTransit": [],
+   "shipFcst": [
+    95,
+    75,
+    104,
+    84,
+    93,
+    103,
+    83,
+    89,
+    88,
+    84,
+    75,
+    88,
+    70
+   ],
+   "depFcst": [
+    80,
+    87,
+    87,
+    80,
+    91,
+    89,
+    89,
+    82,
+    74,
+    80,
+    81,
+    88,
+    77
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1113",
+     "qty": 108,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1114",
+     "qty": 101,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D05-OH",
+   "onHand": 183,
+   "inTransit": [],
+   "shipFcst": [
+    59,
+    52,
+    45,
+    49,
+    49,
+    53,
+    61,
+    65,
+    60,
+    63,
+    52,
+    65,
+    49
+   ],
+   "depFcst": [
+    54,
+    55,
+    49,
+    51,
+    48,
+    50,
+    60,
+    57,
+    50,
+    61,
+    52,
+    56,
+    52
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1115",
+     "qty": 54,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1116",
+     "qty": 51,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D06-PA",
+   "onHand": 227,
+   "inTransit": [],
+   "shipFcst": [
+    57,
+    66,
+    39,
+    52,
+    44,
+    55,
+    60,
+    51,
+    54,
+    60,
+    58,
+    47,
+    54
+   ],
+   "depFcst": [
+    50,
+    58,
+    44,
+    49,
+    45,
+    49,
+    55,
+    52,
+    50,
+    50,
+    53,
+    47,
+    52
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1117",
+     "qty": 111,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D06-NJ",
+   "onHand": 108,
+   "inTransit": [
+    {
+     "qty": 42,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    38,
+    46,
+    55,
+    38,
+    37,
+    40,
+    42,
+    48,
+    53,
+    45,
+    38,
+    41,
+    49
+   ],
+   "depFcst": [
+    43,
+    43,
+    44,
+    43,
+    40,
+    40,
+    42,
+    45,
+    44,
+    45,
+    39,
+    39,
+    40
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1118",
+     "qty": 56,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1119",
+     "qty": 43,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D07-NC",
+   "onHand": 207,
+   "inTransit": [],
+   "shipFcst": [
+    51,
+    72,
+    61,
+    48,
+    62,
+    50,
+    49,
+    54,
+    48,
+    56,
+    71,
+    56,
+    51
+   ],
+   "depFcst": [
+    53,
+    58,
+    59,
+    55,
+    56,
+    49,
+    55,
+    58,
+    55,
+    56,
+    64,
+    62,
+    55
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1120",
+     "qty": 128,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D07-GA",
+   "onHand": 218,
+   "inTransit": [
+    {
+     "qty": 37,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    37,
+    35,
+    34,
+    34,
+    36,
+    41,
+    37,
+    45,
+    46,
+    39,
+    39,
+    46,
+    33
+   ],
+   "depFcst": [
+    37,
+    35,
+    36,
+    38,
+    35,
+    43,
+    40,
+    39,
+    37,
+    37,
+    37,
+    37,
+    39
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1121",
+     "qty": 42,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1122",
+     "qty": 45,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D08-CO",
+   "onHand": 132,
+   "inTransit": [],
+   "shipFcst": [
+    24,
+    26,
+    27,
+    30,
+    28,
+    32,
+    31,
+    32,
+    34,
+    25,
+    31,
+    22,
+    29
+   ],
+   "depFcst": [
+    27,
+    25,
+    27,
+    27,
+    29,
+    29,
+    28,
+    27,
+    29,
+    27,
+    28,
+    23,
+    29
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1123",
+     "qty": 60,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D09-OH",
+   "onHand": 194,
+   "inTransit": [],
+   "shipFcst": [
+    77,
+    84,
+    52,
+    62,
+    73,
+    62,
+    60,
+    63,
+    63,
+    54,
+    70,
+    78,
+    68
+   ],
+   "depFcst": [
+    62,
+    68,
+    59,
+    55,
+    67,
+    62,
+    51,
+    59,
+    64,
+    62,
+    61,
+    63,
+    61
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1124",
+     "qty": 86,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1125",
+     "qty": 63,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D10-AZ",
+   "onHand": 279,
+   "inTransit": [],
+   "shipFcst": [
+    47,
+    46,
+    57,
+    42,
+    63,
+    56,
+    50,
+    49,
+    57,
+    54,
+    51,
+    52,
+    60
+   ],
+   "depFcst": [
+    53,
+    49,
+    48,
+    43,
+    51,
+    51,
+    47,
+    45,
+    48,
+    56,
+    52,
+    49,
+    49
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1126",
+     "qty": 45,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1127",
+     "qty": 52,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D11-IL",
+   "onHand": 184,
+   "inTransit": [],
+   "shipFcst": [
+    42,
+    39,
+    48,
+    40,
+    57,
+    59,
+    40,
+    41,
+    42,
+    60,
+    46,
+    48,
+    46
+   ],
+   "depFcst": [
+    47,
+    44,
+    42,
+    46,
+    47,
+    51,
+    45,
+    39,
+    43,
+    50,
+    44,
+    51,
+    48
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D12-TX",
+   "onHand": 390,
+   "inTransit": [],
+   "shipFcst": [
+    87,
+    84,
+    114,
+    106,
+    93,
+    111,
+    94,
+    111,
+    97,
+    92,
+    117,
+    95,
+    118
+   ],
+   "depFcst": [
+    94,
+    86,
+    99,
+    90,
+    98,
+    98,
+    99,
+    106,
+    89,
+    93,
+    110,
+    91,
+    102
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D13-CA",
+   "onHand": 272,
+   "inTransit": [
+    {
+     "qty": 40,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    59,
+    61,
+    62,
+    81,
+    64,
+    56,
+    80,
+    75,
+    83,
+    60,
+    67,
+    76,
+    51
+   ],
+   "depFcst": [
+    69,
+    62,
+    67,
+    66,
+    61,
+    62,
+    70,
+    73,
+    68,
+    60,
+    59,
+    64,
+    60
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1128",
+     "qty": 54,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1129",
+     "qty": 73,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D14-NY",
+   "onHand": 353,
+   "inTransit": [],
+   "shipFcst": [
+    75,
+    105,
+    92,
+    127,
+    108,
+    95,
+    99,
+    86,
+    95,
+    132,
+    107,
+    94,
+    95
+   ],
+   "depFcst": [
+    85,
+    95,
+    92,
+    106,
+    87,
+    103,
+    84,
+    94,
+    94,
+    107,
+    91,
+    93,
+    99
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1130",
+     "qty": 208,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D15-FL",
+   "onHand": 339,
+   "inTransit": [],
+   "shipFcst": [
+    83,
+    69,
+    96,
+    95,
+    86,
+    80,
+    74,
+    69,
+    104,
+    96,
+    69,
+    95,
+    80
+   ],
+   "depFcst": [
+    68,
+    67,
+    84,
+    79,
+    84,
+    71,
+    78,
+    78,
+    85,
+    80,
+    69,
+    80,
+    69
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1131",
+     "qty": 153,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D16-NC",
+   "onHand": 183,
+   "inTransit": [
+    {
+     "qty": 36,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    48,
+    57,
+    55,
+    43,
+    51,
+    47,
+    47,
+    47,
+    46,
+    46,
+    44,
+    51,
+    65
+   ],
+   "depFcst": [
+    46,
+    49,
+    49,
+    43,
+    41,
+    49,
+    47,
+    45,
+    43,
+    49,
+    49,
+    47,
+    52
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1132",
+     "qty": 109,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CVK-1L",
+   "marketId": "D16-PA",
+   "onHand": 230,
+   "inTransit": [],
+   "shipFcst": [
+    73,
+    77,
+    56,
+    58,
+    60,
+    73,
+    82,
+    68,
+    58,
+    68,
+    77,
+    58,
+    65
+   ],
+   "depFcst": [
+    61,
+    62,
+    64,
+    66,
+    60,
+    67,
+    66,
+    59,
+    56,
+    59,
+    63,
+    62,
+    70
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D01-TX",
+   "onHand": 50,
+   "inTransit": [],
+   "shipFcst": [
+    19,
+    17,
+    15,
+    17,
+    20,
+    19,
+    14,
+    11,
+    15,
+    12,
+    20,
+    13,
+    16
+   ],
+   "depFcst": [
+    15,
+    15,
+    15,
+    16,
+    18,
+    17,
+    16,
+    12,
+    17,
+    14,
+    19,
+    15,
+    18
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1133",
+     "qty": 15,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1134",
+     "qty": 21,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D01-FL",
+   "onHand": 60,
+   "inTransit": [
+    {
+     "qty": 12,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    15,
+    11,
+    14,
+    17,
+    13,
+    9,
+    15,
+    16,
+    11,
+    12,
+    13,
+    18,
+    13
+   ],
+   "depFcst": [
+    13,
+    13,
+    13,
+    14,
+    12,
+    10,
+    13,
+    13,
+    11,
+    14,
+    12,
+    15,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1135",
+     "qty": 24,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D01-AZ",
+   "onHand": 41,
+   "inTransit": [
+    {
+     "qty": 10,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    9,
+    9,
+    9,
+    8,
+    13,
+    9,
+    9,
+    10,
+    12,
+    8,
+    11,
+    11,
+    10
+   ],
+   "depFcst": [
+    9,
+    9,
+    10,
+    8,
+    11,
+    9,
+    9,
+    9,
+    11,
+    8,
+    9,
+    9,
+    9
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1136",
+     "qty": 12,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1137",
+     "qty": 10,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D02-FL",
+   "onHand": 58,
+   "inTransit": [
+    {
+     "qty": 12,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    17,
+    20,
+    19,
+    18,
+    15,
+    18,
+    16,
+    15,
+    18,
+    14,
+    20,
+    14,
+    13
+   ],
+   "depFcst": [
+    16,
+    17,
+    18,
+    17,
+    17,
+    16,
+    14,
+    15,
+    15,
+    15,
+    17,
+    13,
+    14
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1138",
+     "qty": 46,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D02-GA",
+   "onHand": 56,
+   "inTransit": [],
+   "shipFcst": [
+    11,
+    10,
+    13,
+    12,
+    10,
+    9,
+    10,
+    9,
+    16,
+    11,
+    16,
+    12,
+    15
+   ],
+   "depFcst": [
+    10,
+    10,
+    11,
+    11,
+    12,
+    10,
+    9,
+    10,
+    13,
+    10,
+    13,
+    11,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1139",
+     "qty": 13,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1140",
+     "qty": 9,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D03-CA",
+   "onHand": 141,
+   "inTransit": [
+    {
+     "qty": 26,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    28,
+    25,
+    23,
+    21,
+    21,
+    27,
+    21,
+    25,
+    23,
+    21,
+    27,
+    36,
+    24
+   ],
+   "depFcst": [
+    27,
+    23,
+    23,
+    20,
+    24,
+    22,
+    23,
+    28,
+    27,
+    23,
+    26,
+    29,
+    24
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1141",
+     "qty": 24,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1142",
+     "qty": 34,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D03-CO",
+   "onHand": 22,
+   "inTransit": [],
+   "shipFcst": [
+    7,
+    5,
+    7,
+    6,
+    7,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    8,
+    6
+   ],
+   "depFcst": [
+    6,
+    6,
+    6,
+    5,
+    6,
+    5,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    6
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1143",
+     "qty": 13,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D04-NY",
+   "onHand": 88,
+   "inTransit": [],
+   "shipFcst": [
+    15,
+    14,
+    16,
+    12,
+    22,
+    19,
+    16,
+    14,
+    16,
+    21,
+    20,
+    14,
+    16
+   ],
+   "depFcst": [
+    17,
+    16,
+    18,
+    13,
+    21,
+    17,
+    15,
+    14,
+    15,
+    17,
+    16,
+    15,
+    18
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1144",
+     "qty": 16,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1145",
+     "qty": 17,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D04-NJ",
+   "onHand": 56,
+   "inTransit": [
+    {
+     "qty": 13,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    16,
+    14,
+    13,
+    13,
+    14,
+    10,
+    15,
+    16,
+    17,
+    11,
+    16,
+    14,
+    12
+   ],
+   "depFcst": [
+    15,
+    11,
+    12,
+    12,
+    14,
+    11,
+    13,
+    16,
+    14,
+    10,
+    14,
+    15,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1146",
+     "qty": 32,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D05-IL",
+   "onHand": 63,
+   "inTransit": [
+    {
+     "qty": 14,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    23,
+    17,
+    18,
+    21,
+    17,
+    15,
+    18,
+    18,
+    20,
+    17,
+    18,
+    16,
+    22
+   ],
+   "depFcst": [
+    20,
+    18,
+    18,
+    17,
+    18,
+    15,
+    18,
+    18,
+    18,
+    18,
+    17,
+    16,
+    19
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D05-OH",
+   "onHand": 52,
+   "inTransit": [],
+   "shipFcst": [
+    11,
+    12,
+    11,
+    12,
+    12,
+    10,
+    12,
+    12,
+    14,
+    15,
+    12,
+    10,
+    16
+   ],
+   "depFcst": [
+    10,
+    11,
+    13,
+    11,
+    10,
+    10,
+    13,
+    12,
+    12,
+    12,
+    12,
+    11,
+    13
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1147",
+     "qty": 27,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D06-PA",
+   "onHand": 49,
+   "inTransit": [
+    {
+     "qty": 9,
+     "arrivesInDays": 4
+    }
+   ],
+   "shipFcst": [
+    13,
+    13,
+    13,
+    12,
+    9,
+    12,
+    10,
+    14,
+    10,
+    14,
+    12,
+    12,
+    11
+   ],
+   "depFcst": [
+    11,
+    12,
+    11,
+    10,
+    10,
+    10,
+    11,
+    12,
+    11,
+    12,
+    12,
+    11,
+    9
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1148",
+     "qty": 15,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1149",
+     "qty": 14,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D06-NJ",
+   "onHand": 38,
+   "inTransit": [],
+   "shipFcst": [
+    9,
+    8,
+    9,
+    11,
+    9,
+    8,
+    7,
+    10,
+    9,
+    9,
+    10,
+    9,
+    8
+   ],
+   "depFcst": [
+    9,
+    9,
+    9,
+    9,
+    8,
+    7,
+    8,
+    9,
+    8,
+    9,
+    10,
+    8,
+    8
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1150",
+     "qty": 17,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D07-NC",
+   "onHand": 37,
+   "inTransit": [],
+   "shipFcst": [
+    13,
+    10,
+    13,
+    11,
+    13,
+    10,
+    12,
+    14,
+    14,
+    9,
+    9,
+    13,
+    12
+   ],
+   "depFcst": [
+    12,
+    11,
+    13,
+    10,
+    12,
+    9,
+    11,
+    12,
+    11,
+    10,
+    9,
+    14,
+    13
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1151",
+     "qty": 12,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1152",
+     "qty": 12,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D07-GA",
+   "onHand": 28,
+   "inTransit": [],
+   "shipFcst": [
+    8,
+    9,
+    9,
+    9,
+    7,
+    10,
+    9,
+    9,
+    7,
+    8,
+    8,
+    9,
+    8
+   ],
+   "depFcst": [
+    9,
+    8,
+    8,
+    10,
+    7,
+    9,
+    9,
+    8,
+    8,
+    9,
+    7,
+    8,
+    7
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1153",
+     "qty": 19,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D08-CO",
+   "onHand": 24,
+   "inTransit": [],
+   "shipFcst": [
+    4,
+    6,
+    7,
+    6,
+    7,
+    7,
+    5,
+    6,
+    7,
+    7,
+    6,
+    6,
+    4
+   ],
+   "depFcst": [
+    5,
+    5,
+    6,
+    5,
+    6,
+    6,
+    5,
+    6,
+    6,
+    6,
+    6,
+    5,
+    5
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1154",
+     "qty": 12,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D09-OH",
+   "onHand": 67,
+   "inTransit": [],
+   "shipFcst": [
+    18,
+    14,
+    13,
+    13,
+    15,
+    17,
+    16,
+    14,
+    15,
+    18,
+    13,
+    11,
+    14
+   ],
+   "depFcst": [
+    16,
+    14,
+    12,
+    13,
+    12,
+    14,
+    14,
+    14,
+    13,
+    15,
+    12,
+    12,
+    14
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1155",
+     "qty": 16,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1156",
+     "qty": 19,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D10-AZ",
+   "onHand": 53,
+   "inTransit": [],
+   "shipFcst": [
+    11,
+    10,
+    12,
+    10,
+    8,
+    13,
+    8,
+    12,
+    12,
+    11,
+    14,
+    8,
+    14
+   ],
+   "depFcst": [
+    11,
+    11,
+    11,
+    11,
+    9,
+    13,
+    9,
+    12,
+    11,
+    9,
+    11,
+    9,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1157",
+     "qty": 11,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1158",
+     "qty": 10,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D11-IL",
+   "onHand": 49,
+   "inTransit": [],
+   "shipFcst": [
+    9,
+    11,
+    10,
+    10,
+    9,
+    9,
+    11,
+    9,
+    10,
+    14,
+    10,
+    11,
+    10
+   ],
+   "depFcst": [
+    10,
+    11,
+    10,
+    8,
+    9,
+    10,
+    10,
+    10,
+    9,
+    12,
+    9,
+    9,
+    10
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1159",
+     "qty": 10,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1160",
+     "qty": 14,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D12-TX",
+   "onHand": 114,
+   "inTransit": [
+    {
+     "qty": 17,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    23,
+    23,
+    29,
+    23,
+    20,
+    18,
+    22,
+    25,
+    23,
+    25,
+    25,
+    29,
+    18
+   ],
+   "depFcst": [
+    22,
+    20,
+    24,
+    22,
+    20,
+    21,
+    25,
+    20,
+    21,
+    24,
+    24,
+    23,
+    20
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D13-CA",
+   "onHand": 47,
+   "inTransit": [
+    {
+     "qty": 10,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    18,
+    14,
+    15,
+    18,
+    14,
+    14,
+    17,
+    16,
+    18,
+    15,
+    15,
+    12,
+    17
+   ],
+   "depFcst": [
+    16,
+    15,
+    15,
+    16,
+    13,
+    13,
+    14,
+    17,
+    15,
+    15,
+    16,
+    14,
+    15
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1161",
+     "qty": 40,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D14-NY",
+   "onHand": 99,
+   "inTransit": [
+    {
+     "qty": 26,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    21,
+    23,
+    23,
+    25,
+    24,
+    21,
+    18,
+    21,
+    18,
+    17,
+    25,
+    24,
+    26
+   ],
+   "depFcst": [
+    24,
+    24,
+    22,
+    22,
+    21,
+    18,
+    20,
+    20,
+    21,
+    19,
+    23,
+    22,
+    24
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1162",
+     "qty": 54,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D15-FL",
+   "onHand": 57,
+   "inTransit": [],
+   "shipFcst": [
+    18,
+    16,
+    17,
+    16,
+    14,
+    20,
+    19,
+    19,
+    19,
+    16,
+    15,
+    21,
+    15
+   ],
+   "depFcst": [
+    15,
+    14,
+    16,
+    16,
+    15,
+    18,
+    16,
+    15,
+    18,
+    13,
+    15,
+    17,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1163",
+     "qty": 15,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1164",
+     "qty": 17,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D16-NC",
+   "onHand": 55,
+   "inTransit": [],
+   "shipFcst": [
+    9,
+    12,
+    9,
+    12,
+    10,
+    11,
+    10,
+    12,
+    13,
+    9,
+    13,
+    11,
+    10
+   ],
+   "depFcst": [
+    10,
+    11,
+    9,
+    11,
+    9,
+    10,
+    10,
+    10,
+    11,
+    10,
+    11,
+    10,
+    10
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1165",
+     "qty": 27,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "IBR-750",
+   "marketId": "D16-PA",
+   "onHand": 51,
+   "inTransit": [],
+   "shipFcst": [
+    14,
+    16,
+    15,
+    17,
+    15,
+    12,
+    14,
+    13,
+    10,
+    10,
+    13,
+    12,
+    15
+   ],
+   "depFcst": [
+    13,
+    14,
+    15,
+    14,
+    13,
+    13,
+    15,
+    11,
+    12,
+    10,
+    14,
+    12,
+    14
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1166",
+     "qty": 14,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1167",
+     "qty": 21,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D01-TX",
+   "onHand": 103,
+   "inTransit": [
+    {
+     "qty": 21,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    24,
+    23,
+    16,
+    17,
+    24,
+    26,
+    21,
+    26,
+    19,
+    23,
+    25,
+    23,
+    20
+   ],
+   "depFcst": [
+    21,
+    20,
+    18,
+    19,
+    23,
+    23,
+    18,
+    21,
+    20,
+    22,
+    24,
+    19,
+    21
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1168",
+     "qty": 56,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D01-FL",
+   "onHand": 86,
+   "inTransit": [
+    {
+     "qty": 12,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    15,
+    20,
+    18,
+    13,
+    21,
+    23,
+    18,
+    20,
+    14,
+    18,
+    16,
+    15,
+    17
+   ],
+   "depFcst": [
+    14,
+    19,
+    16,
+    15,
+    19,
+    20,
+    18,
+    18,
+    16,
+    16,
+    16,
+    13,
+    18
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1169",
+     "qty": 20,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1170",
+     "qty": 21,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D01-AZ",
+   "onHand": 80,
+   "inTransit": [
+    {
+     "qty": 14,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    15,
+    12,
+    15,
+    13,
+    14,
+    13,
+    13,
+    16,
+    15,
+    13,
+    14,
+    11,
+    11
+   ],
+   "depFcst": [
+    13,
+    12,
+    13,
+    14,
+    13,
+    13,
+    13,
+    13,
+    12,
+    13,
+    12,
+    13,
+    11
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1171",
+     "qty": 16,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1172",
+     "qty": 12,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D02-FL",
+   "onHand": 81,
+   "inTransit": [],
+   "shipFcst": [
+    23,
+    24,
+    20,
+    16,
+    18,
+    23,
+    19,
+    20,
+    27,
+    24,
+    31,
+    18,
+    18
+   ],
+   "depFcst": [
+    25,
+    20,
+    19,
+    19,
+    20,
+    21,
+    22,
+    22,
+    22,
+    21,
+    25,
+    20,
+    21
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1173",
+     "qty": 61,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D02-GA",
+   "onHand": 56,
+   "inTransit": [],
+   "shipFcst": [
+    15,
+    16,
+    18,
+    14,
+    16,
+    15,
+    15,
+    16,
+    15,
+    13,
+    16,
+    17,
+    16
+   ],
+   "depFcst": [
+    13,
+    15,
+    17,
+    16,
+    16,
+    15,
+    14,
+    18,
+    14,
+    15,
+    15,
+    15,
+    15
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1174",
+     "qty": 35,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D03-CA",
+   "onHand": 166,
+   "inTransit": [],
+   "shipFcst": [
+    37,
+    41,
+    26,
+    31,
+    36,
+    28,
+    30,
+    31,
+    39,
+    41,
+    42,
+    30,
+    33
+   ],
+   "depFcst": [
+    32,
+    36,
+    29,
+    33,
+    32,
+    30,
+    30,
+    33,
+    35,
+    33,
+    36,
+    34,
+    37
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1175",
+     "qty": 93,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D03-CO",
+   "onHand": 32,
+   "inTransit": [],
+   "shipFcst": [
+    6,
+    10,
+    8,
+    9,
+    7,
+    10,
+    9,
+    8,
+    9,
+    9,
+    9,
+    8,
+    10
+   ],
+   "depFcst": [
+    7,
+    8,
+    7,
+    8,
+    8,
+    9,
+    8,
+    7,
+    8,
+    8,
+    9,
+    8,
+    9
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1176",
+     "qty": 19,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D04-NY",
+   "onHand": 127,
+   "inTransit": [],
+   "shipFcst": [
+    21,
+    22,
+    21,
+    23,
+    22,
+    27,
+    21,
+    19,
+    26,
+    26,
+    29,
+    25,
+    29
+   ],
+   "depFcst": [
+    21,
+    21,
+    21,
+    23,
+    18,
+    22,
+    22,
+    20,
+    21,
+    22,
+    24,
+    26,
+    24
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1177",
+     "qty": 50,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D04-NJ",
+   "onHand": 60,
+   "inTransit": [
+    {
+     "qty": 20,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    18,
+    19,
+    20,
+    19,
+    19,
+    16,
+    20,
+    16,
+    19,
+    25,
+    16,
+    19,
+    13
+   ],
+   "depFcst": [
+    19,
+    20,
+    18,
+    17,
+    18,
+    16,
+    16,
+    17,
+    17,
+    20,
+    17,
+    18,
+    15
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1178",
+     "qty": 38,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D05-IL",
+   "onHand": 153,
+   "inTransit": [],
+   "shipFcst": [
+    32,
+    18,
+    28,
+    29,
+    26,
+    27,
+    27,
+    21,
+    21,
+    30,
+    24,
+    24,
+    26
+   ],
+   "depFcst": [
+    29,
+    19,
+    24,
+    25,
+    24,
+    26,
+    23,
+    23,
+    18,
+    27,
+    25,
+    22,
+    25
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D05-OH",
+   "onHand": 97,
+   "inTransit": [],
+   "shipFcst": [
+    17,
+    20,
+    16,
+    14,
+    18,
+    14,
+    14,
+    19,
+    12,
+    13,
+    17,
+    18,
+    17
+   ],
+   "depFcst": [
+    14,
+    18,
+    14,
+    16,
+    15,
+    15,
+    16,
+    16,
+    13,
+    12,
+    17,
+    17,
+    15
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1179",
+     "qty": 21,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1180",
+     "qty": 14,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D06-PA",
+   "onHand": 48,
+   "inTransit": [],
+   "shipFcst": [
+    16,
+    18,
+    19,
+    12,
+    13,
+    15,
+    15,
+    13,
+    13,
+    14,
+    19,
+    18,
+    15
+   ],
+   "depFcst": [
+    16,
+    15,
+    16,
+    13,
+    14,
+    13,
+    15,
+    13,
+    15,
+    14,
+    15,
+    17,
+    15
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1181",
+     "qty": 41,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D06-NJ",
+   "onHand": 63,
+   "inTransit": [
+    {
+     "qty": 9,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    15,
+    13,
+    11,
+    13,
+    13,
+    13,
+    10,
+    15,
+    17,
+    14,
+    15,
+    12,
+    12
+   ],
+   "depFcst": [
+    13,
+    12,
+    12,
+    12,
+    12,
+    11,
+    10,
+    13,
+    14,
+    13,
+    14,
+    14,
+    10
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1182",
+     "qty": 34,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D07-NC",
+   "onHand": 74,
+   "inTransit": [
+    {
+     "qty": 15,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    13,
+    15,
+    22,
+    21,
+    21,
+    22,
+    13,
+    15,
+    19,
+    15,
+    15,
+    18,
+    18
+   ],
+   "depFcst": [
+    15,
+    16,
+    18,
+    18,
+    17,
+    18,
+    13,
+    17,
+    16,
+    16,
+    13,
+    17,
+    18
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1183",
+     "qty": 18,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1184",
+     "qty": 14,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D07-GA",
+   "onHand": 47,
+   "inTransit": [],
+   "shipFcst": [
+    12,
+    13,
+    10,
+    11,
+    11,
+    10,
+    12,
+    11,
+    11,
+    13,
+    10,
+    10,
+    11
+   ],
+   "depFcst": [
+    10,
+    13,
+    10,
+    11,
+    10,
+    9,
+    11,
+    10,
+    11,
+    11,
+    9,
+    11,
+    11
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1185",
+     "qty": 11,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1186",
+     "qty": 15,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D08-CO",
+   "onHand": 37,
+   "inTransit": [],
+   "shipFcst": [
+    7,
+    7,
+    9,
+    5,
+    8,
+    7,
+    7,
+    8,
+    6,
+    7,
+    8,
+    9,
+    9
+   ],
+   "depFcst": [
+    8,
+    7,
+    8,
+    6,
+    8,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    9,
+    7
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1187",
+     "qty": 13,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D09-OH",
+   "onHand": 67,
+   "inTransit": [],
+   "shipFcst": [
+    18,
+    21,
+    16,
+    16,
+    19,
+    18,
+    21,
+    23,
+    17,
+    22,
+    21,
+    26,
+    23
+   ],
+   "depFcst": [
+    15,
+    19,
+    16,
+    18,
+    16,
+    18,
+    17,
+    20,
+    19,
+    20,
+    20,
+    21,
+    19
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1188",
+     "qty": 39,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D10-AZ",
+   "onHand": 57,
+   "inTransit": [],
+   "shipFcst": [
+    18,
+    13,
+    14,
+    14,
+    11,
+    13,
+    14,
+    16,
+    18,
+    15,
+    13,
+    14,
+    17
+   ],
+   "depFcst": [
+    15,
+    13,
+    13,
+    12,
+    12,
+    14,
+    11,
+    14,
+    17,
+    14,
+    13,
+    15,
+    14
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1189",
+     "qty": 20,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1190",
+     "qty": 20,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D11-IL",
+   "onHand": 57,
+   "inTransit": [],
+   "shipFcst": [
+    13,
+    14,
+    15,
+    12,
+    15,
+    15,
+    11,
+    15,
+    16,
+    13,
+    15,
+    14,
+    10
+   ],
+   "depFcst": [
+    11,
+    13,
+    15,
+    13,
+    13,
+    14,
+    13,
+    14,
+    15,
+    14,
+    14,
+    14,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1191",
+     "qty": 33,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D12-TX",
+   "onHand": 148,
+   "inTransit": [],
+   "shipFcst": [
+    27,
+    25,
+    23,
+    37,
+    23,
+    33,
+    24,
+    31,
+    31,
+    25,
+    29,
+    36,
+    28
+   ],
+   "depFcst": [
+    30,
+    27,
+    25,
+    30,
+    25,
+    29,
+    26,
+    27,
+    29,
+    23,
+    27,
+    29,
+    25
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1192",
+     "qty": 67,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D13-CA",
+   "onHand": 121,
+   "inTransit": [
+    {
+     "qty": 11,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    17,
+    26,
+    15,
+    17,
+    20,
+    23,
+    26,
+    16,
+    19,
+    20,
+    21,
+    22,
+    18
+   ],
+   "depFcst": [
+    19,
+    21,
+    18,
+    19,
+    18,
+    22,
+    24,
+    17,
+    18,
+    20,
+    19,
+    18,
+    18
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D14-NY",
+   "onHand": 145,
+   "inTransit": [
+    {
+     "qty": 25,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    22,
+    23,
+    25,
+    24,
+    25,
+    32,
+    35,
+    31,
+    31,
+    26,
+    33,
+    31,
+    35
+   ],
+   "depFcst": [
+    21,
+    21,
+    28,
+    25,
+    28,
+    26,
+    32,
+    28,
+    30,
+    26,
+    27,
+    27,
+    28
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1193",
+     "qty": 44,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D15-FL",
+   "onHand": 77,
+   "inTransit": [
+    {
+     "qty": 22,
+     "arrivesInDays": 4
+    }
+   ],
+   "shipFcst": [
+    19,
+    21,
+    22,
+    21,
+    22,
+    23,
+    25,
+    23,
+    26,
+    29,
+    25,
+    20,
+    24
+   ],
+   "depFcst": [
+    22,
+    22,
+    20,
+    23,
+    21,
+    24,
+    23,
+    23,
+    22,
+    24,
+    22,
+    21,
+    20
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1194",
+     "qty": 22,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1195",
+     "qty": 20,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D16-NC",
+   "onHand": 60,
+   "inTransit": [],
+   "shipFcst": [
+    13,
+    13,
+    13,
+    10,
+    14,
+    16,
+    16,
+    15,
+    12,
+    17,
+    11,
+    12,
+    16
+   ],
+   "depFcst": [
+    13,
+    12,
+    14,
+    11,
+    14,
+    14,
+    13,
+    14,
+    12,
+    15,
+    12,
+    12,
+    14
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1196",
+     "qty": 11,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1197",
+     "qty": 16,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "HFG-750",
+   "marketId": "D16-PA",
+   "onHand": 81,
+   "inTransit": [],
+   "shipFcst": [
+    15,
+    18,
+    15,
+    16,
+    19,
+    22,
+    17,
+    18,
+    15,
+    21,
+    17,
+    23,
+    22
+   ],
+   "depFcst": [
+    16,
+    19,
+    15,
+    16,
+    17,
+    19,
+    16,
+    17,
+    17,
+    20,
+    15,
+    19,
+    18
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1198",
+     "qty": 14,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1199",
+     "qty": 16,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D01-TX",
+   "onHand": 93,
+   "inTransit": [],
+   "shipFcst": [
+    23,
+    25,
+    28,
+    32,
+    23,
+    25,
+    27,
+    27,
+    33,
+    30,
+    26,
+    18,
+    25
+   ],
+   "depFcst": [
+    26,
+    24,
+    26,
+    29,
+    24,
+    26,
+    27,
+    27,
+    27,
+    29,
+    27,
+    21,
+    26
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1200",
+     "qty": 29,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1201",
+     "qty": 29,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D01-FL",
+   "onHand": 49,
+   "inTransit": [
+    {
+     "qty": 21,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    20,
+    19,
+    20,
+    24,
+    17,
+    21,
+    18,
+    21,
+    20,
+    19,
+    22,
+    29,
+    19
+   ],
+   "depFcst": [
+    22,
+    21,
+    20,
+    22,
+    19,
+    24,
+    19,
+    22,
+    18,
+    22,
+    21,
+    25,
+    17
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D01-AZ",
+   "onHand": 73,
+   "inTransit": [
+    {
+     "qty": 14,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    13,
+    19,
+    15,
+    18,
+    13,
+    14,
+    16,
+    17,
+    15,
+    19,
+    18,
+    15,
+    15
+   ],
+   "depFcst": [
+    15,
+    18,
+    13,
+    17,
+    14,
+    14,
+    14,
+    18,
+    15,
+    17,
+    19,
+    17,
+    16
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1202",
+     "qty": 42,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D02-FL",
+   "onHand": 150,
+   "inTransit": [],
+   "shipFcst": [
+    27,
+    25,
+    28,
+    37,
+    35,
+    34,
+    23,
+    25,
+    33,
+    27,
+    32,
+    29,
+    32
+   ],
+   "depFcst": [
+    29,
+    23,
+    28,
+    30,
+    29,
+    28,
+    22,
+    26,
+    27,
+    28,
+    26,
+    25,
+    29
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1203",
+     "qty": 32,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1204",
+     "qty": 33,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D02-GA",
+   "onHand": 76,
+   "inTransit": [
+    {
+     "qty": 10,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    18,
+    19,
+    20,
+    18,
+    17,
+    23,
+    22,
+    17,
+    25,
+    19,
+    19,
+    21,
+    19
+   ],
+   "depFcst": [
+    16,
+    18,
+    16,
+    17,
+    19,
+    19,
+    19,
+    20,
+    22,
+    17,
+    16,
+    18,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1205",
+     "qty": 15,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1206",
+     "qty": 19,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D03-CA",
+   "onHand": 187,
+   "inTransit": [],
+   "shipFcst": [
+    44,
+    51,
+    52,
+    39,
+    51,
+    49,
+    47,
+    39,
+    42,
+    49,
+    51,
+    48,
+    49
+   ],
+   "depFcst": [
+    36,
+    44,
+    42,
+    38,
+    42,
+    42,
+    38,
+    44,
+    42,
+    42,
+    49,
+    42,
+    43
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1207",
+     "qty": 46,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1208",
+     "qty": 48,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D03-CO",
+   "onHand": 56,
+   "inTransit": [],
+   "shipFcst": [
+    11,
+    9,
+    9,
+    12,
+    11,
+    10,
+    14,
+    11,
+    10,
+    12,
+    11,
+    11,
+    10
+   ],
+   "depFcst": [
+    11,
+    10,
+    9,
+    12,
+    10,
+    9,
+    11,
+    9,
+    11,
+    10,
+    10,
+    10,
+    10
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1209",
+     "qty": 11,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1210",
+     "qty": 8,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D04-NY",
+   "onHand": 123,
+   "inTransit": [],
+   "shipFcst": [
+    31,
+    30,
+    28,
+    34,
+    31,
+    27,
+    37,
+    34,
+    33,
+    30,
+    31,
+    28,
+    32
+   ],
+   "depFcst": [
+    27,
+    28,
+    29,
+    30,
+    33,
+    24,
+    32,
+    30,
+    29,
+    29,
+    26,
+    28,
+    26
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1211",
+     "qty": 73,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D04-NJ",
+   "onHand": 72,
+   "inTransit": [],
+   "shipFcst": [
+    22,
+    21,
+    26,
+    20,
+    25,
+    26,
+    23,
+    27,
+    29,
+    24,
+    26,
+    27,
+    20
+   ],
+   "depFcst": [
+    23,
+    22,
+    22,
+    23,
+    23,
+    25,
+    22,
+    25,
+    23,
+    20,
+    22,
+    24,
+    20
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1212",
+     "qty": 20,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1213",
+     "qty": 23,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D05-IL",
+   "onHand": 116,
+   "inTransit": [
+    {
+     "qty": 27,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    30,
+    39,
+    29,
+    38,
+    29,
+    31,
+    32,
+    34,
+    34,
+    32,
+    38,
+    34,
+    30
+   ],
+   "depFcst": [
+    32,
+    33,
+    26,
+    31,
+    24,
+    26,
+    30,
+    28,
+    33,
+    31,
+    35,
+    29,
+    30
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1214",
+     "qty": 66,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D05-OH",
+   "onHand": 118,
+   "inTransit": [],
+   "shipFcst": [
+    16,
+    21,
+    18,
+    23,
+    23,
+    14,
+    27,
+    25,
+    25,
+    19,
+    19,
+    19,
+    19
+   ],
+   "depFcst": [
+    17,
+    19,
+    19,
+    19,
+    21,
+    15,
+    22,
+    21,
+    21,
+    17,
+    19,
+    18,
+    19
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1215",
+     "qty": 44,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D06-PA",
+   "onHand": 106,
+   "inTransit": [],
+   "shipFcst": [
+    23,
+    18,
+    15,
+    18,
+    23,
+    18,
+    25,
+    16,
+    20,
+    21,
+    18,
+    21,
+    21
+   ],
+   "depFcst": [
+    20,
+    20,
+    17,
+    16,
+    19,
+    19,
+    20,
+    16,
+    16,
+    19,
+    16,
+    20,
+    19
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1216",
+     "qty": 47,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D06-NJ",
+   "onHand": 46,
+   "inTransit": [],
+   "shipFcst": [
+    16,
+    14,
+    14,
+    15,
+    17,
+    13,
+    15,
+    13,
+    13,
+    15,
+    14,
+    19,
+    20
+   ],
+   "depFcst": [
+    14,
+    15,
+    14,
+    13,
+    16,
+    15,
+    15,
+    14,
+    15,
+    15,
+    13,
+    17,
+    17
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1217",
+     "qty": 14,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1218",
+     "qty": 13,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D07-NC",
+   "onHand": 89,
+   "inTransit": [],
+   "shipFcst": [
+    23,
+    17,
+    21,
+    24,
+    24,
+    25,
+    23,
+    23,
+    27,
+    24,
+    16,
+    14,
+    24
+   ],
+   "depFcst": [
+    21,
+    19,
+    18,
+    21,
+    20,
+    21,
+    20,
+    20,
+    22,
+    22,
+    18,
+    16,
+    19
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D07-GA",
+   "onHand": 37,
+   "inTransit": [
+    {
+     "qty": 14,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    14,
+    10,
+    14,
+    15,
+    15,
+    15,
+    15,
+    17,
+    16,
+    16,
+    13,
+    15,
+    15
+   ],
+   "depFcst": [
+    14,
+    10,
+    15,
+    12,
+    15,
+    14,
+    13,
+    15,
+    13,
+    15,
+    14,
+    12,
+    15
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D08-CO",
+   "onHand": 42,
+   "inTransit": [
+    {
+     "qty": 9,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    12,
+    9,
+    8,
+    8,
+    10,
+    9,
+    12,
+    8,
+    10,
+    10,
+    13,
+    11,
+    10
+   ],
+   "depFcst": [
+    10,
+    9,
+    8,
+    9,
+    10,
+    9,
+    10,
+    7,
+    9,
+    10,
+    11,
+    9,
+    10
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1219",
+     "qty": 20,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D09-OH",
+   "onHand": 88,
+   "inTransit": [],
+   "shipFcst": [
+    25,
+    21,
+    21,
+    29,
+    21,
+    23,
+    25,
+    29,
+    19,
+    24,
+    17,
+    24,
+    20
+   ],
+   "depFcst": [
+    25,
+    24,
+    20,
+    24,
+    25,
+    26,
+    24,
+    26,
+    21,
+    25,
+    20,
+    21,
+    22
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1220",
+     "qty": 54,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D10-AZ",
+   "onHand": 102,
+   "inTransit": [],
+   "shipFcst": [
+    18,
+    17,
+    19,
+    14,
+    15,
+    17,
+    20,
+    17,
+    17,
+    16,
+    20,
+    15,
+    15
+   ],
+   "depFcst": [
+    16,
+    16,
+    18,
+    15,
+    14,
+    15,
+    17,
+    17,
+    16,
+    14,
+    17,
+    15,
+    16
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1221",
+     "qty": 40,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D11-IL",
+   "onHand": 73,
+   "inTransit": [],
+   "shipFcst": [
+    15,
+    24,
+    16,
+    16,
+    20,
+    20,
+    19,
+    25,
+    14,
+    21,
+    15,
+    17,
+    15
+   ],
+   "depFcst": [
+    15,
+    19,
+    15,
+    16,
+    18,
+    19,
+    19,
+    20,
+    16,
+    17,
+    15,
+    16,
+    16
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1222",
+     "qty": 23,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1223",
+     "qty": 21,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D12-TX",
+   "onHand": 131,
+   "inTransit": [],
+   "shipFcst": [
+    27,
+    32,
+    34,
+    41,
+    42,
+    34,
+    25,
+    44,
+    39,
+    38,
+    36,
+    43,
+    37
+   ],
+   "depFcst": [
+    32,
+    36,
+    33,
+    36,
+    39,
+    37,
+    27,
+    35,
+    36,
+    32,
+    33,
+    38,
+    33
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D13-CA",
+   "onHand": 92,
+   "inTransit": [],
+   "shipFcst": [
+    25,
+    34,
+    20,
+    19,
+    26,
+    22,
+    24,
+    31,
+    24,
+    19,
+    20,
+    18,
+    28
+   ],
+   "depFcst": [
+    23,
+    29,
+    21,
+    22,
+    24,
+    22,
+    23,
+    26,
+    23,
+    21,
+    23,
+    21,
+    28
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1224",
+     "qty": 68,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D14-NY",
+   "onHand": 202,
+   "inTransit": [],
+   "shipFcst": [
+    32,
+    44,
+    47,
+    38,
+    40,
+    39,
+    35,
+    41,
+    37,
+    38,
+    33,
+    30,
+    34
+   ],
+   "depFcst": [
+    31,
+    37,
+    42,
+    32,
+    33,
+    36,
+    30,
+    33,
+    40,
+    34,
+    37,
+    30,
+    35
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D15-FL",
+   "onHand": 166,
+   "inTransit": [],
+   "shipFcst": [
+    33,
+    24,
+    29,
+    32,
+    29,
+    36,
+    39,
+    29,
+    20,
+    28,
+    24,
+    32,
+    34
+   ],
+   "depFcst": [
+    29,
+    28,
+    27,
+    27,
+    29,
+    29,
+    31,
+    30,
+    24,
+    24,
+    25,
+    27,
+    29
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D16-NC",
+   "onHand": 70,
+   "inTransit": [
+    {
+     "qty": 12,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    18,
+    15,
+    14,
+    12,
+    14,
+    15,
+    13,
+    20,
+    14,
+    13,
+    13,
+    18,
+    18
+   ],
+   "depFcst": [
+    18,
+    16,
+    15,
+    13,
+    16,
+    16,
+    15,
+    17,
+    13,
+    15,
+    14,
+    16,
+    15
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1225",
+     "qty": 19,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1226",
+     "qty": 20,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "CPN-750",
+   "marketId": "D16-PA",
+   "onHand": 95,
+   "inTransit": [],
+   "shipFcst": [
+    21,
+    21,
+    24,
+    25,
+    22,
+    25,
+    22,
+    26,
+    26,
+    23,
+    27,
+    20,
+    25
+   ],
+   "depFcst": [
+    22,
+    24,
+    23,
+    20,
+    21,
+    22,
+    23,
+    23,
+    21,
+    24,
+    23,
+    19,
+    26
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D01-TX",
+   "onHand": 226,
+   "inTransit": [],
+   "shipFcst": [
+    41,
+    38,
+    39,
+    38,
+    30,
+    47,
+    37,
+    42,
+    42,
+    45,
+    41,
+    38,
+    42
+   ],
+   "depFcst": [
+    37,
+    36,
+    37,
+    40,
+    32,
+    39,
+    40,
+    41,
+    37,
+    36,
+    41,
+    38,
+    42
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1227",
+     "qty": 41,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1228",
+     "qty": 60,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D01-FL",
+   "onHand": 187,
+   "inTransit": [],
+   "shipFcst": [
+    36,
+    36,
+    33,
+    38,
+    31,
+    30,
+    35,
+    31,
+    40,
+    25,
+    32,
+    28,
+    29
+   ],
+   "depFcst": [
+    29,
+    30,
+    27,
+    32,
+    29,
+    31,
+    29,
+    30,
+    34,
+    26,
+    35,
+    29,
+    34
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1229",
+     "qty": 75,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D01-AZ",
+   "onHand": 68,
+   "inTransit": [],
+   "shipFcst": [
+    26,
+    25,
+    20,
+    23,
+    25,
+    27,
+    29,
+    19,
+    25,
+    25,
+    23,
+    22,
+    22
+   ],
+   "depFcst": [
+    25,
+    21,
+    20,
+    19,
+    25,
+    22,
+    23,
+    22,
+    22,
+    22,
+    23,
+    23,
+    21
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1230",
+     "qty": 27,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1231",
+     "qty": 23,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D02-FL",
+   "onHand": 175,
+   "inTransit": [],
+   "shipFcst": [
+    30,
+    33,
+    39,
+    45,
+    44,
+    41,
+    41,
+    49,
+    38,
+    43,
+    27,
+    44,
+    42
+   ],
+   "depFcst": [
+    35,
+    39,
+    40,
+    40,
+    39,
+    40,
+    42,
+    40,
+    36,
+    38,
+    31,
+    39,
+    38
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1232",
+     "qty": 64,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D02-GA",
+   "onHand": 101,
+   "inTransit": [],
+   "shipFcst": [
+    23,
+    22,
+    24,
+    32,
+    29,
+    26,
+    27,
+    28,
+    24,
+    21,
+    27,
+    20,
+    24
+   ],
+   "depFcst": [
+    24,
+    24,
+    23,
+    28,
+    26,
+    25,
+    27,
+    27,
+    28,
+    23,
+    26,
+    24,
+    27
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1233",
+     "qty": 51,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D03-CA",
+   "onHand": 274,
+   "inTransit": [],
+   "shipFcst": [
+    58,
+    63,
+    61,
+    51,
+    83,
+    54,
+    62,
+    72,
+    58,
+    70,
+    60,
+    50,
+    54
+   ],
+   "depFcst": [
+    55,
+    63,
+    52,
+    53,
+    67,
+    51,
+    58,
+    58,
+    48,
+    66,
+    54,
+    52,
+    54
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1234",
+     "qty": 133,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D03-CO",
+   "onHand": 77,
+   "inTransit": [],
+   "shipFcst": [
+    19,
+    15,
+    16,
+    13,
+    15,
+    15,
+    15,
+    14,
+    15,
+    16,
+    17,
+    17,
+    17
+   ],
+   "depFcst": [
+    15,
+    14,
+    14,
+    12,
+    15,
+    16,
+    13,
+    14,
+    15,
+    13,
+    15,
+    14,
+    14
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1235",
+     "qty": 14,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1236",
+     "qty": 20,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D04-NY",
+   "onHand": 150,
+   "inTransit": [
+    {
+     "qty": 36,
+     "arrivesInDays": 2
+    }
+   ],
+   "shipFcst": [
+    38,
+    49,
+    53,
+    41,
+    40,
+    44,
+    35,
+    52,
+    44,
+    47,
+    47,
+    45,
+    41
+   ],
+   "depFcst": [
+    36,
+    43,
+    44,
+    36,
+    36,
+    36,
+    41,
+    43,
+    38,
+    38,
+    40,
+    39,
+    38
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1237",
+     "qty": 96,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D04-NJ",
+   "onHand": 143,
+   "inTransit": [
+    {
+     "qty": 27,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    32,
+    36,
+    32,
+    23,
+    32,
+    28,
+    34,
+    37,
+    28,
+    29,
+    30,
+    33,
+    33
+   ],
+   "depFcst": [
+    34,
+    31,
+    30,
+    26,
+    29,
+    30,
+    34,
+    37,
+    31,
+    32,
+    31,
+    31,
+    36
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1238",
+     "qty": 37,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1239",
+     "qty": 31,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D05-IL",
+   "onHand": 163,
+   "inTransit": [],
+   "shipFcst": [
+    35,
+    51,
+    37,
+    41,
+    48,
+    45,
+    38,
+    58,
+    50,
+    53,
+    43,
+    41,
+    49
+   ],
+   "depFcst": [
+    35,
+    42,
+    37,
+    38,
+    42,
+    39,
+    35,
+    48,
+    40,
+    43,
+    41,
+    39,
+    41
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1240",
+     "qty": 46,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1241",
+     "qty": 50,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D05-OH",
+   "onHand": 89,
+   "inTransit": [],
+   "shipFcst": [
+    27,
+    20,
+    28,
+    33,
+    31,
+    25,
+    29,
+    21,
+    32,
+    24,
+    30,
+    30,
+    26
+   ],
+   "depFcst": [
+    26,
+    23,
+    25,
+    28,
+    27,
+    25,
+    25,
+    24,
+    27,
+    27,
+    26,
+    28,
+    30
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1242",
+     "qty": 55,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D06-PA",
+   "onHand": 85,
+   "inTransit": [
+    {
+     "qty": 20,
+     "arrivesInDays": 6
+    }
+   ],
+   "shipFcst": [
+    34,
+    29,
+    35,
+    27,
+    34,
+    28,
+    21,
+    25,
+    20,
+    20,
+    24,
+    24,
+    33
+   ],
+   "depFcst": [
+    30,
+    25,
+    28,
+    27,
+    28,
+    26,
+    25,
+    24,
+    21,
+    23,
+    25,
+    24,
+    29
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1243",
+     "qty": 36,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1244",
+     "qty": 24,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D06-NJ",
+   "onHand": 99,
+   "inTransit": [],
+   "shipFcst": [
+    22,
+    24,
+    22,
+    25,
+    25,
+    19,
+    21,
+    22,
+    25,
+    18,
+    21,
+    19,
+    21
+   ],
+   "depFcst": [
+    21,
+    20,
+    19,
+    23,
+    22,
+    19,
+    22,
+    19,
+    21,
+    19,
+    20,
+    21,
+    20
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D07-NC",
+   "onHand": 152,
+   "inTransit": [
+    {
+     "qty": 30,
+     "arrivesInDays": 12
+    }
+   ],
+   "shipFcst": [
+    34,
+    29,
+    27,
+    32,
+    22,
+    34,
+    29,
+    29,
+    36,
+    35,
+    27,
+    24,
+    35
+   ],
+   "depFcst": [
+    31,
+    24,
+    27,
+    29,
+    26,
+    31,
+    26,
+    30,
+    30,
+    29,
+    26,
+    24,
+    30
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1245",
+     "qty": 68,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D07-GA",
+   "onHand": 103,
+   "inTransit": [],
+   "shipFcst": [
+    14,
+    15,
+    15,
+    19,
+    16,
+    24,
+    17,
+    18,
+    20,
+    21,
+    25,
+    24,
+    18
+   ],
+   "depFcst": [
+    15,
+    17,
+    17,
+    20,
+    19,
+    20,
+    17,
+    16,
+    19,
+    18,
+    20,
+    20,
+    16
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1246",
+     "qty": 14,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1247",
+     "qty": 13,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D08-CO",
+   "onHand": 78,
+   "inTransit": [
+    {
+     "qty": 14,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    12,
+    14,
+    11,
+    16,
+    16,
+    13,
+    15,
+    13,
+    15,
+    13,
+    11,
+    11,
+    15
+   ],
+   "depFcst": [
+    13,
+    14,
+    12,
+    14,
+    13,
+    11,
+    12,
+    12,
+    14,
+    13,
+    11,
+    13,
+    12
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1248",
+     "qty": 27,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D09-OH",
+   "onHand": 150,
+   "inTransit": [
+    {
+     "qty": 32,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    37,
+    38,
+    36,
+    31,
+    29,
+    37,
+    29,
+    31,
+    33,
+    28,
+    27,
+    29,
+    32
+   ],
+   "depFcst": [
+    34,
+    34,
+    33,
+    31,
+    27,
+    33,
+    31,
+    32,
+    34,
+    33,
+    29,
+    29,
+    33
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1249",
+     "qty": 36,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1250",
+     "qty": 41,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D10-AZ",
+   "onHand": 104,
+   "inTransit": [],
+   "shipFcst": [
+    29,
+    29,
+    29,
+    25,
+    33,
+    26,
+    23,
+    34,
+    24,
+    30,
+    29,
+    28,
+    32
+   ],
+   "depFcst": [
+    25,
+    24,
+    26,
+    27,
+    27,
+    27,
+    23,
+    27,
+    23,
+    26,
+    27,
+    25,
+    27
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1251",
+     "qty": 59,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D11-IL",
+   "onHand": 77,
+   "inTransit": [],
+   "shipFcst": [
+    23,
+    24,
+    27,
+    26,
+    19,
+    22,
+    22,
+    27,
+    26,
+    26,
+    24,
+    22,
+    27
+   ],
+   "depFcst": [
+    22,
+    20,
+    23,
+    22,
+    22,
+    25,
+    23,
+    24,
+    24,
+    24,
+    25,
+    22,
+    25
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1252",
+     "qty": 28,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1253",
+     "qty": 27,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D12-TX",
+   "onHand": 274,
+   "inTransit": [],
+   "shipFcst": [
+    40,
+    47,
+    49,
+    50,
+    37,
+    52,
+    47,
+    56,
+    64,
+    49,
+    50,
+    42,
+    55
+   ],
+   "depFcst": [
+    45,
+    44,
+    46,
+    48,
+    43,
+    51,
+    46,
+    45,
+    53,
+    43,
+    42,
+    47,
+    46
+   ],
+   "openOrders": []
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D13-CA",
+   "onHand": 187,
+   "inTransit": [
+    {
+     "qty": 32,
+     "arrivesInDays": 10
+    }
+   ],
+   "shipFcst": [
+    37,
+    36,
+    40,
+    45,
+    36,
+    37,
+    37,
+    45,
+    40,
+    38,
+    40,
+    46,
+    33
+   ],
+   "depFcst": [
+    35,
+    32,
+    33,
+    36,
+    35,
+    31,
+    34,
+    36,
+    37,
+    37,
+    33,
+    37,
+    34
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1254",
+     "qty": 39,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1255",
+     "qty": 52,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D14-NY",
+   "onHand": 228,
+   "inTransit": [],
+   "shipFcst": [
+    53,
+    58,
+    49,
+    51,
+    54,
+    45,
+    52,
+    64,
+    57,
+    58,
+    49,
+    60,
+    50
+   ],
+   "depFcst": [
+    48,
+    54,
+    45,
+    45,
+    49,
+    52,
+    45,
+    54,
+    50,
+    47,
+    44,
+    55,
+    47
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1256",
+     "qty": 49,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1257",
+     "qty": 63,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D15-FL",
+   "onHand": 196,
+   "inTransit": [],
+   "shipFcst": [
+    37,
+    36,
+    37,
+    35,
+    32,
+    50,
+    50,
+    40,
+    36,
+    47,
+    35,
+    43,
+    47
+   ],
+   "depFcst": [
+    39,
+    36,
+    38,
+    38,
+    33,
+    43,
+    42,
+    36,
+    40,
+    38,
+    37,
+    39,
+    40
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1258",
+     "qty": 34,
+     "requestedWeek": 0
+    },
+    {
+     "id": "PO-1259",
+     "qty": 33,
+     "requestedWeek": 1
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D16-NC",
+   "onHand": 118,
+   "inTransit": [
+    {
+     "qty": 16,
+     "arrivesInDays": 4
+    }
+   ],
+   "shipFcst": [
+    20,
+    28,
+    18,
+    18,
+    19,
+    23,
+    23,
+    23,
+    24,
+    23,
+    33,
+    20,
+    25
+   ],
+   "depFcst": [
+    22,
+    25,
+    20,
+    20,
+    20,
+    26,
+    23,
+    21,
+    26,
+    22,
+    28,
+    23,
+    25
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1260",
+     "qty": 55,
+     "requestedWeek": 0
+    }
+   ]
+  },
+  {
+   "skuId": "VCB-750",
+   "marketId": "D16-PA",
+   "onHand": 159,
+   "inTransit": [],
+   "shipFcst": [
+    34,
+    32,
+    32,
+    24,
+    35,
+    31,
+    35,
+    36,
+    34,
+    29,
+    40,
+    31,
+    32
+   ],
+   "depFcst": [
+    29,
+    37,
+    31,
+    27,
+    32,
+    32,
+    31,
+    33,
+    28,
+    33,
+    32,
+    36,
+    29
+   ],
+   "openOrders": [
+    {
+     "id": "PO-1261",
+     "qty": 77,
+     "requestedWeek": 0
+    }
+   ]
+  }
+ ],
+ "scenarios": [
+  {
+   "skuId": "HRB-750",
+   "title": "National bourbon shortage",
+   "story": "A bottling line outage cut Harbor Ridge output. The plant can fill about 58% of open orders, and the next run lands in 6 weeks. Some markets are nearly dry while others are sitting on plenty."
+  },
+  {
+   "skuId": "AGS-750",
+   "title": "One market long, another short",
+   "story": "Summit Crest bought heavily into Texas ahead of a promotion that slipped, leaving about 140 days on hand there while its Florida market is nearly out. A sister-market transfer can fix Florida faster than the plant can."
+  },
+  {
+   "skuId": "NSB-750",
+   "title": "Holiday sparkling crunch",
+   "story": "Holiday demand for North Shore Brut came in well above plan. Supply covers about 55% of orders until the next run in 4 weeks, and two national-account markets are close to stocking out."
+  }
+ ]
+}
