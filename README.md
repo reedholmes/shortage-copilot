@@ -4,7 +4,7 @@
 
 A working demo of how a supply planner allocates scarce inventory across distributors during a shortage, then drafts the customer communication. Every recommendation shows its reasoning. No black box.
 
-**[Live demo →](https://shortage-copilot.reedholmes9.workers.dev)** · Built by Reed Holmes, supply chain planner (6 years in CPG, wine and spirits). All companies, brands and numbers are synthetic.
+**[Live demo →](https://shortage-copilot.reedholmes9.workers.dev)** · Built by Reed Holmes, supply chain planner (7 years in CPG supply chain). All companies, brands and numbers are synthetic.
 
 ![Allocation screen: plant supply, impact tiles, suggested intracompany transfers and the ranked allocation table](docs/images/allocation.png)
 
