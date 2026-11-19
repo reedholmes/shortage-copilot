@@ -1,0 +1,13 @@
+{
+  "id": "S13", "title": "Priority account always served first", "category": "Customer rules", "customer": "bluestone_spirits",
+  "story": "Bluestone serves priority accounts first even when they're well stocked. The national account has 60 days but still gets its full 100 cases; the market with 3 days gets nothing and goes to a human. (Under Acme's rules the 100 cases would go to the 3-day market.)",
+  "event": { "supplyCases": 100, "runInWeeks": 4 },
+  "markets": [
+    { "id": "P", "priority": "National account", "casesPerDay": 10, "daysOnHand": 60, "ordered": 100 },
+    { "id": "N", "casesPerDay": 10, "daysOnHand": 3, "ordered": 300 }
+  ],
+  "expect": [
+    { "market": "P", "ship": 100 }, { "market": "P", "rule": "PRIORITY" }, { "market": "N", "ship": 0 },
+    { "market": "P", "needsApproval": false }, { "market": "N", "needsApproval": true }
+  ]
+}

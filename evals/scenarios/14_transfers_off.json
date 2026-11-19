@@ -1,0 +1,12 @@
+{
+  "id": "S14", "title": "Customer with transfers switched off", "category": "Customer rules", "customer": "bluestone_spirits",
+  "story": "Same long-TX / short-FL setup as S07, but Bluestone's state rules forbid transfers. No transfer is suggested, and FL gets the plant supply instead (100 of 300 ordered).",
+  "event": { "supplyCases": 100, "runInWeeks": 4 },
+  "markets": [
+    { "id": "TX", "distributor": "D1", "casesPerDay": 10, "daysOnHand": 200, "ordered": 0 },
+    { "id": "FL", "distributor": "D1", "casesPerDay": 10, "daysOnHand": 3, "ordered": 300 }
+  ],
+  "expect": [
+    { "transferCount": 0 }, { "market": "FL", "ship": 100 }, { "market": "FL", "needsApproval": true }
+  ]
+}

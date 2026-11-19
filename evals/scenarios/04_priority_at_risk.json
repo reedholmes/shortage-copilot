@@ -1,0 +1,13 @@
+{
+  "id": "S04", "title": "Priority account at stockout risk jumps the line", "category": "Core rule", "customer": "acme_beverage",
+  "story": "A national account and a regular market both have 5 days. Only 100 cases. The national account would stock out, so it is served first and gets all 100. Both lines go to approval: the priority account is shorted and the other market gets nothing and runs out.",
+  "event": { "supplyCases": 100, "runInWeeks": 4 },
+  "markets": [
+    { "id": "P", "priority": "National account", "casesPerDay": 10, "daysOnHand": 5, "ordered": 300 },
+    { "id": "N", "casesPerDay": 10, "daysOnHand": 5, "ordered": 300 }
+  ],
+  "expect": [
+    { "market": "P", "ship": 100 }, { "market": "P", "rule": "PRIORITY" }, { "market": "N", "ship": 0 },
+    { "market": "P", "needsApproval": true }, { "market": "N", "needsApproval": true }
+  ]
+}

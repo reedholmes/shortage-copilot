@@ -1,0 +1,14 @@
+{
+  "id": "S06", "title": "Two priority accounts at risk, not enough for both", "category": "Edge case", "customer": "acme_beverage",
+  "story": "Two priority accounts at 2 and 8 days, both would stock out, and only 100 cases. They share toward equal cover: (L-2)+(L-8) = 10 days x 10 cs/day, so L = 10 days: 80 and 20 cases. The regular market gets nothing. All three go to a human.",
+  "event": { "supplyCases": 100, "runInWeeks": 4 },
+  "markets": [
+    { "id": "P1", "priority": "National account", "casesPerDay": 10, "daysOnHand": 2, "ordered": 300 },
+    { "id": "P2", "priority": "Key distributor", "casesPerDay": 10, "daysOnHand": 8, "ordered": 300 },
+    { "id": "N", "casesPerDay": 10, "daysOnHand": 3, "ordered": 100 }
+  ],
+  "expect": [
+    { "market": "P1", "ship": 80 }, { "market": "P2", "ship": 20 }, { "market": "N", "ship": 0 },
+    { "market": "P1", "needsApproval": true }, { "market": "P2", "needsApproval": true }, { "market": "N", "needsApproval": true }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "S10", "title": "Bad data: negative on hand", "category": "Edge case", "customer": "acme_beverage",
+  "story": "One market reports -40 cases on hand. The agent does not guess: that market gets nothing and goes to a human as a data issue. The other two share all 150 cases as if it weren't there (A to its full 100, B 50), so no supply is wasted.",
+  "event": { "supplyCases": 150, "runInWeeks": 4 },
+  "markets": [
+    { "id": "BAD", "casesPerDay": 10, "daysOnHand": 0, "onHandCases": -40, "ordered": 200 },
+    { "id": "A", "casesPerDay": 10, "daysOnHand": 5, "ordered": 100 },
+    { "id": "B", "casesPerDay": 10, "daysOnHand": 10, "ordered": 100 }
+  ],
+  "expect": [
+    { "market": "BAD", "ship": 0 }, { "market": "BAD", "rule": "DATA ISSUE" }, { "market": "BAD", "needsApproval": true },
+    { "market": "A", "ship": 100 }, { "market": "B", "ship": 50 }, { "summary": "totalShipped", "equals": 150 },
+    { "market": "B", "needsApproval": false }
+  ]
+}

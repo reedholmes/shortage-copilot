@@ -1,0 +1,14 @@
+{
+  "id": "S08", "title": "Zero supply", "category": "Edge case", "customer": "acme_beverage",
+  "story": "The plant has nothing to ship. Nobody ships, nothing is over-allocated, and the market that will run out goes to a human. The covered market's hold executes on its own.",
+  "event": { "supplyCases": 0, "runInWeeks": 4 },
+  "markets": [
+    { "id": "A", "casesPerDay": 10, "daysOnHand": 5, "ordered": 100 },
+    { "id": "B", "casesPerDay": 10, "daysOnHand": 40, "ordered": 100 }
+  ],
+  "expect": [
+    { "market": "A", "ship": 0 }, { "market": "B", "ship": 0 }, { "market": "B", "rule": "HOLD" },
+    { "summary": "overAllocated", "equals": 0 }, { "summary": "marketsAtRiskAfter", "equals": 1 },
+    { "market": "A", "needsApproval": true }, { "market": "B", "needsApproval": false }
+  ]
+}

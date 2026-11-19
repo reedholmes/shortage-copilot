@@ -1,0 +1,13 @@
+{
+  "id": "S15", "title": "Single line over the approval case limit", "category": "Edge case", "customer": "acme_beverage",
+  "story": "A fast-moving market (20 cs/day, 5 days) gets 300 cases, which lifts it to 20 days. That's over Acme's 200-case line, so it goes to a human even though it's 75% filled. The other market has 30 days, reaches the run without help, and executes on its own.",
+  "event": { "supplyCases": 300, "runInWeeks": 4 },
+  "markets": [
+    { "id": "A", "casesPerDay": 20, "daysOnHand": 5, "ordered": 400 },
+    { "id": "B", "casesPerDay": 10, "daysOnHand": 30, "ordered": 50 }
+  ],
+  "expect": [
+    { "market": "A", "ship": 300 }, { "market": "B", "ship": 0 },
+    { "market": "A", "needsApproval": true }, { "market": "B", "needsApproval": false }
+  ]
+}

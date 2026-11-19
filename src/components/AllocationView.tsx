@@ -27,6 +27,7 @@ const ACTION_CLASS: Record<AccountLine['action'], string> = {
   PARTIAL: 'pill amber',
   HOLD: 'pill gray',
   'NO ORDER': 'pill light',
+  REVIEW: 'pill red',
 }
 
 export default function AllocationView(props: Props) {

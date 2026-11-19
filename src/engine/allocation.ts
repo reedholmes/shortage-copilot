@@ -188,6 +188,21 @@ interface Acct {
   orderQty: number
   transferIn: number
   transferOut: number
+  /** Bad input data found for this market (empty when the data is clean). */
+  dataIssues: string[]
+}
+
+/**
+ * Data checks. Inventory, orders and forecasts can't be negative. Rather than guess,
+ * the market is left out of the allocation and flagged for a human.
+ */
+function findDataIssues(pos: Position): string[] {
+  const issues: string[] = []
+  if (pos.onHand < 0) issues.push(`On hand is negative (${pos.onHand} cs)`)
+  if (pos.inTransit.some((t) => t.qty < 0)) issues.push('An in-transit shipment has a negative quantity')
+  if (pos.openOrders.some((o) => o.qty < 0)) issues.push('An open order has a negative quantity')
+  if ([...pos.depFcst, ...pos.shipFcst].some((x) => x < 0)) issues.push('The forecast has negative weeks')
+  return issues
 }
 
 function buildAccounts(world: World, ctx: SkuContext, settings: Settings): Acct[] {
@@ -227,9 +242,13 @@ function buildAccounts(world: World, ctx: SkuContext, settings: Settings): Acct[
         orderQty: sum(pos.openOrders.map((o) => o.qty)),
         transferIn: 0,
         transferOut: 0,
+        dataIssues: findDataIssues(pos),
       }
     })
 }
+
+/** Open orders from markets with clean data (bad-data markets are set aside for review). */
+const cleanOrders = (accts: Acct[]) => sum(accts.filter((a) => !a.dataIssues.length).map((a) => a.orderQty))
 
 /** Cases that will be on hand or arriving before the run, before any plant shipment. */
 const baseCases = (a: Acct) => a.effOnHand + a.inboundBeforeRun + a.transferIn - a.transferOut
@@ -248,7 +267,8 @@ function suggestTransfers(accts: Acct[], ctx: SkuContext, settings: Settings): T
   const transfers: Transfer[] = []
   const target = ctx.daysToRun + ctx.bufferDays
   const byDist = new Map<string, Acct[]>()
-  for (const a of accts) byDist.set(a.dist.id, [...(byDist.get(a.dist.id) ?? []), a])
+  // Markets with bad data never give or receive transfers.
+  for (const a of accts.filter((x) => !x.dataIssues.length)) byDist.set(a.dist.id, [...(byDist.get(a.dist.id) ?? []), a])
 
   for (const group of byDist.values()) {
     if (group.length < 2) continue
@@ -403,7 +423,7 @@ function allocate(accts: Acct[], ctx: SkuContext, settings: Settings, overrides:
   const ship = new Map<string, number>(accts.map((a) => [a.market.id, 0]))
   const rule = new Map<string, Rule>()
   const id = (a: Acct) => a.market.id
-  const isShort = ctx.sku.availableNow < sum(accts.map((a) => a.orderQty))
+  const isShort = ctx.sku.availableNow < cleanOrders(accts)
 
   // Planner overrides are locked first and come off the top of supply.
   let supply = ctx.sku.availableNow
@@ -416,6 +436,8 @@ function allocate(accts: Acct[], ctx: SkuContext, settings: Settings, overrides:
     }
   }
   const supplyAfterLocks = supply
+  // Bad data: ship nothing automatically (a planner override above still wins).
+  for (const a of accts) if (a.dataIssues.length && !rule.has(id(a))) rule.set(id(a), 'DATA ISSUE')
   const open = accts.filter((a) => !rule.has(id(a)))
   for (const a of open) if (a.orderQty <= 0) rule.set(id(a), 'NO ORDER')
   const ordering = open.filter((a) => a.orderQty > 0)
@@ -528,7 +550,7 @@ export function planSku(
   if (!sku) throw new Error(`Unknown SKU ${skuId}`)
   const ctx = skuContext(world, sku, settings)
   const accts = buildAccounts(world, ctx, settings)
-  const totalOrders = sum(accts.map((a) => a.orderQty))
+  const totalOrders = cleanOrders(accts)
   const isShort = sku.availableNow < totalOrders
 
   const transfers = isShort && settings.transfersEnabled ? suggestTransfers(accts, ctx, settings) : []
@@ -548,10 +570,19 @@ export function planSku(
     const backorderQty = Math.max(0, a.orderQty - ship)
     // Stockout risk only means something when the SKU is short. If the plant can fill every
     // open order, it can also fill the market's next order, so low cover is not a shortage problem.
-    const stockoutBeforeRun = isShort && coverAfter < ctx.daysToRun
+    const badData = a.dataIssues.length > 0
+    const stockoutBeforeRun = isShort && !badData && coverAfter < ctx.daysToRun
     const reasons: string[] = []
 
-    // Starting position
+    if (badData && rule === 'DATA ISSUE') {
+      reasons.push(`Data issue: ${a.dataIssues.join('; ')}.`)
+      reasons.push(
+        'This market was left out of the allocation rather than guessing. Supply went to the other markets. Fix the data or set a quantity by hand.',
+      )
+    }
+
+    // Starting position (skipped when the data can't be trusted)
+    if (!badData) {
     reasons.push(`Demand: about ${a.avgDaily.toFixed(1)} cs/day (blended forecast over the next ${ctx.windowWeeks} weeks).`)
     reasons.push(
       `On hand: ${cs(a.effOnHand)}${a.inTransitCounted ? ` (includes ${cs(a.inTransitCounted)} arriving within ${settings.inTransitOnHandDays} days)` : ''} = ${days(a.dohToday)} on hand.`,
@@ -563,6 +594,7 @@ export function planSku(
         `Watch: only ${days(a.dohToday)} on hand and the transfer lands in ${settings.transferLeadDays}, so about ${days(settings.transferLeadDays - a.dohToday)} at risk unless stock arrives sooner.`,
       )
     if (a.transferOut) reasons.push(`Sends a ${cs(a.transferOut)} intracompany transfer to another of this distributor's markets that is short.`)
+    }
 
     // Decision
     switch (rule) {
@@ -616,7 +648,7 @@ export function planSku(
     }
 
     // Outcome
-    if (a.orderQty > 0 || a.transferIn || a.transferOut) {
+    if (!badData && (a.orderQty > 0 || a.transferIn || a.transferOut)) {
       if (stockoutBeforeRun)
         reasons.push(
           `After plan: ${days(coverAfter)} of cover. Projected to run out around ${fmtDate(addDays(world.asOf, Math.floor(coverAfter)))}, ${days(ctx.daysToRun - coverAfter)} before supply lands on ${runDateTxt}.`,
@@ -627,7 +659,8 @@ export function planSku(
       reasons.push(`${cs(backorderQty)} backordered. Expected to ship when the run lands on ${runDateTxt} (about ${days(ctx.daysToRun)} from today).`)
 
     let action: AccountLine['action']
-    if (a.orderQty <= 0) action = 'NO ORDER'
+    if (rule === 'DATA ISSUE') action = 'REVIEW'
+    else if (a.orderQty <= 0) action = 'NO ORDER'
     else if (ship <= 0) action = 'HOLD'
     else if (ship < a.orderQty) action = 'PARTIAL'
     else action = 'SHIP'
@@ -656,6 +689,7 @@ export function planSku(
       action,
       reasons,
       orders: fillOrders(a.pos, ship),
+      dataIssues: a.dataIssues,
     }
   })
 
@@ -682,14 +716,14 @@ export function planSku(
     highVelocity: ctx.highVelocity,
     // "If nothing shipped from the plant, how many markets would run out before the run?"
     marketsAtRiskBefore: isShort
-      ? lines.filter((l) => l.orderQty > 0 && (l.effOnHand + l.inboundBeforeRun) / l.avgDaily < ctx.daysToRun).length
+      ? lines.filter((l) => l.orderQty > 0 && !l.dataIssues.length && (l.effOnHand + l.inboundBeforeRun) / l.avgDaily < ctx.daysToRun).length
       : 0,
     marketsAtRiskAfter: relevant.filter((l) => l.stockoutBeforeRun).length,
     // For each market that runs dry: days without stock before the run x cases per day.
     demandAtRiskCases: Math.round(
       sum(relevant.filter((l) => l.stockoutBeforeRun).map((l) => (ctx.daysToRun - l.coverAfter) * l.avgDaily)),
     ),
-    backorderQty: sum(lines.map((l) => l.backorderQty)),
+    backorderQty: sum(lines.filter((l) => !l.dataIssues.length).map((l) => l.backorderQty)),
     transferCount: transfers.length,
   }
 

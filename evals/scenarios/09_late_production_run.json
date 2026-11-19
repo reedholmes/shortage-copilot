@@ -1,0 +1,14 @@
+{
+  "id": "S09", "title": "Late production run", "category": "Edge case", "customer": "acme_beverage",
+  "story": "The run slips to 10 weeks (70 days). M has 50 days: on a normal 4-week run it would be held, but now it will run out too. Supply goes to the lower market N first (up to its full order), M is no longer held, and both run out before the late run. M goes to approval.",
+  "event": { "supplyCases": 200, "runInWeeks": 10 },
+  "markets": [
+    { "id": "M", "casesPerDay": 10, "daysOnHand": 50, "ordered": 200 },
+    { "id": "N", "casesPerDay": 10, "daysOnHand": 10, "ordered": 200 }
+  ],
+  "expect": [
+    { "market": "N", "ship": 200 }, { "market": "M", "ship": 0 }, { "market": "M", "rule": "SPREAD" },
+    { "summary": "marketsAtRiskAfter", "equals": 2 },
+    { "market": "M", "needsApproval": true }, { "market": "N", "needsApproval": false }
+  ]
+}

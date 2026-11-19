@@ -1,0 +1,657 @@
+{
+  "ranAt": "2026-11-19T19:09:08.511Z",
+  "scenarios": [
+    {
+      "id": "S01",
+      "title": "No shortage: everyone ships in full",
+      "category": "Core rule",
+      "customer": "acme_beverage",
+      "story": "Plant has 300 cases against 200 ordered. Nothing to decide: every order ships in full and nothing needs approval.",
+      "checks": [
+        {
+          "label": "A ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "B ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "A decided by",
+          "expected": "FULL",
+          "actual": "FULL",
+          "passed": true
+        },
+        {
+          "label": "A routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        },
+        {
+          "label": "B routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        },
+        {
+          "label": "Cases left unallocated",
+          "expected": "100",
+          "actual": "100",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S02",
+      "title": "Spread toward equal days of cover",
+      "category": "Core rule",
+      "customer": "acme_beverage",
+      "story": "Three markets at 5, 15 and 20 days, 300 cases to share. Supply lifts them together to about 23 days each: (L-5)+(L-15)+(L-20) = 30 days x 10 cs/day, so L = 23.3. All three still run out before the 28-day run. The two deep cuts that run out go to approval; the market getting 61% does not.",
+      "checks": [
+        {
+          "label": "X ships",
+          "expected": "183 cs (±1)",
+          "actual": "184 cs",
+          "passed": true
+        },
+        {
+          "label": "Y ships",
+          "expected": "83 cs (±1)",
+          "actual": "83 cs",
+          "passed": true
+        },
+        {
+          "label": "Z ships",
+          "expected": "33 cs (±1)",
+          "actual": "33 cs",
+          "passed": true
+        },
+        {
+          "label": "Total cases shipped",
+          "expected": "300",
+          "actual": "300",
+          "passed": true
+        },
+        {
+          "label": "Markets out before the run",
+          "expected": "3",
+          "actual": "3",
+          "passed": true
+        },
+        {
+          "label": "X routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        },
+        {
+          "label": "Y routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "Z routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S03",
+      "title": "Hold a market already covered past the run",
+      "category": "Core rule",
+      "customer": "acme_beverage",
+      "story": "H has 36 days, past the 28-day run plus 7-day buffer (35), so its order is held and all 200 cases go to N (30 days). Without the hold rule the two would share and H would take about 70 cases it doesn't need. Neither line needs a human: N gets 67% and H is covered.",
+      "checks": [
+        {
+          "label": "H ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "H decided by",
+          "expected": "HOLD",
+          "actual": "HOLD",
+          "passed": true
+        },
+        {
+          "label": "N ships",
+          "expected": "200 cs",
+          "actual": "200 cs",
+          "passed": true
+        },
+        {
+          "label": "H routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        },
+        {
+          "label": "N routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S04",
+      "title": "Priority account at stockout risk jumps the line",
+      "category": "Core rule",
+      "customer": "acme_beverage",
+      "story": "A national account and a regular market both have 5 days. Only 100 cases. The national account would stock out, so it is served first and gets all 100. Both lines go to approval: the priority account is shorted and the other market gets nothing and runs out.",
+      "checks": [
+        {
+          "label": "P ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "P decided by",
+          "expected": "PRIORITY",
+          "actual": "PRIORITY",
+          "passed": true
+        },
+        {
+          "label": "N ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "P routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "N routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S05",
+      "title": "Healthy priority account waits its turn",
+      "category": "Core rule",
+      "customer": "acme_beverage",
+      "story": "The key distributor has 30 days, enough to reach the 28-day run, so it does not jump the line. The 100 cases go to the market with 5 days. The key distributor still goes to approval because it gets less than it ordered.",
+      "checks": [
+        {
+          "label": "P ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "P decided by",
+          "expected": "SPREAD",
+          "actual": "SPREAD",
+          "passed": true
+        },
+        {
+          "label": "N ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "P routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "N routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S06",
+      "title": "Two priority accounts at risk, not enough for both",
+      "category": "Edge case",
+      "customer": "acme_beverage",
+      "story": "Two priority accounts at 2 and 8 days, both would stock out, and only 100 cases. They share toward equal cover: (L-2)+(L-8) = 10 days x 10 cs/day, so L = 10 days: 80 and 20 cases. The regular market gets nothing. All three go to a human.",
+      "checks": [
+        {
+          "label": "P1 ships",
+          "expected": "80 cs",
+          "actual": "80 cs",
+          "passed": true
+        },
+        {
+          "label": "P2 ships",
+          "expected": "20 cs",
+          "actual": "20 cs",
+          "passed": true
+        },
+        {
+          "label": "N ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "P1 routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "P2 routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "N routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S07",
+      "title": "Intracompany transfer before plant supply",
+      "category": "Core rule",
+      "customer": "acme_beverage",
+      "story": "One distributor is long in TX (200 days) and nearly out in FL (3 days). Move 320 cases TX to FL: enough to take FL to the run plus buffer (35 days x 10 = 350, minus 30 on hand). FL is then covered, so its plant order is held, and all 200 plant cases go to the other distributor. The transfer itself goes to approval.",
+      "checks": [
+        {
+          "label": "Transfer TX to FL",
+          "expected": "320 cs",
+          "actual": "320 cs",
+          "passed": true
+        },
+        {
+          "label": "Transfers suggested",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        },
+        {
+          "label": "FL ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "FL decided by",
+          "expected": "HOLD",
+          "actual": "HOLD",
+          "passed": true
+        },
+        {
+          "label": "O ships",
+          "expected": "200 cs",
+          "actual": "200 cs",
+          "passed": true
+        },
+        {
+          "label": "FL routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S08",
+      "title": "Zero supply",
+      "category": "Edge case",
+      "customer": "acme_beverage",
+      "story": "The plant has nothing to ship. Nobody ships, nothing is over-allocated, and the market that will run out goes to a human. The covered market's hold executes on its own.",
+      "checks": [
+        {
+          "label": "A ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "B ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "B decided by",
+          "expected": "HOLD",
+          "actual": "HOLD",
+          "passed": true
+        },
+        {
+          "label": "Cases over-allocated",
+          "expected": "0",
+          "actual": "0",
+          "passed": true
+        },
+        {
+          "label": "Markets out before the run",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        },
+        {
+          "label": "A routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "B routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S09",
+      "title": "Late production run",
+      "category": "Edge case",
+      "customer": "acme_beverage",
+      "story": "The run slips to 10 weeks (70 days). M has 50 days: on a normal 4-week run it would be held, but now it will run out too. Supply goes to the lower market N first (up to its full order), M is no longer held, and both run out before the late run. M goes to approval.",
+      "checks": [
+        {
+          "label": "N ships",
+          "expected": "200 cs",
+          "actual": "200 cs",
+          "passed": true
+        },
+        {
+          "label": "M ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "M decided by",
+          "expected": "SPREAD",
+          "actual": "SPREAD",
+          "passed": true
+        },
+        {
+          "label": "Markets out before the run",
+          "expected": "2",
+          "actual": "2",
+          "passed": true
+        },
+        {
+          "label": "M routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "N routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S10",
+      "title": "Bad data: negative on hand",
+      "category": "Edge case",
+      "customer": "acme_beverage",
+      "story": "One market reports -40 cases on hand. The agent does not guess: that market gets nothing and goes to a human as a data issue. The other two share all 150 cases as if it weren't there (A to its full 100, B 50), so no supply is wasted.",
+      "checks": [
+        {
+          "label": "BAD ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "BAD decided by",
+          "expected": "DATA ISSUE",
+          "actual": "DATA ISSUE",
+          "passed": true
+        },
+        {
+          "label": "BAD routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "A ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "B ships",
+          "expected": "50 cs",
+          "actual": "50 cs",
+          "passed": true
+        },
+        {
+          "label": "Total cases shipped",
+          "expected": "150",
+          "actual": "150",
+          "passed": true
+        },
+        {
+          "label": "B routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S11",
+      "title": "Fair share contract",
+      "category": "Customer rules",
+      "customer": "bluestone_spirits",
+      "story": "Bluestone's contracts promise the same percentage to everyone: 200 cases for 400 ordered = 50% each, so X gets 50 and Y 150, whatever their cover. X runs out at that fill, so it goes to approval (under Bluestone's 60% line). Y gets 50% too but stays covered, so it executes.",
+      "checks": [
+        {
+          "label": "X ships",
+          "expected": "50 cs",
+          "actual": "50 cs",
+          "passed": true
+        },
+        {
+          "label": "Y ships",
+          "expected": "150 cs",
+          "actual": "150 cs",
+          "passed": true
+        },
+        {
+          "label": "X decided by",
+          "expected": "FAIR SHARE",
+          "actual": "FAIR SHARE",
+          "passed": true
+        },
+        {
+          "label": "X routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "Y routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S12",
+      "title": "Same event as S11 under Acme's rules",
+      "category": "Customer rules",
+      "customer": "acme_beverage",
+      "story": "Identical markets and supply to S11, but Acme protects the lowest cover first: X is filled to its full 100 (reaching 15 days), then X and Y rise together, ending with Y at 100. X still runs out (15 days of cover vs a 28-day run) but it got everything it ordered, so no human is needed. Same shortage, different customer, different answer: Acme sends the cases to the market closest to running out.",
+      "checks": [
+        {
+          "label": "X ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "Y ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "Markets out before the run",
+          "expected": "1",
+          "actual": "1",
+          "passed": true
+        },
+        {
+          "label": "X routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        },
+        {
+          "label": "Y routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S13",
+      "title": "Priority account always served first",
+      "category": "Customer rules",
+      "customer": "bluestone_spirits",
+      "story": "Bluestone serves priority accounts first even when they're well stocked. The national account has 60 days but still gets its full 100 cases; the market with 3 days gets nothing and goes to a human. (Under Acme's rules the 100 cases would go to the 3-day market.)",
+      "checks": [
+        {
+          "label": "P ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "P decided by",
+          "expected": "PRIORITY",
+          "actual": "PRIORITY",
+          "passed": true
+        },
+        {
+          "label": "N ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "P routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        },
+        {
+          "label": "N routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S14",
+      "title": "Customer with transfers switched off",
+      "category": "Customer rules",
+      "customer": "bluestone_spirits",
+      "story": "Same long-TX / short-FL setup as S07, but Bluestone's state rules forbid transfers. No transfer is suggested, and FL gets the plant supply instead (100 of 300 ordered).",
+      "checks": [
+        {
+          "label": "Transfers suggested",
+          "expected": "0",
+          "actual": "0",
+          "passed": true
+        },
+        {
+          "label": "FL ships",
+          "expected": "100 cs",
+          "actual": "100 cs",
+          "passed": true
+        },
+        {
+          "label": "FL routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "S15",
+      "title": "Single line over the approval case limit",
+      "category": "Edge case",
+      "customer": "acme_beverage",
+      "story": "A fast-moving market (20 cs/day, 5 days) gets 300 cases, which lifts it to 20 days. That's over Acme's 200-case line, so it goes to a human even though it's 75% filled. The other market has 30 days, reaches the run without help, and executes on its own.",
+      "checks": [
+        {
+          "label": "A ships",
+          "expected": "300 cs",
+          "actual": "300 cs",
+          "passed": true
+        },
+        {
+          "label": "B ships",
+          "expected": "0 cs",
+          "actual": "0 cs",
+          "passed": true
+        },
+        {
+          "label": "A routed to",
+          "expected": "approval queue",
+          "actual": "approval queue",
+          "passed": true
+        },
+        {
+          "label": "B routed to",
+          "expected": "auto-execute",
+          "actual": "auto-execute",
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "scenariosPassed": 15,
+  "checksPassed": 83,
+  "checksTotal": 83,
+  "accuracy": 1
+}

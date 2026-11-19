@@ -1,0 +1,13 @@
+{
+  "id": "S11", "title": "Fair share contract", "category": "Customer rules", "customer": "bluestone_spirits",
+  "story": "Bluestone's contracts promise the same percentage to everyone: 200 cases for 400 ordered = 50% each, so X gets 50 and Y 150, whatever their cover. X runs out at that fill, so it goes to approval (under Bluestone's 60% line). Y gets 50% too but stays covered, so it executes.",
+  "event": { "supplyCases": 200, "runInWeeks": 4 },
+  "markets": [
+    { "id": "X", "casesPerDay": 10, "daysOnHand": 5, "ordered": 100 },
+    { "id": "Y", "casesPerDay": 10, "daysOnHand": 20, "ordered": 300 }
+  ],
+  "expect": [
+    { "market": "X", "ship": 50 }, { "market": "Y", "ship": 150 }, { "market": "X", "rule": "FAIR SHARE" },
+    { "market": "X", "needsApproval": true }, { "market": "Y", "needsApproval": false }
+  ]
+}

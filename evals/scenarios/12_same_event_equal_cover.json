@@ -1,0 +1,13 @@
+{
+  "id": "S12", "title": "Same event as S11 under Acme's rules", "category": "Customer rules", "customer": "acme_beverage",
+  "story": "Identical markets and supply to S11, but Acme protects the lowest cover first: X is filled to its full 100 (reaching 15 days), then X and Y rise together, ending with Y at 100. X still runs out (15 days of cover vs a 28-day run) but it got everything it ordered, so no human is needed. Same shortage, different customer, different answer: Acme sends the cases to the market closest to running out.",
+  "event": { "supplyCases": 200, "runInWeeks": 4 },
+  "markets": [
+    { "id": "X", "casesPerDay": 10, "daysOnHand": 5, "ordered": 100 },
+    { "id": "Y", "casesPerDay": 10, "daysOnHand": 20, "ordered": 300 }
+  ],
+  "expect": [
+    { "market": "X", "ship": 100 }, { "market": "Y", "ship": 100 }, { "summary": "marketsAtRiskAfter", "equals": 1 },
+    { "market": "X", "needsApproval": false }, { "market": "Y", "needsApproval": false }
+  ]
+}

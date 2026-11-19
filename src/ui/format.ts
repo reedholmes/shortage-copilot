@@ -15,4 +15,5 @@ export const RULE_LABEL: Record<AccountLine['rule'], string> = {
   RELEASED: 'Leftover released',
   OVERRIDE: 'Planner override',
   'NO ORDER': 'No open order',
+  'DATA ISSUE': 'Data issue, needs review',
 }

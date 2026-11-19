@@ -102,7 +102,7 @@ export interface Settings {
   minTransferQty: number
 }
 
-export type Action = 'SHIP' | 'PARTIAL' | 'HOLD' | 'NO ORDER'
+export type Action = 'SHIP' | 'PARTIAL' | 'HOLD' | 'NO ORDER' | 'REVIEW'
 
 export interface OrderFill {
   id: string
@@ -134,9 +134,11 @@ export interface AccountLine {
   coverAfter: number
   stockoutBeforeRun: boolean
   /** The rule that decided this line. */
-  rule: 'FULL' | 'HOLD' | 'PRIORITY' | 'SPREAD' | 'FAIR SHARE' | 'RELEASED' | 'OVERRIDE' | 'NO ORDER'
+  rule: 'FULL' | 'HOLD' | 'PRIORITY' | 'SPREAD' | 'FAIR SHARE' | 'RELEASED' | 'OVERRIDE' | 'NO ORDER' | 'DATA ISSUE'
   action: Action
   reasons: string[]
+  /** Problems found in this market's input data. If any, nothing ships until a human reviews it. */
+  dataIssues: string[]
   orders: OrderFill[]
 }
 

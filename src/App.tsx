@@ -13,16 +13,18 @@ import Overview from './components/Overview'
 import AllocationView from './components/AllocationView'
 import CompareCustomers from './components/CompareCustomers'
 import CustomerNote from './components/CustomerNote'
+import EvalsView from './components/EvalsView'
 import HowItWorks from './components/HowItWorks'
 
 const world = worldJson as World
 
-type Tab = 'overview' | 'allocation' | 'note' | 'compare' | 'how'
+type Tab = 'overview' | 'allocation' | 'note' | 'compare' | 'evals' | 'how'
 const TABS: { id: Tab; label: string }[] = [
   { id: 'overview', label: '1. Shortage overview' },
   { id: 'allocation', label: '2. Allocation' },
   { id: 'note', label: '3. Customer note' },
   { id: 'compare', label: 'Compare customers' },
+  { id: 'evals', label: 'Evals' },
   { id: 'how', label: 'How it works' },
 ]
 
@@ -123,6 +125,7 @@ export default function App() {
           />
         )}
         {tab === 'compare' && <CompareCustomers world={world} skuId={skuId} setSkuId={setSkuId} />}
+        {tab === 'evals' && <EvalsView />}
         {tab === 'how' && <HowItWorks />}
       </main>
 

@@ -1,0 +1,13 @@
+{
+  "id": "S05", "title": "Healthy priority account waits its turn", "category": "Core rule", "customer": "acme_beverage",
+  "story": "The key distributor has 30 days, enough to reach the 28-day run, so it does not jump the line. The 100 cases go to the market with 5 days. The key distributor still goes to approval because it gets less than it ordered.",
+  "event": { "supplyCases": 100, "runInWeeks": 4 },
+  "markets": [
+    { "id": "P", "priority": "Key distributor", "casesPerDay": 10, "daysOnHand": 30, "ordered": 300 },
+    { "id": "N", "casesPerDay": 10, "daysOnHand": 5, "ordered": 300 }
+  ],
+  "expect": [
+    { "market": "P", "ship": 0 }, { "market": "P", "rule": "SPREAD" }, { "market": "N", "ship": 100 },
+    { "market": "P", "needsApproval": true }, { "market": "N", "needsApproval": true }
+  ]
+}

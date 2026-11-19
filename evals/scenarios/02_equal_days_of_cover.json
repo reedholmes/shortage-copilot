@@ -1,0 +1,16 @@
+{
+  "id": "S02", "title": "Spread toward equal days of cover", "category": "Core rule", "customer": "acme_beverage",
+  "story": "Three markets at 5, 15 and 20 days, 300 cases to share. Supply lifts them together to about 23 days each: (L-5)+(L-15)+(L-20) = 30 days x 10 cs/day, so L = 23.3. All three still run out before the 28-day run. The two deep cuts that run out go to approval; the market getting 61% does not.",
+  "event": { "supplyCases": 300, "runInWeeks": 4 },
+  "markets": [
+    { "id": "X", "casesPerDay": 10, "daysOnHand": 5, "ordered": 300 },
+    { "id": "Y", "casesPerDay": 10, "daysOnHand": 15, "ordered": 300 },
+    { "id": "Z", "casesPerDay": 10, "daysOnHand": 20, "ordered": 300 }
+  ],
+  "expect": [
+    { "market": "X", "ship": 183, "tolerance": 1 }, { "market": "Y", "ship": 83, "tolerance": 1 }, { "market": "Z", "ship": 33, "tolerance": 1 },
+    { "summary": "totalShipped", "equals": 300 },
+    { "summary": "marketsAtRiskAfter", "equals": 3 },
+    { "market": "X", "needsApproval": false }, { "market": "Y", "needsApproval": true }, { "market": "Z", "needsApproval": true }
+  ]
+}
