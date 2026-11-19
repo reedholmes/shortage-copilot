@@ -234,3 +234,4 @@ table.mini { border-collapse: collapse; width: 100%; font-size: 12px; }
   .field select { min-width: 0; width: 100%; }
   .field { width: 100%; }
 }
+.note-grid > * { min-width: 0; }
