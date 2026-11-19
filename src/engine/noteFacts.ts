@@ -14,7 +14,7 @@ export interface NoteFacts {
   orderedCases: number
   shippingNowCases: number
   backorderedCases: number
-  supplyLandsOn: string
+  nextAvailableSupply: string
   daysOrdersWillSit: number
   incomingTransfer?: { cases: number; fromMarket: string; arrivesInDays: number }
 }
@@ -49,7 +49,7 @@ export function buildNoteFacts(
     orderedCases: line.orderQty,
     shippingNowCases: line.ship,
     backorderedCases: line.backorderQty,
-    supplyLandsOn: longDate(addDays(world.asOf, plan.summary.daysToRun)),
+    nextAvailableSupply: longDate(addDays(world.asOf, plan.summary.daysToRun)),
     daysOrdersWillSit: plan.summary.daysToRun,
     ...(transfer && {
       incomingTransfer: { cases: transfer.qty, fromMarket: transfer.fromState, arrivesInDays: transfer.arrivesInDays },

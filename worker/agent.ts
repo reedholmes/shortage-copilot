@@ -124,7 +124,7 @@ export async function scriptedRun(session: AgentSession, emit: (step: TraceStep)
     steps.push(step)
     emit(step)
   }
-  await run('get_inventory', { sku_id: sku, reason: 'Start with what the plant can ship now and when the next run lands.' })
+  await run('get_inventory', { sku_id: sku, reason: 'Start with what is on hand to ship now and when the next run lands.' })
   await run('get_forecast', { sku_id: sku, reason: "Get each market's daily demand so stock can be turned into days of cover." })
   await run('get_open_orders', { sku_id: sku, reason: 'Confirm orders really exceed supply before allocating anything.' })
   await run('calc_days_on_hand', { sku_id: sku, reason: 'Find which markets would run out before the run if nothing ships.' })
@@ -146,7 +146,7 @@ function scriptedSummary(s: AgentSession, notes: string[]): string {
   const q = s.routing.queue
   return (
     `${p.name} is short: ${p.openOrderQty.toLocaleString()} cs ordered against ${p.availableNow.toLocaleString()} available (${Math.round(p.fillRate * 100)}% fill). ` +
-    `Under ${s.config.customer.name}'s rules the plan leaves ${p.marketsAtRiskAfter} markets short of the run, versus ${p.marketsAtRiskBefore} if nothing ships, with about ${p.demandAtRiskCases.toLocaleString()} cs of lost sales. ` +
+    `Under ${s.config.customer.name}'s rules the plan leaves ${p.marketsAtRiskAfter} markets short of the run, versus ${p.marketsAtRiskBefore} if nothing ships, with about ${p.demandAtRiskCases.toLocaleString()} cs of sales at risk. ` +
     `${s.routing.autoExecute.length} lines can execute now; ${q.length} item${q.length === 1 ? '' : 's'} wait${q.length === 1 ? 's' : ''} for approval. ` +
     (notes.length ? `Drafted notes to ${notes.join(' and ')}.` : 'No notes drafted: every backordered line is waiting for approval.')
   )

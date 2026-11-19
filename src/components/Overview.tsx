@@ -1,6 +1,6 @@
 /**
- * Screen 1: Shortage overview.
- * Answers "which SKUs are short, by how much, and until when?" at a glance.
+ * Overview: which SKUs are short, and how much the plan helps. One card per shortage.
+ * The scenario story is on hover (title) rather than on the card.
  */
 import { fmtDate, summarizeAll } from '../engine/allocation'
 import type { Settings, World } from '../engine/types'
@@ -9,10 +9,11 @@ import { n, pct } from '../ui/format'
 interface Props {
   world: World
   settings: Settings
-  onOpen: (skuId: string) => void
+  onRunAgent: (skuId: string) => void
+  onOpenAllocation: (skuId: string) => void
 }
 
-export default function Overview({ world, settings, onOpen }: Props) {
+export default function Overview({ world, settings, onRunAgent, onOpenAllocation }: Props) {
   const summaries = summarizeAll(world, settings)
   const short = summaries.filter((s) => s.isShort)
   const healthy = summaries.filter((s) => !s.isShort)
@@ -20,98 +21,71 @@ export default function Overview({ world, settings, onOpen }: Props) {
 
   return (
     <section>
-      <div className="intro">
+      <div className="page-h">
         <h2>
-          {short.length} of {summaries.length} SKUs are short
+          {short.length} of {summaries.length} SKUs short
         </h2>
-        <p>
-          Plant supply can't cover every open order on these SKUs before the next production run. Pick one to see the
-          recommended allocation and why.
-        </p>
+        <p>Markets that run out before the next available supply, without and with the plan.</p>
       </div>
 
       <div className="cards">
         {short.map((s) => {
           const sc = scenario(s.skuId)
           return (
-            <article key={s.skuId} className="card short">
+            <article key={s.skuId} className="card short" title={sc ? `${sc.title}. ${sc.story}` : undefined}>
               <div className="card-top">
+                <h3>{s.name.replace(/ 750ml$/, '')}</h3>
                 <span className="pill red">Short {pct(1 - s.fillRate)}</span>
-                <span className="muted">{s.category}</span>
               </div>
-              <h3>{s.name}</h3>
-              {sc && <p className="scenario-title">{sc.title}</p>}
-              {sc && <p className="story">{sc.story}</p>}
+              <div>
+                <div className="bigdelta">
+                  <span className="from">{s.marketsAtRiskBefore}</span>
+                  <span className="arrow">→</span>
+                  <span className="to">{s.marketsAtRiskAfter}</span>
+                </div>
+                <div className="bigdelta-label">markets out before next supply</div>
+              </div>
               <dl className="stats">
                 <div>
-                  <dt>Open orders</dt>
-                  <dd>{n(s.openOrderQty)}</dd>
-                </div>
-                <div>
-                  <dt>Plant supply</dt>
+                  <dt>On hand</dt>
                   <dd>{n(s.availableNow)}</dd>
                 </div>
                 <div>
-                  <dt>Gap</dt>
-                  <dd className="red-text">{n(s.gapQty)}</dd>
+                  <dt>Ordered</dt>
+                  <dd>{n(s.openOrderQty)}</dd>
                 </div>
                 <div>
-                  <dt>Supply lands</dt>
-                  <dd>
-                    {fmtDate(s.runDate)} <span className="muted">({s.daysToRun}d)</span>
-                  </dd>
+                  <dt>Next available supply</dt>
+                  <dd>{fmtDate(s.runDate)}</dd>
                 </div>
               </dl>
-              <div className="risk">
-                <span>Markets running out before the run</span>
-                <strong>
-                  {s.marketsAtRiskBefore} <span className="muted">if nothing ships</span> →{' '}
-                  <span className="green-text">{s.marketsAtRiskAfter}</span>{' '}
-                  <span className="muted">with plan</span>
-                </strong>
+              <div className="card-actions">
+                <button className="primary small-btn" onClick={() => onRunAgent(s.skuId)}>
+                  ▶ Run agent
+                </button>
+                <button className="secondary small-btn" onClick={() => onOpenAllocation(s.skuId)}>
+                  Allocation
+                </button>
+                {s.transferCount > 0 && <span className="transfer-note">⇄ {s.transferCount} transfers</span>}
               </div>
-              {s.transferCount > 0 && (
-                <p className="transfer-note">
-                  ⇄ {s.transferCount} intracompany transfer{s.transferCount > 1 ? 's' : ''} suggested
-                </p>
-              )}
-              <button className="primary" onClick={() => onOpen(s.skuId)}>
-                Open allocation →
-              </button>
             </article>
           )
         })}
       </div>
 
-      <h3 className="section-h">Healthy SKUs</h3>
-      <table className="grid compact">
-        <thead>
-          <tr>
-            <th>SKU</th>
-            <th className="num">Open orders</th>
-            <th className="num">Plant supply</th>
-            <th className="num">Supply vs orders</th>
-            <th>Next run</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {healthy.map((s) => (
-            <tr key={s.skuId}>
-              <td>{s.name}</td>
-              <td className="num">{n(s.openOrderQty)}</td>
-              <td className="num">{n(s.availableNow)}</td>
-              <td className="num">{pct(s.availableNow / Math.max(1, s.openOrderQty))}</td>
-              <td>{fmtDate(s.runDate)}</td>
-              <td>
-                <button className="link" onClick={() => onOpen(s.skuId)}>
-                  View
-                </button>
-              </td>
-            </tr>
+      <details className="healthy">
+        <summary>{healthy.length} SKUs fully covered</summary>
+        <p>
+          {healthy.map((s, i) => (
+            <span key={s.skuId}>
+              {i > 0 && ' · '}
+              <button className="link" onClick={() => onOpenAllocation(s.skuId)}>
+                {s.name}
+              </button>
+            </span>
           ))}
-        </tbody>
-      </table>
+        </p>
+      </details>
     </section>
   )
 }

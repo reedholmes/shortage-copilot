@@ -13,7 +13,7 @@ Ran 15 scenarios on 2026-11-19.
 | S04 | Priority account at stockout risk jumps the line | Core rule | acme_beverage | 5/5 | PASS |
 | S05 | Healthy priority account waits its turn | Core rule | acme_beverage | 5/5 | PASS |
 | S06 | Two priority accounts at risk, not enough for both | Edge case | acme_beverage | 6/6 | PASS |
-| S07 | Intracompany transfer before plant supply | Core rule | acme_beverage | 6/6 | PASS |
+| S07 | Intracompany transfer before shipping from on hand | Core rule | acme_beverage | 6/6 | PASS |
 | S08 | Zero supply | Edge case | acme_beverage | 7/7 | PASS |
 | S09 | Late production run | Edge case | acme_beverage | 6/6 | PASS |
 | S10 | Bad data: negative on hand | Edge case | acme_beverage | 7/7 | PASS |

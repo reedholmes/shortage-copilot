@@ -14,13 +14,9 @@ export default function EvalsView() {
 
   return (
     <section>
-      <div className="intro">
-        <h2>Test suite: does the agent follow the rule book?</h2>
-        <p>
-          {SCENARIOS.length} shortage scenarios, each with the answer worked out by hand from the customer's rules
-          before the engine ever ran it. They just ran again in your browser. A config change or code change that breaks
-          a rule shows up here before it reaches a customer.
-        </p>
+      <div className="page-h">
+        <h2>Evals</h2>
+        <p>{SCENARIOS.length} shortages with hand-checked answers, re-run live in your browser.</p>
       </div>
 
       <div className="tiles three">
@@ -40,7 +36,7 @@ export default function EvalsView() {
         <div className="tile">
           <span className="tile-label">Edge cases covered</span>
           <strong>{card.scenarios.filter((s) => s.category === 'Edge case').length}</strong>
-          <small className="muted">zero supply, late run, priority conflict, bad data, large line</small>
+          <small className="muted">zero supply, late run, priority clash, bad data</small>
         </div>
       </div>
 
@@ -122,9 +118,8 @@ export default function EvalsView() {
           </tbody>
         </table>
       </div>
-      <p className="muted hint compare-note">
-        Run the same suite from the command line with <code>npm run evals</code>. It writes evals/scorecard.md and fails
-        the build if any scenario fails.
+      <p className="muted tiny">
+        Same suite: <code>npm run evals</code>. Any failure blocks a release.
       </p>
     </section>
   )

@@ -18,10 +18,10 @@ frames, durations = [], []
 for f in json.loads((FRAMES / "frames.json").read_text()):
     img = Image.open(FRAMES / f["file"]).convert("RGB")
     img = img.resize((WIDTH, round(img.height * WIDTH / img.width)), Image.LANCZOS)
-    canvas = Image.new("RGB", (WIDTH, img.height + BAR), (23, 32, 51))
+    canvas = Image.new("RGB", (WIDTH, img.height + BAR), (21, 24, 29))
     canvas.paste(img, (0, 0))
     draw = ImageDraw.Draw(canvas)
-    draw.text((WIDTH / 2, img.height + BAR / 2), f["caption"], font=FONT, fill="white", anchor="mm")
+    draw.text((WIDTH / 2, img.height + BAR / 2), f["caption"], font=FONT, fill=(79, 209, 176), anchor="mm")
     frames.append(canvas.quantize(colors=128, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE))
     durations.append(f["ms"])
 

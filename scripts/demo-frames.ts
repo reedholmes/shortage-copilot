@@ -1,10 +1,10 @@
 /**
- * README DEMO GIF, step 1 of 2: drives the live site in a headless browser and saves one
- * snapshot per step of the two-minute tour, plus a captions file.
+ * README DEMO GIF, step 1 of 2: drives the site in a headless browser and saves one
+ * snapshot per step of the tour, plus a captions file.
  * Step 2 (scripts/make_gif.py) stitches the snapshots into docs/images/demo.gif.
- * Run both with:  npm run gif
+ * Run both with:  npm run gif            (or pass a URL to tsx scripts/demo-frames.ts)
  *
- * The customer-note step reuses a saved AI draft, so it costs nothing to re-run.
+ * The agent and note steps replay saved AI runs, so it costs nothing to re-run.
  */
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
@@ -22,58 +22,58 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 760 }, dev
 
 const frames: { file: string; caption: string; ms: number }[] = []
 async function snap(caption: string, ms: number) {
-  await page.waitForTimeout(250) // let the UI settle
+  await page.waitForTimeout(300) // let the UI settle
   const file = `frame-${String(frames.length + 1).padStart(2, '0')}.png`
   await page.screenshot({ path: resolve(outDir, file) })
   frames.push({ file, caption, ms })
 }
-const toTop = (p: Page) => p.evaluate(() => window.scrollTo(0, 0))
-const toTable = (p: Page) => p.locator('.table-head').evaluate((el) => el.scrollIntoView())
+const tab = (name: string) => page.getByRole('navigation').getByRole('button', { name, exact: true }).click()
+const top = (p: Page) => p.evaluate(() => window.scrollTo(0, 0))
+const scrollTo = (selector: string) =>
+  page.locator(selector).first().evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 16))
 
 // 1. Overview
 await page.goto(BASE, { waitUntil: 'networkidle' })
-await page.getByRole('heading', { name: /SKUs are short/ }).waitFor()
-await snap('Three of eight SKUs are short. The plan cuts how many markets run out.', 3000)
+await page.getByRole('heading', { name: /SKUs short/ }).waitFor()
+await snap('Three SKUs are short. On tequila, the plan cuts markets out of stock from 13 to 2.', 3200)
 
-// 2. Tequila: long in Texas, short in Florida
-await page.locator('.card.short', { hasText: 'Agave Sol' }).getByRole('button', { name: /Open allocation/ }).click()
-await page.locator('.transfers').waitFor()
-await snap('Tequila is long in Texas and nearly out in Florida: move stock within the distributor first.', 3200)
+// 2. The agent investigates (tequila, Acme's rules)
+await page.locator('.card.short', { hasText: 'Agave Sol' }).getByRole('button', { name: /Run agent/ }).click()
+await page.getByRole('button', { name: /Run the agent/ }).click()
+await page.locator('.trace-step').nth(3).waitFor()
+await snap('The agent investigates: inventory, demand, open orders and days on hand.', 2600)
+await page.locator('.briefing').waitFor({ timeout: 90_000 })
+await top(page)
+await snap('The engine sets every number. Claude explains each step and briefs the planner.', 3400)
 
-// 3. Reasoning on a row
-await page.locator('tr.row', { hasText: 'Gulfline Wine & Spirits' }).filter({ hasText: 'Key distributor' }).first().click()
-await page.locator('tr.detail').waitFor()
-await toTable(page)
-await snap('Every line explains why it ships, waits or gets a partial.', 3600)
-await page.locator('tr.row.open').first().click() // close it again
+// 3. An email it drafted
+await page.locator('.trace-row', { hasText: 'draft_customer_note' }).first().click()
+await scrollTo('.trace-step:nth-child(5)')
+await snap('It drafts customer emails, only for lines that execute on their own.', 3400)
+await page.locator('.trace-row', { hasText: 'draft_customer_note' }).first().click()
 
-// 4. Override: cut the most at-risk market, then see the cost. Frame shows the tiles and the top rows together.
-const tilesInView = (p: Page) => p.locator('.tiles').evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 16))
-await tilesInView(page)
-await snap('A planner can override any line. Say we cut the lowest-cover market...', 2600)
-const atRisk = page.locator('tr.row', { hasText: 'Magnolia Coast' }).first()
-await atRisk.locator('input').fill('100')
-await atRisk.locator('input').press('Tab')
-await tilesInView(page)
-await snap('...the rest re-spreads, and the tiles show the cost in lost sales.', 3600)
-await page.getByRole('button', { name: 'Reset all overrides' }).click()
+// 4. Approval queue
+const items = page.locator('.queue-item')
+for (let i = 0; i < 3; i++) await items.nth(i).getByRole('button', { name: i === 1 ? 'Reject' : 'Approve' }).click()
+await scrollTo('.briefing')
+await snap('Risky lines wait for a person. Code routes them, not the AI.', 3400)
 
-// 5. Forecast blend slider
-const slider = page.locator('input[type="range"]')
-await slider.fill('0.5')
-await toTop(page)
-await snap('Trust distributor orders, which some inflate in a shortage...', 2400)
-await slider.fill('1')
-await snap('...or trust depletions: same supply, fewer markets run out.', 3000)
-await slider.fill('0.75')
+// 5. Two customers
+await tab('Compare customers')
+await page.locator('main select').selectOption('AGS-750')
+await top(page)
+await snap("Same shortage, different customer rules: 2 markets out vs 9. Only a config file changed.", 3800)
 
-// 6. Customer note (cached draft, so free)
-await page.getByRole('button', { name: '3. Customer note' }).click()
-await page.locator('select').nth(1).selectOption('D01-FL')
-await page.getByRole('button', { name: /Draft with AI/ }).click()
-await page.locator('.email-body').waitFor({ timeout: 60_000 })
-await toTop(page)
-await snap('Claude drafts the customer email. The engine supplies every number.', 4200)
+// 6. Evals
+await tab('Evals')
+await top(page)
+await snap('15 hand-checked scenarios run on every change. 15 of 15 pass.', 3200)
+
+// 7. Allocation detail
+await tab('Allocation')
+await page.locator('tr.row', { hasText: 'Summit Crest Distributing' }).filter({ hasText: 'FL' }).first().click()
+await scrollTo('tr.row.open')
+await snap('Every line shows its reasoning, and the planner can override any quantity.', 3400)
 
 await browser.close()
 writeFileSync(resolve(outDir, 'frames.json'), JSON.stringify(frames, null, 2))

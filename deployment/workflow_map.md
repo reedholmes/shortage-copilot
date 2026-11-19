@@ -15,7 +15,7 @@
 
 ```mermaid
 flowchart TB
-  A(["Shortage event: orders exceed plant supply for a SKU"]) --> B
+  A(["Shortage event: orders exceed on hand for a SKU"]) --> B
 
   subgraph AG["Agent investigates"]
     direction LR
@@ -48,7 +48,7 @@ flowchart TB
 
 | # | Step | Done by | Decision or output | Controlled by (config) | Guardrail |
 |---|---|---|---|---|---|
-| 1 | Check inventory | Agent, `get_inventory` | Plant supply, next run, on hand and in transit by market | `forecast.inTransitCountsAsOnHandWithinDays` | Read only; scoped to one SKU |
+| 1 | Check inventory | Agent, `get_inventory` | On hand, next run, distributor on hand and in transit by market | `forecast.inTransitCountsAsOnHandWithinDays` | Read only; scoped to one SKU |
 | 2 | Check demand | Agent, `get_forecast` | Blended cases per day by market | `forecast.depletionWeightWeek1` | Read only |
 | 3 | Confirm the shortage | Agent, `get_open_orders` | Orders vs supply; fill rate possible | | If not short, everything ships in full |
 | 4 | Find who runs out | Agent, `calc_days_on_hand` | Days on hand, cover to the run, markets at risk | | Read only |

@@ -1,6 +1,6 @@
 {
-  "id": "S07", "title": "Intracompany transfer before plant supply", "category": "Core rule", "customer": "acme_beverage",
-  "story": "One distributor is long in TX (200 days) and nearly out in FL (3 days). Move 320 cases TX to FL: enough to take FL to the run plus buffer (35 days x 10 = 350, minus 30 on hand). FL is then covered, so its plant order is held, and all 200 plant cases go to the other distributor. The transfer itself goes to approval.",
+  "id": "S07", "title": "Intracompany transfer before shipping from on hand", "category": "Core rule", "customer": "acme_beverage",
+  "story": "One distributor is long in TX (200 days) and nearly out in FL (3 days). Move 320 cases TX to FL: enough to take FL to the run plus buffer (35 days x 10 = 350, minus 30 on hand). FL is then covered, so its order is held, and all 200 cases on hand go to the other distributor. The transfer itself goes to approval.",
   "event": { "supplyCases": 200, "runInWeeks": 4 },
   "markets": [
     { "id": "TX", "distributor": "D1", "casesPerDay": 10, "daysOnHand": 200, "ordered": 0 },

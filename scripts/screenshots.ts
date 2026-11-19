@@ -2,9 +2,9 @@
  * README SCREENSHOTS: drives the live site in a headless browser and saves images
  * to docs/images. Uses the Microsoft Edge already installed on the machine.
  * Run with:  npm run screenshots            (live site)
- *            npm run screenshots -- <url>   (any other address, e.g. local dev)
+ *            npm run screenshots -- <url>   (any other address, e.g. a preview version)
  *
- * The customer-note shot reuses a saved AI draft, so it costs nothing to re-run.
+ * The agent and customer-note shots replay saved AI runs, so re-running costs nothing.
  */
 import { mkdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
@@ -18,29 +18,57 @@ mkdirSync(outDir, { recursive: true })
 const out = (name: string) => resolve(outDir, name)
 
 const browser = await chromium.launch({ channel: 'msedge', headless: true })
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1.5 })
+const page = await browser.newPage({ viewport: { width: 1366, height: 820 }, deviceScaleFactor: 1.5 })
+const tab = (name: string) => page.getByRole('navigation').getByRole('button', { name, exact: true }).click()
+const top = () => page.evaluate(() => window.scrollTo(0, 0))
+const scrollTo = (selector: string) =>
+  page.locator(selector).first().evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 16))
 
-// 1. Shortage overview
+// 1. Overview
 await page.goto(BASE, { waitUntil: 'networkidle' })
-await page.getByRole('heading', { name: /SKUs are short/ }).waitFor()
+await page.getByRole('heading', { name: /SKUs short/ }).waitFor()
 await page.screenshot({ path: out('overview.png') })
 
-// 2. Allocation: the long/short tequila scenario, with one row's reasoning open
-await page.locator('.card.short', { hasText: 'Agave Sol' }).getByRole('button', { name: /Open allocation/ }).click()
-await page.locator('.transfers').waitFor()
+// 2. Agent: tequila under Acme's rules (replays the saved live run)
+await tab('Agent')
+await page.locator('main select').selectOption('AGS-750')
+await page.getByRole('button', { name: /Run the agent/ }).click()
+await page.locator('.briefing').waitFor({ timeout: 90_000 })
+await top()
+await page.screenshot({ path: out('agent-trace.png') })
+const items = page.locator('.queue-item')
+for (let i = 0; i < 3; i++) await items.nth(i).getByRole('button', { name: i === 1 ? 'Reject' : 'Approve' }).click()
+await scrollTo('.briefing')
+await page.screenshot({ path: out('agent-queue.png') })
+
+// 3. Allocation, with one row's reasoning open
+await tab('Allocation')
+await page.locator('main select').first().selectOption('AGS-750')
+await top()
 await page.screenshot({ path: out('allocation.png') })
-// Gulfline FL: a key distributor at stockout risk, served first. It sits near the top of the table.
-await page.locator('tr.row', { hasText: 'Gulfline Wine & Spirits' }).filter({ hasText: 'Key distributor' }).first().click()
+await page.locator('tr.row', { hasText: 'Summit Crest Distributing' }).filter({ hasText: 'FL' }).first().click()
 await page.locator('tr.detail').waitFor()
-await page.locator('.table-head').evaluate((el) => el.scrollIntoView())
+await scrollTo('tr.row.open')
 await page.screenshot({ path: out('reasoning.png') })
 
-// 3. Customer note for the same market
-await page.getByRole('button', { name: '3. Customer note' }).click()
-await page.locator('select').nth(1).selectOption('D01-FL')
+// 4. Customer note, opened from that row
+await page.getByRole('button', { name: /Draft customer note/ }).click()
 await page.getByRole('button', { name: /Draft with AI/ }).click()
 await page.locator('.email-body').waitFor({ timeout: 60_000 })
+await top()
 await page.screenshot({ path: out('customer-note.png') })
 
+// 5. Same shortage, two customers
+await tab('Compare customers')
+await page.locator('main select').selectOption('AGS-750')
+await top()
+await page.screenshot({ path: out('compare.png') })
+
+// 6. Eval scorecard
+await tab('Evals')
+await page.locator('tr.row', { hasText: 'Two priority accounts' }).click()
+await top()
+await page.screenshot({ path: out('evals.png') })
+
 await browser.close()
-console.log(`Saved 4 screenshots to ${outDir}`)
+console.log(`Saved 8 screenshots to ${outDir}`)

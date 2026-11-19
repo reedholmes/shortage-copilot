@@ -14,7 +14,7 @@
 
 ## How shortages are handled today
 
-1. **Someone notices.** A planner sees open orders running ahead of plant supply, usually in the weekly supply review. Sometimes sales hears about it first from a distributor.
+1. **Someone notices.** A planner sees open orders running ahead of on hand, usually in the weekly supply review. Sometimes sales hears about it first from a distributor.
 2. **Data pull.** The planner exports open orders from the ERP, pulls the latest depletion report, and copies on-hand and in-transit by market into a spreadsheet. *Customer estimate: 3 to 4 hours.*
 3. **First-pass allocation.** The planner allocates in the spreadsheet. The method lives in their head: protect markets about to run out, look after the big accounts, don't ship to markets already sitting on months of stock.
 4. **Negotiation.** Sales leadership reviews by email and phone. Key accounts get pulled up, sometimes regardless of their inventory. *Customer estimate: 1 to 2 days of back and forth.*
@@ -30,7 +30,7 @@
 | Priority accounts handled by phone | National accounts get stock even with 60+ days on hand, while smaller markets stock out | |
 | Slow decisions | 1.5 to 3 days from noticing to releasing (customer estimate), while markets keep selling down | |
 | Late, inconsistent customer notes | Distributors find out about backorders from their own receiving dock | |
-| Stock stuck in the wrong state | A distributor long in one state and out in another; nobody checks before spending plant supply | |
+| Stock stuck in the wrong state | A distributor long in one state and out in another; nobody checks before spending on-hand inventory | |
 
 ## What success looks like
 

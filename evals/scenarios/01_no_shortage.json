@@ -1,6 +1,6 @@
 {
   "id": "S01", "title": "No shortage: everyone ships in full", "category": "Core rule", "customer": "acme_beverage",
-  "story": "Plant has 300 cases against 200 ordered. Nothing to decide: every order ships in full and nothing needs approval.",
+  "story": "300 cases on hand against 200 ordered. Nothing to decide: every order ships in full and nothing needs approval.",
   "event": { "supplyCases": 300, "runInWeeks": 4 },
   "markets": [
     { "id": "A", "casesPerDay": 10, "daysOnHand": 10, "ordered": 100 },

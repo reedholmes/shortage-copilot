@@ -1,12 +1,12 @@
 {
-  "ranAt": "2026-11-19T19:09:08.511Z",
+  "ranAt": "2026-11-19T22:23:42.651Z",
   "scenarios": [
     {
       "id": "S01",
       "title": "No shortage: everyone ships in full",
       "category": "Core rule",
       "customer": "acme_beverage",
-      "story": "Plant has 300 cases against 200 ordered. Nothing to decide: every order ships in full and nothing needs approval.",
+      "story": "300 cases on hand against 200 ordered. Nothing to decide: every order ships in full and nothing needs approval.",
       "checks": [
         {
           "label": "A ships",
@@ -273,10 +273,10 @@
     },
     {
       "id": "S07",
-      "title": "Intracompany transfer before plant supply",
+      "title": "Intracompany transfer before shipping from on hand",
       "category": "Core rule",
       "customer": "acme_beverage",
-      "story": "One distributor is long in TX (200 days) and nearly out in FL (3 days). Move 320 cases TX to FL: enough to take FL to the run plus buffer (35 days x 10 = 350, minus 30 on hand). FL is then covered, so its plant order is held, and all 200 plant cases go to the other distributor. The transfer itself goes to approval.",
+      "story": "One distributor is long in TX (200 days) and nearly out in FL (3 days). Move 320 cases TX to FL: enough to take FL to the run plus buffer (35 days x 10 = 350, minus 30 on hand). FL is then covered, so its order is held, and all 200 cases on hand go to the other distributor. The transfer itself goes to approval.",
       "checks": [
         {
           "label": "Transfer TX to FL",
@@ -322,7 +322,7 @@
       "title": "Zero supply",
       "category": "Edge case",
       "customer": "acme_beverage",
-      "story": "The plant has nothing to ship. Nobody ships, nothing is over-allocated, and the market that will run out goes to a human. The covered market's hold executes on its own.",
+      "story": "Nothing on hand to ship. Nobody ships, nothing is over-allocated, and the market that will run out goes to a human. The covered market's hold executes on its own.",
       "checks": [
         {
           "label": "A ships",
@@ -592,7 +592,7 @@
       "title": "Customer with transfers switched off",
       "category": "Customer rules",
       "customer": "bluestone_spirits",
-      "story": "Same long-TX / short-FL setup as S07, but Bluestone's state rules forbid transfers. No transfer is suggested, and FL gets the plant supply instead (100 of 300 ordered).",
+      "story": "Same long-TX / short-FL setup as S07, but Bluestone's state rules forbid transfers. No transfer is suggested, and FL gets the on-hand cases instead (100 of 300 ordered).",
       "checks": [
         {
           "label": "Transfers suggested",

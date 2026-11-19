@@ -2,7 +2,7 @@
   "customer": {
     "id": "acme_beverage",
     "name": "Acme Beverage Co.",
-    "summary": "Protect the markets closest to running out. Priority accounts jump the line only when they would stock out. Move stock between a distributor's own markets before spending plant supply."
+    "summary": "Protect the markets closest to running out. Priority accounts jump the line only when they would stock out. Move stock between a distributor's own markets before spending on-hand inventory."
   },
   "forecast": {
     "depletionWeightWeek1": 0.75,

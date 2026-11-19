@@ -250,7 +250,7 @@ function buildAccounts(world: World, ctx: SkuContext, settings: Settings): Acct[
 /** Open orders from markets with clean data (bad-data markets are set aside for review). */
 const cleanOrders = (accts: Acct[]) => sum(accts.filter((a) => !a.dataIssues.length).map((a) => a.orderQty))
 
-/** Cases that will be on hand or arriving before the run, before any plant shipment. */
+/** Cases that will be on hand or arriving before the run, before anything ships from on hand. */
 const baseCases = (a: Acct) => a.effOnHand + a.inboundBeforeRun + a.transferIn - a.transferOut
 
 // ---------------------------------------------------------------------------
@@ -258,7 +258,7 @@ const baseCases = (a: Acct) => a.effOnHand + a.inboundBeforeRun + a.transferIn -
 // ---------------------------------------------------------------------------
 
 /**
- * Runs BEFORE plant allocation because a transfer reduces how much plant supply the
+ * Runs BEFORE allocation because a transfer reduces how many on-hand cases the
  * short market needs, which frees supply for everyone else.
  * Rules: same distributor only; giver must be long (over the long threshold) and keeps
  * enough to reach the run plus buffer; receiver must be on track to run out before the run.
@@ -568,7 +568,7 @@ export function planSku(
     const coverBefore = baseCases(a) / a.avgDaily
     const coverAfter = (baseCases(a) + ship) / a.avgDaily
     const backorderQty = Math.max(0, a.orderQty - ship)
-    // Stockout risk only means something when the SKU is short. If the plant can fill every
+    // Stockout risk only means something when the SKU is short. If on hand can fill every
     // open order, it can also fill the market's next order, so low cover is not a shortage problem.
     const badData = a.dataIssues.length > 0
     const stockoutBeforeRun = isShort && !badData && coverAfter < ctx.daysToRun
@@ -651,7 +651,7 @@ export function planSku(
     if (!badData && (a.orderQty > 0 || a.transferIn || a.transferOut)) {
       if (stockoutBeforeRun)
         reasons.push(
-          `After plan: ${days(coverAfter)} of cover. Projected to run out around ${fmtDate(addDays(world.asOf, Math.floor(coverAfter)))}, ${days(ctx.daysToRun - coverAfter)} before supply lands on ${runDateTxt}.`,
+          `After plan: ${days(coverAfter)} of cover. Projected to run out around ${fmtDate(addDays(world.asOf, Math.floor(coverAfter)))}, ${days(ctx.daysToRun - coverAfter)} before the next available supply on ${runDateTxt}.`,
         )
       else reasons.push(`After plan: ${days(coverAfter)} of cover, which reaches the run on ${runDateTxt}.`)
     }
@@ -714,7 +714,7 @@ export function planSku(
     bufferWhy: ctx.bufferWhy,
     cv: ctx.cv,
     highVelocity: ctx.highVelocity,
-    // "If nothing shipped from the plant, how many markets would run out before the run?"
+    // "If nothing shipped from on hand, how many markets would run out before the run?"
     marketsAtRiskBefore: isShort
       ? lines.filter((l) => l.orderQty > 0 && !l.dataIssues.length && (l.effOnHand + l.inboundBeforeRun) / l.avgDaily < ctx.daysToRun).length
       : 0,

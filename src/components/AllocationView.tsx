@@ -39,7 +39,6 @@ export default function AllocationView(props: Props) {
   const s = plan.summary
   const sc = world.scenarios.find((x) => x.skuId === skuId)
   const hasOverrides = Object.keys(overrides).length > 0
-  const shipped = plan.lines.reduce((a, l) => a + l.ship, 0)
 
   const setQty = (marketId: string, raw: string) => {
     const next = { ...overrides }
@@ -84,9 +83,12 @@ export default function AllocationView(props: Props) {
             ))}
           </select>
         </label>
-        <label className="field slider">
+        <label
+          className="field slider"
+          title="Near term trusts what consumers buy (depletions); further out, what distributors plan to order. Slide right to discount inflated orders."
+        >
           <span>
-            Forecast blend: depletions {pct(nearWeight)} in week 1 → {pct(1 - nearWeight)} in week {world.horizonWeeks}
+            Forecast blend: {pct(nearWeight)} depletions in week 1 → {pct(1 - nearWeight)} by week {world.horizonWeeks}
           </span>
           <input
             type="range"
@@ -96,124 +98,80 @@ export default function AllocationView(props: Props) {
             value={nearWeight}
             onChange={(e) => setNearWeight(Number(e.target.value))}
           />
-          <small className="muted">
-            Near term trusts what consumers buy (depletions). Further out leans on what distributors plan to order
-            (shipments). In a shortage some distributors inflate orders, so slide right to discount them.
-          </small>
         </label>
       </div>
 
-      {sc && (
-        <p className="scenario-line">
-          <strong>{sc.title}.</strong> {sc.story}
-        </p>
-      )}
-
       <div className="tiles">
-        <div className="tile">
-          <span>Plant supply</span>
+        <div className="tile" title={sc ? `${sc.title}. ${sc.story}` : undefined}>
+          <span>On hand</span>
           <strong>{n(s.availableNow)}</strong>
-          <small>vs {n(s.openOrderQty)} ordered ({pct(s.fillRate)} fill)</small>
-        </div>
-        <div className="tile">
-          <span>Supply lands</span>
-          <strong>{fmtDate(s.runDate)}</strong>
           <small>
-            in {s.daysToRun} days · {n(s.runQty)} cs · buffer {s.bufferDays}d
+            of {n(s.openOrderQty)} ordered ({pct(s.fillRate)})
           </small>
         </div>
-        <div className={plan.overAllocated ? 'tile alert' : 'tile'}>
-          <span>{plan.overAllocated ? 'Over-allocated' : 'Left unallocated'}</span>
-          <strong>{n(plan.overAllocated || plan.unallocated)}</strong>
-          <small>{plan.overAllocated ? 'Ship quantities exceed plant supply' : `${n(shipped)} cs allocated`}</small>
+        <div className="tile" title={s.bufferWhy.join('; ')}>
+          <span>Next available supply</span>
+          <strong>{fmtDate(s.runDate)}</strong>
+          <small>
+            in {s.daysToRun} days · buffer {s.bufferDays}d
+          </small>
         </div>
         <div className="tile">
-          <span>Markets out before the run</span>
-          <strong>{s.isShort ? s.marketsAtRiskAfter : 0}</strong>
+          <span>Markets out before supply</span>
+          <strong className={s.marketsAtRiskAfter ? 'red-text' : 'green-text'}>{s.isShort ? s.marketsAtRiskAfter : 0}</strong>
           <small>
-            {s.isShort ? `${s.marketsAtRiskBefore} if nothing ships` : 'Not short: all orders fill'}{' '}
+            {s.isShort ? `${s.marketsAtRiskBefore} if nothing ships` : 'Not short'}{' '}
             {delta(s.marketsAtRiskAfter, recommended.summary.marketsAtRiskAfter, true)}
           </small>
         </div>
-        <div className="tile" title="Cases of consumer demand that go unserved before supply lands">
-          <span>Demand at risk (lost sales)</span>
+        <div className="tile" title="Cases of consumer demand that go unserved before the next available supply">
+          <span>Sales at risk (cs)</span>
           <strong>{n(s.demandAtRiskCases)}</strong>
           <small>
-            cs before {fmtDate(s.runDate)} {delta(s.demandAtRiskCases, recommended.summary.demandAtRiskCases, true)}
+            before next supply {delta(s.demandAtRiskCases, recommended.summary.demandAtRiskCases, true)}
           </small>
-        </div>
-        <div className="tile">
-          <span>Cases backordered</span>
-          <strong>{n(s.backorderQty)}</strong>
-          <small>{delta(s.backorderQty, recommended.summary.backorderQty, true) ?? 'ship when the run lands'}</small>
         </div>
       </div>
 
       {plan.overAllocated > 0 && (
         <div className="banner alert">
-          Your overrides ship {n(plan.overAllocated)} more cases than the plant has. Reduce a quantity or reset.
+          Overrides ship {n(plan.overAllocated)} cs more than on hand. Reduce a quantity or reset.
         </div>
       )}
 
-      <details className="buffer-why">
-        <summary>
-          Why a {s.bufferDays}-day buffer and a {s.daysToRun + s.bufferDays}-day hold line?
-        </summary>
-        <ul>
-          {s.bufferWhy.map((b) => (
-            <li key={b}>{b}</li>
-          ))}
-          <li>
-            Markets with at least {s.daysToRun} days to the run + {s.bufferDays} buffer = {s.daysToRun + s.bufferDays}{' '}
-            days of cover are held so supply goes where it prevents stockouts.
-          </li>
-        </ul>
-      </details>
-
       {plan.transfers.length > 0 && (
         <div className="transfers">
-          <h3>⇄ Suggested intracompany transfers (between a distributor's own markets)</h3>
           {plan.transfers.map((t) => (
-            <div key={t.fromMarketId + t.toMarketId} className="transfer">
-              <div className="transfer-head">
-                <strong>
-                  {t.distributorName}: {n(t.qty)} cs {t.fromState} → {t.toState}
-                </strong>
-                <span className="pill blue">Arrives in {t.arrivesInDays} days</span>
-              </div>
-              <p>{t.reason}</p>
+            <div key={t.fromMarketId + t.toMarketId} className="transfer" title={t.reason}>
+              ⇄ <strong>{t.distributorName}</strong> moves <span className="mono">{n(t.qty)}</span> cs {t.fromState} →{' '}
+              {t.toState}, arrives in {t.arrivesInDays} days
             </div>
           ))}
         </div>
       )}
 
       <div className="table-head">
-        <h3>Recommended allocation, lowest cover first</h3>
+        <h3>
+          Allocation <span className="muted tiny">lowest cover first · click a row for why · type to override</span>
+        </h3>
         {hasOverrides && (
-          <button className="secondary" onClick={() => setOverrides({})}>
-            Reset all overrides
+          <button className="secondary small-btn" onClick={() => setOverrides({})}>
+            Reset overrides
           </button>
         )}
       </div>
-      <p className="muted hint">Click a row to see the reasoning. Type in the Ship column to override.</p>
 
       <div className="table-wrap">
         <table className="grid">
           <thead>
             <tr>
               <th>Distributor · market</th>
-              <th className="num" title="Blended forecast, average cases per day">Cs/day</th>
               <th className="num" title="On hand plus in-transit arriving within 7 days">Days on hand</th>
-              <th className="num" title="Days of cover including later inbound and transfers, before any plant shipment">
-                Cover before
-              </th>
               <th className="num">Ordered</th>
-              <th className="num">Recommended</th>
               <th className="num">Ship</th>
               <th className="num">Backorder</th>
               <th className="num">Cover after</th>
               <th>Action</th>
-              <th>Why</th>
             </tr>
           </thead>
           <tbody>
@@ -242,12 +200,9 @@ export default function AllocationView(props: Props) {
                         </div>
                       </div>
                     </td>
-                    <td className="num">{l.avgDaily.toFixed(1)}</td>
                     <td className={`num ${l.dohToday < 14 ? 'red-text' : ''}`}>{d(l.dohToday)}</td>
-                    <td className="num">{d(l.coverBefore)}</td>
                     <td className="num">{l.orderQty ? n(l.orderQty) : '–'}</td>
-                    <td className="num muted">{l.orderQty ? n(l.recommendedShip) : '–'}</td>
-                    <td className="num" onClick={(e) => e.stopPropagation()}>
+                    <td className="num" onClick={(e) => e.stopPropagation()} title={`Recommended: ${n(l.recommendedShip)}`}>
                       {l.orderQty > 0 || l.overridden ? (
                         <div className="qty">
                           <input
@@ -276,16 +231,17 @@ export default function AllocationView(props: Props) {
                       )}
                     </td>
                     <td>
-                      <span className={ACTION_CLASS[l.action]}>{l.action}</span>
+                      <span className={ACTION_CLASS[l.action]} title={RULE_LABEL[l.rule]}>
+                        {l.action}
+                      </span>
                     </td>
-                    <td className="why">{RULE_LABEL[l.rule]}</td>
                   </tr>
                   {isOpen && (
                     <tr className="detail">
-                      <td colSpan={11}>
+                      <td colSpan={7}>
                         <div className="detail-body">
                           <div>
-                            <h4>Reasoning</h4>
+                            <h4>Why · {RULE_LABEL[l.rule]}</h4>
                             <ol>
                               {l.reasons.map((r, i) => (
                                 <li key={i}>{r}</li>
@@ -318,8 +274,8 @@ export default function AllocationView(props: Props) {
                                 </tbody>
                               </table>
                               {l.backorderQty > 0 && (
-                                <button className="primary small-btn" onClick={() => onDraftNote(l.marketId)}>
-                                  Draft customer note →
+                                <button className="primary small-btn note-btn" onClick={() => onDraftNote(l.marketId)}>
+                                  ✉ Draft customer note
                                 </button>
                               )}
                             </div>

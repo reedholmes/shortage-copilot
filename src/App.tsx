@@ -1,7 +1,7 @@
 /**
  * App shell: header, customer switcher, tabs, and the shared state every screen reads.
  * State lives here (not in each screen) so an override made on the allocation
- * screen is still there when you visit the customer note and come back.
+ * screen is still there when you open a customer note and come back.
  */
 import { useMemo, useState } from 'react'
 import worldJson from './data/world.json'
@@ -19,15 +19,14 @@ import HowItWorks from './components/HowItWorks'
 
 const world = worldJson as World
 
-type Tab = 'overview' | 'agent' | 'allocation' | 'note' | 'compare' | 'evals' | 'how'
-const TABS: { id: Tab; label: string }[] = [
-  { id: 'overview', label: '1. Shortage overview' },
-  { id: 'agent', label: '2. Agent run' },
-  { id: 'allocation', label: '3. Allocation' },
-  { id: 'note', label: '4. Customer note' },
+/** 'note' is not a tab: it opens from an allocation row. */
+type Tab = 'overview' | 'agent' | 'allocation' | 'compare' | 'evals' | 'note'
+const TABS: { id: Exclude<Tab, 'note'>; label: string }[] = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'agent', label: 'Agent' },
+  { id: 'allocation', label: 'Allocation' },
   { id: 'compare', label: 'Compare customers' },
   { id: 'evals', label: 'Evals' },
-  { id: 'how', label: 'How it works' },
 ]
 
 export default function App() {
@@ -36,6 +35,7 @@ export default function App() {
     setTabState(t)
     window.scrollTo(0, 0) // each screen starts at the top
   }
+  const [showHow, setShowHow] = useState(false)
   const [customerId, setCustomerIdState] = useState(DEFAULT_CUSTOMER_ID)
   const customer = getCustomer(customerId)
   const [skuId, setSkuId] = useState(world.scenarios[0].skuId)
@@ -58,18 +58,21 @@ export default function App() {
   )
   const overrides = overridesBySku[skuId] ?? {}
   const setOverrides = (o: Overrides) => setOverridesBySku((all) => ({ ...all, [skuId]: o }))
+  const open = (id: string, where: Tab) => {
+    setSkuId(id)
+    setTab(where)
+  }
 
   return (
     <div className="app">
       <header className="header">
-        <div>
+        <div className="brand">
           <h1>Shortage Allocation Copilot</h1>
-          <p className="sub">
-            Synthetic demo data · as of {fmtDate(world.asOf)}, 2026 · all quantities in 9L cases
-          </p>
-          <label className="customer-pick">
-            <span>Customer rules:</span>
-            <select value={customerId} onChange={(e) => setCustomerId(e.target.value)}>
+          <span className="sub">Synthetic data · as of {fmtDate(world.asOf)}, 2026 · 9L cases</span>
+        </div>
+        <div className="header-right">
+          <label className="customer-pick" title="Whose operating rules the agent and engine apply">
+            <select value={customerId} onChange={(e) => setCustomerId(e.target.value)} aria-label="Customer rules">
               {CUSTOMERS.map((c) => (
                 <option key={c.customer.id} value={c.customer.id}>
                   {c.customer.name}
@@ -77,25 +80,32 @@ export default function App() {
               ))}
             </select>
           </label>
+          <button className={showHow ? 'info-btn on' : 'info-btn'} onClick={() => setShowHow((v) => !v)}>
+            ⓘ How it works
+          </button>
         </div>
         <nav className="tabs" aria-label="Screens">
           {TABS.map((t) => (
-            <button key={t.id} className={tab === t.id ? 'tab active' : 'tab'} onClick={() => setTab(t.id)}>
+            <button
+              key={t.id}
+              className={tab === t.id || (tab === 'note' && t.id === 'allocation') ? 'tab active' : 'tab'}
+              onClick={() => setTab(t.id)}
+            >
               {t.label}
             </button>
           ))}
         </nav>
       </header>
 
+      {showHow && <HowItWorks onClose={() => setShowHow(false)} />}
+
       <main>
         {tab === 'overview' && (
           <Overview
             world={world}
             settings={settings}
-            onOpen={(id) => {
-              setSkuId(id)
-              setTab('allocation')
-            }}
+            onRunAgent={(id) => open(id, 'agent')}
+            onOpenAllocation={(id) => open(id, 'allocation')}
           />
         )}
         {tab === 'agent' && (
@@ -133,16 +143,14 @@ export default function App() {
             overrides={overrides}
             marketId={noteMarketId}
             setMarketId={setNoteMarketId}
+            onBack={() => setTab('allocation')}
           />
         )}
         {tab === 'compare' && <CompareCustomers world={world} skuId={skuId} setSkuId={setSkuId} />}
         {tab === 'evals' && <EvalsView />}
-        {tab === 'how' && <HowItWorks />}
       </main>
 
-      <footer className="footer">
-        Portfolio demo. All companies, brands and numbers are invented. Allocation logic runs in your browser.
-      </footer>
+      <footer className="footer">Portfolio demo. All companies, brands and numbers are invented.</footer>
     </div>
   )
 }

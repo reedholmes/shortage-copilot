@@ -34,7 +34,7 @@ Tone: ${style.tone}, the way an experienced planner writes to a distributor they
 Rules:
 - Use only the facts provided. Do not invent quantities, dates, causes, promotions, or promises.
 - All quantities are 9-liter cases. Write them as "cases".
-- Cover: what is shipping now, what is backordered, when supply lands, and roughly how long the backordered cases will wait.
+- Cover: what is shipping now, what is backordered, the date of the next available supply, and roughly how long the backordered cases will wait.
 - If an incoming intracompany transfer is listed, mention it as a near-term bridge from their other market.
 - Body: plain text, under 160 words, greet the distributor's team by company name, sign off as "${style.signOff}".
 - Subject: under 80 characters, include the product and the word backorder.
@@ -69,14 +69,14 @@ export function templateNote(f: NoteFacts, style: NoteStyle = DEFAULT_STYLE): Dr
     ? ` In the meantime, ${f.incomingTransfer.cases} cases are moving from your ${f.incomingTransfer.fromMarket} market and should arrive in about ${f.incomingTransfer.arrivesInDays} days.`
     : ''
   return {
-    subject: `${f.sku}: ${f.backorderedCases} cases on backorder until ${f.supplyLandsOn}`,
+    subject: `${f.sku}: ${f.backorderedCases} cases on backorder until ${f.nextAvailableSupply}`,
     body:
       `Hi ${f.distributor} team,\n\n` +
       `We're short on ${f.sku}. Of the ${f.orderedCases} cases you ordered for ${f.market}, ${f.shippingNowCases} ship now and ${f.backorderedCases} are on backorder.` +
       `${transfer}\n\n` +
-      `Our next production run lands on ${f.supplyLandsOn}, so the backordered cases will wait about ${f.daysOrdersWillSit} days. We'll ship them as soon as it arrives. Sorry for the disruption.\n\n` +
+      `Our next production run lands on ${f.nextAvailableSupply}, so the backordered cases will wait about ${f.daysOrdersWillSit} days. We'll ship them as soon as it arrives. Sorry for the disruption.\n\n` +
       `Let us know if you need to reprioritize any of your open orders.\n\n` +
       style.signOff,
-    summary: `Notified ${f.distributor} (${f.market}) of ${f.backorderedCases} cs backordered on ${f.sku} until ${f.supplyLandsOn}.`,
+    summary: `Notified ${f.distributor} (${f.market}) of ${f.backorderedCases} cs backordered on ${f.sku} until ${f.nextAvailableSupply}.`,
   }
 }

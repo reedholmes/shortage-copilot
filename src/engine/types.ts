@@ -34,7 +34,7 @@ export interface Sku {
   id: string
   name: string
   category: string
-  /** Cases at the plant, free to ship today. */
+  /** Cases on hand, free to ship to distributors today. */
   availableNow: number
   nextRun: {
     /** Weeks from the as-of date until the next production run lands at distributors. */
@@ -77,7 +77,7 @@ export interface World {
  * (see src/engine/customerConfig.ts). The UI exposes the blend slider.
  */
 export interface Settings {
-  /** How plant supply is split among markets that need it. */
+  /** How on-hand cases are split among markets that need them. */
   allocationPolicy: 'equal_days_of_cover' | 'fair_share'
   /** Hold orders for markets already covered past the run plus buffer. */
   holdCoveredMarkets: boolean
@@ -125,7 +125,7 @@ export interface AccountLine {
   orderQty: number
   transferIn: number
   transferOut: number
-  /** Days of cover before any plant shipment (includes inbound and transfers). */
+  /** Days of cover before anything ships from on hand (includes inbound and transfers). */
   coverBefore: number
   recommendedShip: number
   ship: number
@@ -182,9 +182,9 @@ export interface Plan {
   summary: SkuSummary
   lines: AccountLine[]
   transfers: Transfer[]
-  /** Plant cases left unshipped. */
+  /** On-hand cases left unshipped. */
   unallocated: number
-  /** Cases shipped beyond what the plant has (only possible through overrides). */
+  /** Cases shipped beyond what is on hand (only possible through overrides). */
   overAllocated: number
   /** Common cover level (days) reached by the spread step, if it ran. */
   spreadLevelDays: number | null

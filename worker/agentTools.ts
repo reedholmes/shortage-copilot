@@ -38,10 +38,10 @@ const skuTool = (name: string, description: string): Anthropic.Beta.BetaTool => 
 })
 
 export const TOOLS: Anthropic.Beta.BetaTool[] = [
-  skuTool('get_inventory', 'Plant supply available now, the next production run, and each market\'s on-hand and in-transit stock. Flags bad inventory data.'),
+  skuTool('get_inventory', 'Cases on hand to ship now, the next production run, and each distributor market\'s on-hand and in-transit stock. Flags bad inventory data.'),
   skuTool('get_forecast', 'Each market\'s blended daily demand (depletions near term, shipments further out), using the customer\'s forecast settings.'),
-  skuTool('get_open_orders', 'Open orders by market and in total, compared with plant supply. Tells you whether this is really a shortage.'),
-  skuTool('calc_days_on_hand', 'Days on hand today and days of cover until the run for every market, and which markets would run out before supply lands.'),
+  skuTool('get_open_orders', 'Open orders by market and in total, compared with on hand. Tells you whether this is really a shortage.'),
+  skuTool('calc_days_on_hand', 'Days on hand today and days of cover until the run for every market, and which markets would run out before the next available supply.'),
   skuTool(
     'propose_allocation',
     "Runs the customer's configured allocation rules and returns the recommended plan, any intracompany transfers, and which lines must go to a human for approval. Quantities come only from this tool and cannot be changed.",
@@ -140,11 +140,11 @@ export class AgentSession {
       ...(l.dataIssues.length && { data_issue: l.dataIssues.join('; ') }),
     }))
     const summary =
-      `Plant has ${s.availableNow.toLocaleString()} cs now; next run of ${s.runQty.toLocaleString()} cs lands ${fmtDate(s.runDate)} (${s.daysToRun} days).` +
+      `${s.availableNow.toLocaleString()} cs on hand to ship now; next run of ${s.runQty.toLocaleString()} cs lands ${fmtDate(s.runDate)} (${s.daysToRun} days).` +
       (bad.length ? ` Data issue in ${bad.map((l) => l.marketId).join(', ')}.` : '')
     return {
-      content: JSON.stringify({ plant_available_now: s.availableNow, next_run: { lands: s.runDate, in_days: s.daysToRun, qty: s.runQty }, markets: rows }),
-      step: { summary, table: table(['Market', 'On hand', 'Inbound later'], this.lines().map((l) => [label(l), r0(l.effOnHand), r0(l.inboundBeforeRun)])) },
+      content: JSON.stringify({ on_hand_to_ship_now: s.availableNow, next_run: { lands: s.runDate, in_days: s.daysToRun, qty: s.runQty }, markets: rows }),
+      step: { summary, table: table(['Market', 'Distributor on hand', 'Inbound later'], this.lines().map((l) => [label(l), r0(l.effOnHand), r0(l.inboundBeforeRun)])) },
     }
   }
 
@@ -169,14 +169,14 @@ export class AgentSession {
     return {
       content: JSON.stringify({
         total_open_orders: s.openOrderQty,
-        plant_available_now: s.availableNow,
+        on_hand_to_ship_now: s.availableNow,
         is_shortage: s.isShort,
         fill_rate_possible: Math.round(s.fillRate * 100) / 100,
         markets: ordering.map((l) => ({ market: l.marketId, ordered: l.orderQty })),
       }),
       step: {
         summary: s.isShort
-          ? `${s.openOrderQty.toLocaleString()} cs ordered vs ${s.availableNow.toLocaleString()} available: a real shortage, ${Math.round(s.fillRate * 100)}% fill possible.`
+          ? `${s.openOrderQty.toLocaleString()} cs ordered vs ${s.availableNow.toLocaleString()} on hand: a real shortage, ${Math.round(s.fillRate * 100)}% fill possible.`
           : `Supply covers all ${s.openOrderQty.toLocaleString()} cs ordered. No shortage.`,
         table: table(['Market', 'Ordered'], ordering.map((l) => [label(l), l.orderQty])),
       },
@@ -220,7 +220,7 @@ export class AgentSession {
         outcome: {
           markets_out_before_run_with_plan: s.marketsAtRiskAfter,
           markets_out_if_nothing_ships: s.marketsAtRiskBefore,
-          lost_sales_cases: s.demandAtRiskCases,
+          sales_at_risk_cases: s.demandAtRiskCases,
           backordered_cases: s.backorderQty,
         },
         transfers: p.transfers.map((t) => ({ from: t.fromMarketId, to: t.toMarketId, cases: t.qty, needs_approval: c.approval.transfers })),
@@ -240,7 +240,7 @@ export class AgentSession {
       }),
       step: {
         summary:
-          `Plan: ${s.marketsAtRiskAfter} markets out before the run (vs ${s.marketsAtRiskBefore} if nothing ships), ${s.demandAtRiskCases.toLocaleString()} cs lost sales. ` +
+          `Plan: ${s.marketsAtRiskAfter} markets out before the run (vs ${s.marketsAtRiskBefore} if nothing ships), ${s.demandAtRiskCases.toLocaleString()} cs sales at risk. ` +
           `${this.routing.autoExecute.length} lines auto-execute, ${this.routing.queue.length} items need approval` +
           (p.transfers.length ? `, ${p.transfers.length} transfer${p.transfers.length > 1 ? 's' : ''} suggested.` : '.'),
         table: table(
@@ -266,7 +266,7 @@ export class AgentSession {
       content: JSON.stringify({ drafted: true, market: marketId, subject: draft.subject }),
       step: {
         ...base,
-        summary: `Drafted a ${this.config.customerEmail.tone} note to ${facts.distributor} (${facts.market}): ${facts.backorderedCases} cs backordered until ${facts.supplyLandsOn}.`,
+        summary: `Drafted a ${this.config.customerEmail.tone} note to ${facts.distributor} (${facts.market}): ${facts.backorderedCases} cs backordered until ${facts.nextAvailableSupply}.`,
         note: { marketId, title: `${facts.distributor} ${facts.market}`, draft, source },
       },
     }

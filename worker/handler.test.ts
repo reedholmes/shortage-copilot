@@ -162,7 +162,7 @@ describe('template note', () => {
       orderedCases: 100,
       shippingNowCases: 60,
       backorderedCases: 40,
-      supplyLandsOn: 'December 28, 2026',
+      nextAvailableSupply: 'December 28, 2026',
       daysOrdersWillSit: 42,
       incomingTransfer: { cases: 25, fromMarket: 'FL', arrivesInDays: 7 },
     })

@@ -178,7 +178,7 @@ describe('Step 6: priority and spreading', () => {
     expect(plan.spreadLevelDays).toBeCloseTo(23.33, 1)
   })
 
-  it('never ships more than a market ordered, and never more than the plant has', () => {
+  it('never ships more than a market ordered, and never more than is on hand', () => {
     const w = world(
       [
         { id: 'X', rate: 10, doh: 1, order: 40 }, // tiny order, will be capped
@@ -263,7 +263,7 @@ describe('Planner overrides', () => {
     expect(planSku(w, 'A', DEFAULT_SETTINGS, { X: 0, Y: 100 }).summary.demandAtRiskCases).toBe(230)
   })
 
-  it('flags over-allocation when overrides exceed plant supply', () => {
+  it('flags over-allocation when overrides exceed on hand', () => {
     const w = world([{ id: 'X', rate: 10, doh: 5, order: 500 }, { id: 'Y', rate: 10, doh: 5, order: 500 }], 200, 4, 4)
     const plan = planSku(w, 'A', DEFAULT_SETTINGS, { X: 260 })
     expect(plan.overAllocated).toBe(60)

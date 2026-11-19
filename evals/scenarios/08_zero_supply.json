@@ -1,6 +1,6 @@
 {
   "id": "S08", "title": "Zero supply", "category": "Edge case", "customer": "acme_beverage",
-  "story": "The plant has nothing to ship. Nobody ships, nothing is over-allocated, and the market that will run out goes to a human. The covered market's hold executes on its own.",
+  "story": "Nothing on hand to ship. Nobody ships, nothing is over-allocated, and the market that will run out goes to a human. The covered market's hold executes on its own.",
   "event": { "supplyCases": 0, "runInWeeks": 4 },
   "markets": [
     { "id": "A", "casesPerDay": 10, "daysOnHand": 5, "ordered": 100 },

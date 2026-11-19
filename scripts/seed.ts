@@ -69,7 +69,7 @@ interface SkuSpec {
   /** Optional demand multiplier by week (holiday ramps etc.). */
   season?: (week: number) => number
   runInWeeks: number
-  /** Plant supply as a share of open orders. Below 1 means short. */
+  /** On hand as a share of open orders. Below 1 means short. */
   supplyRatio: number
 }
 
@@ -110,13 +110,13 @@ const SCENARIOS: Scenario[] = [
     skuId: 'HRB-750',
     title: 'National bourbon shortage',
     story:
-      'A bottling line outage cut Harbor Ridge output. The plant can fill about 58% of open orders, and the next run lands in 6 weeks. Some markets are nearly dry while others are sitting on plenty.',
+      'A bottling line outage cut Harbor Ridge output. On hand covers about 58% of open orders, and the next run lands in 6 weeks. Some markets are nearly dry while others are sitting on plenty.',
   },
   {
     skuId: 'AGS-750',
     title: 'One market long, another short',
     story:
-      'Summit Crest bought heavily into Texas ahead of a promotion that slipped, leaving about 140 days on hand there while its Florida market is nearly out. An intracompany transfer can fix Florida faster than the plant can.',
+      'Summit Crest bought heavily into Texas ahead of a promotion that slipped, leaving about 140 days on hand there while its Florida market is nearly out. An intracompany transfer can fix Florida faster than the next production run can.',
   },
   {
     skuId: 'NSB-750',

@@ -19,6 +19,7 @@ interface Props {
   overrides: Overrides
   marketId: string | null
   setMarketId: (id: string | null) => void
+  onBack: () => void
 }
 
 interface DraftResult {
@@ -39,7 +40,7 @@ const REASON_LABEL: Record<NonNullable<DraftResult['reason']>, string> = {
   ai_unavailable: "The AI service didn't respond. Showing the template version.",
 }
 
-export default function CustomerNote({ customerId, world, skuId, setSkuId, settings, overrides, marketId, setMarketId }: Props) {
+export default function CustomerNote({ customerId, world, skuId, setSkuId, settings, overrides, marketId, setMarketId, onBack }: Props) {
   const plan = planSku(world, skuId, settings, overrides)
   const affected = plan.lines.filter((l) => l.backorderQty > 0)
   const line = affected.find((l) => l.marketId === marketId) ?? affected[0]
@@ -91,12 +92,12 @@ export default function CustomerNote({ customerId, world, skuId, setSkuId, setti
 
   return (
     <section>
-      <div className="intro">
-        <h2>Out-of-stock note</h2>
-        <p>
-          Pick a distributor with a backorder. The allocation engine supplies the facts and Claude writes the email. The
-          AI only writes words: every number and date comes from the engine.
-        </p>
+      <button className="link back" onClick={onBack}>
+        ← Back to allocation
+      </button>
+      <div className="page-h">
+        <h2>Customer note</h2>
+        <p>The engine supplies the facts. Claude writes the words.</p>
       </div>
       <div className="toolbar">
         <label className="field">
@@ -130,11 +131,10 @@ export default function CustomerNote({ customerId, world, skuId, setSkuId, setti
       ) : (
         <div className="note-grid">
           <div className="card">
-            <h3>Facts sent to the AI</h3>
+            <h3 title="The server recomputes these with the same engine, so the browser can't send made-up facts.">
+              Facts sent to the AI
+            </h3>
             <pre className="json">{JSON.stringify(facts, null, 2)}</pre>
-            <p className="muted tiny-note">
-              The server recomputes these from the same engine, so the browser can't send it made-up facts.
-            </p>
           </div>
           <div className="card draft-card">
             <div className="draft-head">
@@ -144,10 +144,7 @@ export default function CustomerNote({ customerId, world, skuId, setSkuId, setti
               </button>
             </div>
             {error && <div className="banner alert">Couldn't reach the server ({error}). Try again.</div>}
-            {loading && <p className="muted">Claude is writing… this takes a few seconds.</p>}
-            {!loading && !current && !error && (
-              <p className="muted">Click "Draft with AI" to write the email from these facts.</p>
-            )}
+            {loading && <p className="muted">Claude is writing…</p>}
             {!loading && current && (
               <>
                 <div className="draft-meta">
@@ -163,9 +160,6 @@ export default function CustomerNote({ customerId, world, skuId, setSkuId, setti
                   <div className="email-body">{current.draft.body}</div>
                 </div>
                 <div className="draft-foot">
-                  <span className="muted">
-                    <strong>Log summary:</strong> {current.draft.summary}
-                  </span>
                   <button className="secondary" onClick={copy}>
                     {copied ? 'Copied ✓' : 'Copy email'}
                   </button>

@@ -1,12 +1,14 @@
 /**
  * Compare customers: the same shortage run under two customers' rules.
  * Nothing in the engine changes between the columns, only the config file it reads.
+ * Shows only the rules that differ, the outcome, and the biggest line differences.
  */
+import { useState } from 'react'
 import { planSku } from '../engine/allocation'
 import { CUSTOMERS, settingsFromConfig } from '../engine/customerConfig'
 import type { CustomerConfig } from '../engine/customerConfig'
-import type { AccountLine, Plan, World } from '../engine/types'
-import { RULE_LABEL, d, n, pct } from '../ui/format'
+import type { World } from '../engine/types'
+import { RULE_LABEL, n, pct } from '../ui/format'
 
 interface Props {
   world: World
@@ -14,46 +16,44 @@ interface Props {
   setSkuId: (id: string) => void
 }
 
-const POLICY = { equal_days_of_cover: 'Equal days of cover (lowest cover first)', fair_share: 'Fair share (same % of every order)' }
-const PRIORITY = { only_when_at_risk: 'Jump the line only if they would stock out', always_first: 'Always served first, full order' }
+const POLICY = { equal_days_of_cover: 'Equal days of cover', fair_share: 'Fair share (same % to all)' }
+const PRIORITY = { only_when_at_risk: 'Only if about to stock out', always_first: 'Always first, full order' }
 
 const RULES: { label: string; get: (c: CustomerConfig) => string }[] = [
-  { label: 'How short supply is split', get: (c) => POLICY[c.allocation.policy] },
+  { label: 'Split short supply', get: (c) => POLICY[c.allocation.policy] },
   { label: 'Priority accounts', get: (c) => PRIORITY[c.priorityAccounts.rule] },
   { label: 'Minimum cover past the run', get: (c) => `${c.safetyBuffer.minimumDaysPastRun} days` },
-  { label: 'Hold markets already covered', get: (c) => (c.allocation.holdMarketsCoveredPastRun ? 'Yes' : 'No') },
-  {
-    label: 'Intracompany transfers',
-    get: (c) => (c.transfers.enabled ? `On (long = over ${c.transfers.longThresholdDays} days)` : 'Off'),
-  },
-  {
-    label: 'Needs approval',
-    get: (c) => `Fill under ${pct(c.approval.fillRateBelow)}, lines over ${n(c.approval.lineOverCases)} cs`,
-  },
+  { label: 'Hold covered markets', get: (c) => (c.allocation.holdMarketsCoveredPastRun ? 'Yes' : 'No') },
+  { label: 'Intracompany transfers', get: (c) => (c.transfers.enabled ? 'On' : 'Off') },
+  { label: 'Approval', get: (c) => `Fill under ${pct(c.approval.fillRateBelow)}, over ${n(c.approval.lineOverCases)} cs` },
   { label: 'Email tone', get: (c) => c.customerEmail.tone },
 ]
+const TOP = 8
 
 export default function CompareCustomers({ world, skuId, setSkuId }: Props) {
+  const [showAll, setShowAll] = useState(false)
   const plans = CUSTOMERS.map((c) => ({ c, plan: planSku(world, skuId, settingsFromConfig(c)) }))
   const [a, b] = plans
-  const byMarket = (p: Plan) => new Map(p.lines.map((l) => [l.marketId, l]))
-  const bLines = byMarket(b.plan)
-  const rows = a.plan.lines.filter((l) => l.orderQty > 0 || l.transferIn || l.transferOut)
+  const bLines = new Map(b.plan.lines.map((l) => [l.marketId, l]))
   const shortSkus = world.skus.filter((s) => planSku(world, s.id, settingsFromConfig(a.c)).summary.isShort)
+  const differing = RULES.map((r) => ({ ...r, vals: plans.map(({ c }) => r.get(c)) })).filter((r) => new Set(r.vals).size > 1)
+  const diffs = a.plan.lines
+    .filter((l) => l.orderQty > 0)
+    .map((la) => ({ la, lb: bLines.get(la.marketId)!, diff: bLines.get(la.marketId)!.ship - la.ship }))
+    .filter((x) => x.diff !== 0)
+    .sort((x, y) => Math.abs(y.diff) - Math.abs(x.diff))
+  const shown = showAll ? diffs : diffs.slice(0, TOP)
 
   return (
     <section>
-      <div className="intro">
+      <div className="page-h">
         <h2>Same shortage, two customers</h2>
-        <p>
-          Both columns run the identical engine on identical data. The only difference is the customer config file it
-          reads. Onboarding a new customer means writing their rules down, not rewriting code.
-        </p>
+        <p>Same engine, same data. Only the customer's config file changes.</p>
       </div>
 
       <div className="toolbar">
         <label className="field">
-          <span>Shortage event</span>
+          <span>Shortage</span>
           <select value={skuId} onChange={(e) => setSkuId(e.target.value)}>
             {shortSkus.map((s) => (
               <option key={s.id} value={s.id}>
@@ -64,85 +64,73 @@ export default function CompareCustomers({ world, skuId, setSkuId }: Props) {
         </label>
       </div>
 
-      <div className="table-wrap">
-        <table className="grid">
-          <thead>
-            <tr>
-              <th>Rule (from config)</th>
-              {plans.map(({ c }) => (
-                <th key={c.customer.id}>
-                  {c.customer.name}
-                  <div className="tiny muted">config/customer_{c.customer.id}.json</div>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {RULES.map((r) => {
-              const vals = plans.map(({ c }) => r.get(c))
-              const differs = new Set(vals).size > 1
-              return (
-                <tr key={r.label} className={differs ? 'differs' : ''}>
-                  <td className="strong">{r.label}</td>
-                  {vals.map((v, i) => (
-                    <td key={i}>{v}</td>
-                  ))}
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
-      <p className="muted hint compare-note">Highlighted rows are rules that differ between the two customers.</p>
-
-      <h3 className="section-h">Outcome</h3>
       <div className="compare-cols">
         {plans.map(({ c, plan }, i) => {
-          const other = plans[1 - i].plan.summary
           const s = plan.summary
-          const delta = (mine: number, theirs: number) =>
-            mine === theirs ? null : (
-              <span className={mine < theirs ? 'delta good' : 'delta bad'}>
-                {mine > theirs ? '+' : ''}
-                {n(mine - theirs)} vs other
-              </span>
-            )
+          const other = plans[1 - i].plan.summary
+          const better = (mine: number, theirs: number) => (mine < theirs ? 'green-text' : mine > theirs ? 'red-text' : '')
           return (
             <div key={c.customer.id} className="card">
-              <h3>{c.customer.name}</h3>
-              <p className="story">{c.customer.summary}</p>
-              <dl className="stats compare-stats">
+              <h3>
+                {c.customer.name} <span className="muted tiny mono">customer_{c.customer.id}.json</span>
+              </h3>
+              <div className="compare-nums">
                 <div>
-                  <dt>Markets out before run</dt>
-                  <dd>{s.marketsAtRiskAfter}</dd>
-                  {delta(s.marketsAtRiskAfter, other.marketsAtRiskAfter)}
+                  <div className={`bigdelta ${better(s.marketsAtRiskAfter, other.marketsAtRiskAfter)}`}>
+                    {s.marketsAtRiskAfter}
+                  </div>
+                  <div className="bigdelta-label">markets out</div>
                 </div>
                 <div>
-                  <dt>Lost sales (cs)</dt>
-                  <dd>{n(s.demandAtRiskCases)}</dd>
-                  {delta(s.demandAtRiskCases, other.demandAtRiskCases)}
+                  <div className={`bigdelta ${better(s.demandAtRiskCases, other.demandAtRiskCases)}`}>
+                    {n(s.demandAtRiskCases)}
+                  </div>
+                  <div className="bigdelta-label">sales at risk (cs)</div>
                 </div>
                 <div>
-                  <dt>Backordered (cs)</dt>
-                  <dd>{n(s.backorderQty)}</dd>
+                  <div className="bigdelta">{s.transferCount}</div>
+                  <div className="bigdelta-label">transfers</div>
                 </div>
-                <div>
-                  <dt>Transfers</dt>
-                  <dd>{s.transferCount}</dd>
-                </div>
-              </dl>
+              </div>
             </div>
           )
         })}
       </div>
 
-      <h3 className="section-h">Line by line</h3>
+      <h3 className="section-h">
+        Rules that differ <span className="muted tiny">{RULES.length - differing.length} other{RULES.length - differing.length === 1 ? ' is' : 's are'} the same</span>
+      </h3>
+      <div className="table-wrap">
+        <table className="grid">
+          <thead>
+            <tr>
+              <th>Rule</th>
+              {plans.map(({ c }) => (
+                <th key={c.customer.id}>{c.customer.name}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {differing.map((r) => (
+              <tr key={r.label}>
+                <td className="muted">{r.label}</td>
+                {r.vals.map((v, i) => (
+                  <td key={i}>{v}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 className="section-h">
+        Biggest differences <span className="muted tiny">{diffs.length} of {a.plan.lines.filter((l) => l.orderQty > 0).length} lines differ</span>
+      </h3>
       <div className="table-wrap">
         <table className="grid">
           <thead>
             <tr>
               <th>Distributor · market</th>
-              <th className="num">Cover before</th>
               <th className="num">Ordered</th>
               <th className="num">{a.c.customer.name}</th>
               <th className="num">{b.c.customer.name}</th>
@@ -150,38 +138,36 @@ export default function CompareCustomers({ world, skuId, setSkuId }: Props) {
             </tr>
           </thead>
           <tbody>
-            {rows.map((la) => {
-              const lb = bLines.get(la.marketId)!
-              const diff = lb.ship - la.ship
-              return (
-                <tr key={la.marketId}>
-                  <td>
-                    {la.distributorName} <span className="state">{la.state}</span>
-                    {la.priority && <span className="pill purple small">{la.priority}</span>}
-                  </td>
-                  <td className="num">{d(la.coverBefore)}</td>
-                  <td className="num">{la.orderQty ? n(la.orderQty) : '–'}</td>
-                  <ShipCell l={la} />
-                  <ShipCell l={lb} />
-                  <td className={`num strong ${diff > 0 ? 'green-text' : diff < 0 ? 'red-text' : 'muted'}`}>
-                    {diff === 0 ? '–' : (diff > 0 ? '+' : '') + n(diff)}
-                  </td>
-                </tr>
-              )
-            })}
+            {shown.map(({ la, lb, diff }) => (
+              <tr key={la.marketId}>
+                <td>
+                  {la.distributorName} <span className="state">{la.state}</span>
+                  {la.priority && <span className="pill purple small">{la.priority}</span>}
+                </td>
+                <td className="num">{n(la.orderQty)}</td>
+                <td className={`num ${la.stockoutBeforeRun ? 'red-text' : ''}`} title={RULE_LABEL[la.rule]}>
+                  {n(la.ship)}
+                </td>
+                <td className={`num ${lb.stockoutBeforeRun ? 'red-text' : ''}`} title={RULE_LABEL[lb.rule]}>
+                  {n(lb.ship)}
+                </td>
+                <td className={`num strong ${diff > 0 ? 'green-text' : 'red-text'}`}>
+                  {diff > 0 ? '+' : ''}
+                  {n(diff)}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
+      {diffs.length > TOP && (
+        <p className="muted tiny">
+          Red quantity = market still runs out.{' '}
+          <button className="link" onClick={() => setShowAll((v) => !v)}>
+            {showAll ? 'Show top 8' : `Show all ${diffs.length}`}
+          </button>
+        </p>
+      )}
     </section>
-  )
-}
-
-function ShipCell({ l }: { l: AccountLine }) {
-  return (
-    <td className="num">
-      <div className="strong">{n(l.ship)}</div>
-      <div className="tiny muted">{RULE_LABEL[l.rule]}</div>
-      {l.stockoutBeforeRun && <div className="tiny red-text">runs out ~{d(l.coverAfter)}</div>}
-    </td>
   )
 }
