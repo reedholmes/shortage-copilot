@@ -10,6 +10,7 @@ import type { Overrides } from './engine/allocation'
 import { CUSTOMERS, DEFAULT_CUSTOMER_ID, getCustomer, settingsFromConfig } from './engine/customerConfig'
 import type { World } from './engine/types'
 import Overview from './components/Overview'
+import AgentRun from './components/AgentRun'
 import AllocationView from './components/AllocationView'
 import CompareCustomers from './components/CompareCustomers'
 import CustomerNote from './components/CustomerNote'
@@ -18,11 +19,12 @@ import HowItWorks from './components/HowItWorks'
 
 const world = worldJson as World
 
-type Tab = 'overview' | 'allocation' | 'note' | 'compare' | 'evals' | 'how'
+type Tab = 'overview' | 'agent' | 'allocation' | 'note' | 'compare' | 'evals' | 'how'
 const TABS: { id: Tab; label: string }[] = [
   { id: 'overview', label: '1. Shortage overview' },
-  { id: 'allocation', label: '2. Allocation' },
-  { id: 'note', label: '3. Customer note' },
+  { id: 'agent', label: '2. Agent run' },
+  { id: 'allocation', label: '3. Allocation' },
+  { id: 'note', label: '4. Customer note' },
   { id: 'compare', label: 'Compare customers' },
   { id: 'evals', label: 'Evals' },
   { id: 'how', label: 'How it works' },
@@ -94,6 +96,15 @@ export default function App() {
               setSkuId(id)
               setTab('allocation')
             }}
+          />
+        )}
+        {tab === 'agent' && (
+          <AgentRun
+            world={world}
+            customerId={customerId}
+            skuId={skuId}
+            setSkuId={setSkuId}
+            onOpenAllocation={() => setTab('allocation')}
           />
         )}
         {tab === 'allocation' && (

@@ -20,8 +20,8 @@
   // Per-visitor limit: 5 AI drafts per minute.
   "ratelimits": [{ "name": "DRAFT_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }],
 
-  // Site-wide cap on fresh AI drafts per day (cached drafts don't count).
-  "vars": { "DAILY_AI_CAP": "150" },
+  // Site-wide daily caps on fresh AI work (saved drafts and replayed agent runs don't count).
+  "vars": { "DAILY_AI_CAP": "150", "AGENT_DAILY_CAP": "40" },
 
   "observability": { "enabled": true }
   // The API key is NOT here. It is stored encrypted with: npx wrangler secret put ANTHROPIC_API_KEY

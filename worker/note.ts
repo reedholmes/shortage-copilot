@@ -19,21 +19,30 @@ export const DraftSchema = z.object({
 })
 export type Draft = z.infer<typeof DraftSchema>
 
-const SYSTEM_PROMPT = `You write out-of-stock notices from a beverage alcohol supplier's Supply Planning Team to a distributor partner.
+/** Tone and sign-off come from the customer config (customerEmail section). */
+export interface NoteStyle {
+  tone: string
+  signOff: string
+}
+export const DEFAULT_STYLE: NoteStyle = { tone: 'direct and practical', signOff: 'Supply Planning Team' }
 
-Tone: direct and practical, the way an experienced planner writes to a distributor they work with every week. Lead with what is short and the numbers. One brief apology, no groveling. Close with a clear next step.
+export function systemPrompt(style: NoteStyle): string {
+  return `You write out-of-stock notices from a beverage alcohol supplier's supply team to a distributor partner.
+
+Tone: ${style.tone}, the way an experienced planner writes to a distributor they work with every week. Lead with what is short and the numbers. One brief apology, no groveling. Close with a clear next step.
 
 Rules:
 - Use only the facts provided. Do not invent quantities, dates, causes, promotions, or promises.
 - All quantities are 9-liter cases. Write them as "cases".
 - Cover: what is shipping now, what is backordered, when supply lands, and roughly how long the backordered cases will wait.
 - If an incoming intracompany transfer is listed, mention it as a near-term bridge from their other market.
-- Body: plain text, under 160 words, greet the distributor's team by company name, sign off as "Supply Planning Team".
+- Body: plain text, under 160 words, greet the distributor's team by company name, sign off as "${style.signOff}".
 - Subject: under 80 characters, include the product and the word backorder.
 - Summary: one sentence for the planner's internal log.`
+}
 
 /** Calls Claude. Throws on any failure so the caller can fall back to the template. */
-export async function draftWithClaude(facts: NoteFacts, apiKey: string): Promise<Draft> {
+export async function draftWithClaude(facts: NoteFacts, apiKey: string, style: NoteStyle = DEFAULT_STYLE): Promise<Draft> {
   const client = new Anthropic({ apiKey, maxRetries: 1, timeout: 30_000 })
   const response = await client.beta.messages.parse({
     model: MODEL,
@@ -43,7 +52,7 @@ export async function draftWithClaude(facts: NoteFacts, apiKey: string): Promise
     fallbacks: 'default',
     // Low effort: a short templated email doesn't need deep reasoning, and it keeps cost and wait down.
     output_config: { effort: 'low', format: betaZodOutputFormat(DraftSchema) },
-    system: SYSTEM_PROMPT,
+    system: systemPrompt(style),
     messages: [{ role: 'user', content: `Draft the notice from these facts:\n${JSON.stringify(facts, null, 2)}` }],
   })
   if (response.stop_reason === 'refusal') throw new Error('Model declined the request')
@@ -55,7 +64,7 @@ export async function draftWithClaude(facts: NoteFacts, apiKey: string): Promise
 }
 
 /** Fill-in-the-blanks fallback. Always correct, never creative. */
-export function templateNote(f: NoteFacts): Draft {
+export function templateNote(f: NoteFacts, style: NoteStyle = DEFAULT_STYLE): Draft {
   const transfer = f.incomingTransfer
     ? ` In the meantime, ${f.incomingTransfer.cases} cases are moving from your ${f.incomingTransfer.fromMarket} market and should arrive in about ${f.incomingTransfer.arrivesInDays} days.`
     : ''
@@ -67,7 +76,7 @@ export function templateNote(f: NoteFacts): Draft {
       `${transfer}\n\n` +
       `Our next production run lands on ${f.supplyLandsOn}, so the backordered cases will wait about ${f.daysOrdersWillSit} days. We'll ship them as soon as it arrives. Sorry for the disruption.\n\n` +
       `Let us know if you need to reprioritize any of your open orders.\n\n` +
-      `Supply Planning Team`,
+      style.signOff,
     summary: `Notified ${f.distributor} (${f.market}) of ${f.backorderedCases} cs backordered on ${f.sku} until ${f.supplyLandsOn}.`,
   }
 }

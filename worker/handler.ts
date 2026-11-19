@@ -16,7 +16,7 @@ import { buildNoteFacts } from '../src/engine/noteFacts'
 import type { NoteFacts } from '../src/engine/noteFacts'
 import type { World } from '../src/engine/types'
 import { draftWithClaude, templateNote } from './note'
-import type { Draft } from './note'
+import type { Draft, NoteStyle } from './note'
 
 const world = worldJson as World
 
@@ -26,6 +26,8 @@ export interface Env {
   DRAFT_LIMITER: RateLimit
   ANTHROPIC_API_KEY?: string
   DAILY_AI_CAP?: string
+  /** Site-wide cap on fresh (not replayed) agent runs per day. */
+  AGENT_DAILY_CAP?: string
 }
 
 export type Source = 'ai' | 'cache' | 'fallback'
@@ -49,20 +51,32 @@ const RequestSchema = z.object({
   overrides: z.record(z.string().max(20), z.number().int().min(0).max(100_000)).default({}),
 })
 
-const json = (data: unknown, status = 200) =>
+export const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json' } })
 
-async function hash(text: string): Promise<string> {
+export async function hash(text: string): Promise<string> {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
   return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('').slice(0, 32)
 }
 
-const DAY = 86_400
+export const DAY = 86_400
+
+/** Saved drafts are keyed by the exact facts AND the customer's tone, so one customer's email is never reused for another. */
+export async function noteCacheKey(facts: NoteFacts, style: NoteStyle): Promise<string> {
+  return `note:${await hash(JSON.stringify({ facts, style }))}`
+}
+
+/** Daily counter for fresh AI calls (saved drafts and replays don't count). */
+export async function dailyCount(env: Env, prefix: string): Promise<{ used: number; bump: () => Promise<void> }> {
+  const key = `${prefix}:${new Date().toISOString().slice(0, 10)}`
+  const used = Number((await env.NOTES.get(key)) ?? '0')
+  return { used, bump: () => env.NOTES.put(key, String(used + 1), { expirationTtl: 2 * DAY }) }
+}
 
 export async function handleDraftNote(
   request: Request,
   env: Env,
-  draft: (facts: NoteFacts, apiKey: string) => Promise<Draft> = draftWithClaude,
+  draft: (facts: NoteFacts, apiKey: string, style: NoteStyle) => Promise<Draft> = draftWithClaude,
 ): Promise<Response> {
   if (request.method !== 'POST') return json({ error: 'Use POST' }, 405)
 
@@ -79,14 +93,16 @@ export async function handleDraftNote(
   if (Object.keys(overrides).length > 30) return json({ error: 'Too many overrides' }, 400)
 
   // 2. Recompute facts server-side, with that customer's rules
-  const settings = { ...settingsFromConfig(getCustomer(customerId)), nearDepletionWeight }
+  const customer = getCustomer(customerId)
+  const settings = { ...settingsFromConfig(customer), nearDepletionWeight }
+  const style: NoteStyle = { tone: customer.customerEmail.tone, signOff: customer.customerEmail.signOff }
   const facts = buildNoteFacts(world, skuId, marketId, settings, overrides)
   if (!facts) return json({ error: 'No backorder for that SKU and market' }, 400)
   const fallback = (reason: FallbackReason): Response =>
-    json({ source: 'fallback', reason, facts, draft: templateNote(facts) } satisfies DraftResponse)
+    json({ source: 'fallback', reason, facts, draft: templateNote(facts, style) } satisfies DraftResponse)
 
   // 3. Cache
-  const cacheKey = `note:${await hash(JSON.stringify(facts))}`
+  const cacheKey = await noteCacheKey(facts, style)
   const cached = await env.NOTES.get<Draft>(cacheKey, 'json')
   if (cached) return json({ source: 'cache', facts, draft: cached } satisfies DraftResponse)
 
@@ -96,17 +112,15 @@ export async function handleDraftNote(
   if (!success) return fallback('rate_limited')
 
   // 5. Daily cap
-  const cap = Number(env.DAILY_AI_CAP ?? '150')
-  const countKey = `count:${new Date().toISOString().slice(0, 10)}`
-  const used = Number((await env.NOTES.get(countKey)) ?? '0')
-  if (used >= cap) return fallback('daily_cap')
+  const counter = await dailyCount(env, 'count')
+  if (counter.used >= Number(env.DAILY_AI_CAP ?? '150')) return fallback('daily_cap')
 
   // 6. Call Claude
   if (!env.ANTHROPIC_API_KEY) return fallback('not_configured')
   try {
-    const result = await draft(facts, env.ANTHROPIC_API_KEY)
+    const result = await draft(facts, env.ANTHROPIC_API_KEY, style)
     await env.NOTES.put(cacheKey, JSON.stringify(result), { expirationTtl: 7 * DAY })
-    await env.NOTES.put(countKey, String(used + 1), { expirationTtl: 2 * DAY })
+    await counter.bump()
     return json({ source: 'ai', facts, draft: result } satisfies DraftResponse)
   } catch (err) {
     console.error('AI draft failed:', err instanceof Error ? err.message : err)
