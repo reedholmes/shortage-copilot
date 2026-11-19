@@ -18,7 +18,7 @@
 
 ## What the agent found on three shortages
 
-| Shortage | Supply vs orders | Markets out before the run if nothing ships | With the agent's plan | Lost sales with the plan | Needs a person |
+| Shortage | On hand vs orders | Markets out before the run if nothing ships | With the agent's plan | Sales at risk with the plan (cs) | Needs a person |
 |---|---|---|---|---|---|
 | Agave Sol tequila | 62% | 13 | **2** | 50 cases | 8 of 24 lines, plus 2 transfers |
 | North Shore sparkling | 55% | 12 | **2** | 126 cases | 7 of 21 lines |

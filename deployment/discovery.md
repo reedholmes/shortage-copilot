@@ -40,7 +40,7 @@ Agreed with the VP Supply Chain as the scorecard for go-live. Baselines are cust
 |---|---|---|---|
 | Time from shortage detected to quantities released | 1.5 to 3 days | Same business day | Timestamps: agent run start to last approval |
 | Markets that stock out before the next run | Not tracked | At or below the engine's recommended plan | Engine projection vs. actual depletions after the run |
-| Lost sales (cases consumers couldn't buy) | Not tracked | Reported per event, trending down | Engine's demand-at-risk figure, checked against depletions |
+| Sales at risk (cases consumers couldn't buy) | Not tracked | Reported per event, trending down | Engine's sales-at-risk figure, checked against depletions |
 | Planner overrides of the agent's plan | n/a | Under 10% of lines by the end of approval mode | Override log |
 | Share of lines needing human approval | 100% (all manual) | About a third in a typical shortage | Approval queue size per event (demo: 7 to 8 of 21 to 24 lines on tequila and sparkling) |
 | Days from decision to customer note | 2 to 3 days | Same day for lines that auto-execute | Note timestamps |
