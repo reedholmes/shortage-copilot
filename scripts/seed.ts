@@ -31,23 +31,24 @@ const AS_OF = '2026-11-16' // a Monday
 const WEEKS = 13
 
 // --- Distributors and their markets (25 markets, 12 states) -----------------
+// Which distributors are priority accounts is a customer rule, so it lives in /config, not here.
 const DISTRIBUTORS: (Distributor & { states: string[] })[] = [
-  { id: 'D01', name: 'Summit Crest Distributing', priority: 'National account', states: ['TX', 'FL', 'AZ'] },
-  { id: 'D02', name: 'Gulfline Wine & Spirits', priority: 'Key distributor', states: ['FL', 'GA'] },
-  { id: 'D03', name: 'Pacific Bluff Beverage', priority: 'National account', states: ['CA', 'CO'] },
-  { id: 'D04', name: 'Empire Harbor Distributors', priority: 'Key distributor', states: ['NY', 'NJ'] },
-  { id: 'D05', name: 'Lakefront Beverage Co.', priority: null, states: ['IL', 'OH'] },
-  { id: 'D06', name: 'Keystone Valley Wine & Spirits', priority: null, states: ['PA', 'NJ'] },
-  { id: 'D07', name: 'Piedmont Spirits Group', priority: null, states: ['NC', 'GA'] },
-  { id: 'D08', name: 'Front Range Beverage', priority: null, states: ['CO'] },
-  { id: 'D09', name: 'Buckeye Junction Distributing', priority: null, states: ['OH'] },
-  { id: 'D10', name: 'Desert Mesa Wine Co.', priority: null, states: ['AZ'] },
-  { id: 'D11', name: 'Prairie Lantern Beverage', priority: null, states: ['IL'] },
-  { id: 'D12', name: 'Longhorn Plains Beverage', priority: null, states: ['TX'] },
-  { id: 'D13', name: 'Golden Coast Fine Wine', priority: null, states: ['CA'] },
-  { id: 'D14', name: 'Hudson & Pine Spirits', priority: null, states: ['NY'] },
-  { id: 'D15', name: 'Magnolia Coast Distributing', priority: null, states: ['FL'] },
-  { id: 'D16', name: 'Tidewater Atlantic Beverage', priority: null, states: ['NC', 'PA'] },
+  { id: 'D01', name: 'Summit Crest Distributing', states: ['TX', 'FL', 'AZ'] },
+  { id: 'D02', name: 'Gulfline Wine & Spirits', states: ['FL', 'GA'] },
+  { id: 'D03', name: 'Pacific Bluff Beverage', states: ['CA', 'CO'] },
+  { id: 'D04', name: 'Empire Harbor Distributors', states: ['NY', 'NJ'] },
+  { id: 'D05', name: 'Lakefront Beverage Co.', states: ['IL', 'OH'] },
+  { id: 'D06', name: 'Keystone Valley Wine & Spirits', states: ['PA', 'NJ'] },
+  { id: 'D07', name: 'Piedmont Spirits Group', states: ['NC', 'GA'] },
+  { id: 'D08', name: 'Front Range Beverage', states: ['CO'] },
+  { id: 'D09', name: 'Buckeye Junction Distributing', states: ['OH'] },
+  { id: 'D10', name: 'Desert Mesa Wine Co.', states: ['AZ'] },
+  { id: 'D11', name: 'Prairie Lantern Beverage', states: ['IL'] },
+  { id: 'D12', name: 'Longhorn Plains Beverage', states: ['TX'] },
+  { id: 'D13', name: 'Golden Coast Fine Wine', states: ['CA'] },
+  { id: 'D14', name: 'Hudson & Pine Spirits', states: ['NY'] },
+  { id: 'D15', name: 'Magnolia Coast Distributing', states: ['FL'] },
+  { id: 'D16', name: 'Tidewater Atlantic Beverage', states: ['NC', 'PA'] },
 ]
 
 /** Relative market size by state. */

@@ -1,25 +1,28 @@
 /**
- * App shell: header, tabs, and the shared state every screen reads.
+ * App shell: header, customer switcher, tabs, and the shared state every screen reads.
  * State lives here (not in each screen) so an override made on the allocation
  * screen is still there when you visit the customer note and come back.
  */
 import { useMemo, useState } from 'react'
 import worldJson from './data/world.json'
-import { DEFAULT_SETTINGS, fmtDate } from './engine/allocation'
+import { fmtDate } from './engine/allocation'
 import type { Overrides } from './engine/allocation'
+import { CUSTOMERS, DEFAULT_CUSTOMER_ID, getCustomer, settingsFromConfig } from './engine/customerConfig'
 import type { World } from './engine/types'
 import Overview from './components/Overview'
 import AllocationView from './components/AllocationView'
+import CompareCustomers from './components/CompareCustomers'
 import CustomerNote from './components/CustomerNote'
 import HowItWorks from './components/HowItWorks'
 
 const world = worldJson as World
 
-type Tab = 'overview' | 'allocation' | 'note' | 'how'
+type Tab = 'overview' | 'allocation' | 'note' | 'compare' | 'how'
 const TABS: { id: Tab; label: string }[] = [
   { id: 'overview', label: '1. Shortage overview' },
   { id: 'allocation', label: '2. Allocation' },
   { id: 'note', label: '3. Customer note' },
+  { id: 'compare', label: 'Compare customers' },
   { id: 'how', label: 'How it works' },
 ]
 
@@ -29,13 +32,26 @@ export default function App() {
     setTabState(t)
     window.scrollTo(0, 0) // each screen starts at the top
   }
+  const [customerId, setCustomerIdState] = useState(DEFAULT_CUSTOMER_ID)
+  const customer = getCustomer(customerId)
   const [skuId, setSkuId] = useState(world.scenarios[0].skuId)
   const [noteMarketId, setNoteMarketId] = useState<string | null>(null)
-  const [nearWeight, setNearWeight] = useState(DEFAULT_SETTINGS.nearDepletionWeight)
+  const [nearWeight, setNearWeight] = useState(customer.forecast.depletionWeightWeek1)
   /** Overrides are kept per SKU: { skuId: { marketId: cases } } */
   const [overridesBySku, setOverridesBySku] = useState<Record<string, Overrides>>({})
 
-  const settings = useMemo(() => ({ ...DEFAULT_SETTINGS, nearDepletionWeight: nearWeight }), [nearWeight])
+  // Switching customer starts clean: their own forecast default, no overrides.
+  const setCustomerId = (id: string) => {
+    setCustomerIdState(id)
+    setNearWeight(getCustomer(id).forecast.depletionWeightWeek1)
+    setOverridesBySku({})
+    setNoteMarketId(null)
+  }
+
+  const settings = useMemo(
+    () => ({ ...settingsFromConfig(getCustomer(customerId)), nearDepletionWeight: nearWeight }),
+    [customerId, nearWeight],
+  )
   const overrides = overridesBySku[skuId] ?? {}
   const setOverrides = (o: Overrides) => setOverridesBySku((all) => ({ ...all, [skuId]: o }))
 
@@ -47,6 +63,16 @@ export default function App() {
           <p className="sub">
             Synthetic demo data · as of {fmtDate(world.asOf)}, 2026 · all quantities in 9L cases
           </p>
+          <label className="customer-pick">
+            <span>Customer rules:</span>
+            <select value={customerId} onChange={(e) => setCustomerId(e.target.value)}>
+              {CUSTOMERS.map((c) => (
+                <option key={c.customer.id} value={c.customer.id}>
+                  {c.customer.name}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
         <nav className="tabs" aria-label="Screens">
           {TABS.map((t) => (
@@ -86,6 +112,7 @@ export default function App() {
         )}
         {tab === 'note' && (
           <CustomerNote
+            customerId={customerId}
             world={world}
             skuId={skuId}
             setSkuId={setSkuId}
@@ -95,6 +122,7 @@ export default function App() {
             setMarketId={setNoteMarketId}
           />
         )}
+        {tab === 'compare' && <CompareCustomers world={world} skuId={skuId} setSkuId={setSkuId} />}
         {tab === 'how' && <HowItWorks />}
       </main>
 

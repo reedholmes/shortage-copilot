@@ -86,83 +86,67 @@
  "distributors": [
   {
    "id": "D01",
-   "name": "Summit Crest Distributing",
-   "priority": "National account"
+   "name": "Summit Crest Distributing"
   },
   {
    "id": "D02",
-   "name": "Gulfline Wine & Spirits",
-   "priority": "Key distributor"
+   "name": "Gulfline Wine & Spirits"
   },
   {
    "id": "D03",
-   "name": "Pacific Bluff Beverage",
-   "priority": "National account"
+   "name": "Pacific Bluff Beverage"
   },
   {
    "id": "D04",
-   "name": "Empire Harbor Distributors",
-   "priority": "Key distributor"
+   "name": "Empire Harbor Distributors"
   },
   {
    "id": "D05",
-   "name": "Lakefront Beverage Co.",
-   "priority": null
+   "name": "Lakefront Beverage Co."
   },
   {
    "id": "D06",
-   "name": "Keystone Valley Wine & Spirits",
-   "priority": null
+   "name": "Keystone Valley Wine & Spirits"
   },
   {
    "id": "D07",
-   "name": "Piedmont Spirits Group",
-   "priority": null
+   "name": "Piedmont Spirits Group"
   },
   {
    "id": "D08",
-   "name": "Front Range Beverage",
-   "priority": null
+   "name": "Front Range Beverage"
   },
   {
    "id": "D09",
-   "name": "Buckeye Junction Distributing",
-   "priority": null
+   "name": "Buckeye Junction Distributing"
   },
   {
    "id": "D10",
-   "name": "Desert Mesa Wine Co.",
-   "priority": null
+   "name": "Desert Mesa Wine Co."
   },
   {
    "id": "D11",
-   "name": "Prairie Lantern Beverage",
-   "priority": null
+   "name": "Prairie Lantern Beverage"
   },
   {
    "id": "D12",
-   "name": "Longhorn Plains Beverage",
-   "priority": null
+   "name": "Longhorn Plains Beverage"
   },
   {
    "id": "D13",
-   "name": "Golden Coast Fine Wine",
-   "priority": null
+   "name": "Golden Coast Fine Wine"
   },
   {
    "id": "D14",
-   "name": "Hudson & Pine Spirits",
-   "priority": null
+   "name": "Hudson & Pine Spirits"
   },
   {
    "id": "D15",
-   "name": "Magnolia Coast Distributing",
-   "priority": null
+   "name": "Magnolia Coast Distributing"
   },
   {
    "id": "D16",
-   "name": "Tidewater Atlantic Beverage",
-   "priority": null
+   "name": "Tidewater Atlantic Beverage"
   }
  ],
  "markets": [

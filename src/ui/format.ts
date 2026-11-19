@@ -9,8 +9,9 @@ export const d = (x: number) => `${Math.round(x)}d`
 export const RULE_LABEL: Record<AccountLine['rule'], string> = {
   FULL: 'Full supply',
   HOLD: 'Covered to run, held',
-  PRIORITY: 'Priority at risk, served first',
+  PRIORITY: 'Priority account, served first',
   SPREAD: 'Spread to equal cover',
+  'FAIR SHARE': 'Fair share of order',
   RELEASED: 'Leftover released',
   OVERRIDE: 'Planner override',
   'NO ORDER': 'No open order',

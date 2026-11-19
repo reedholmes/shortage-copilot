@@ -11,7 +11,7 @@
  */
 import { z } from 'zod'
 import worldJson from '../src/data/world.json'
-import { DEFAULT_SETTINGS } from '../src/engine/allocation'
+import { CUSTOMERS, DEFAULT_CUSTOMER_ID, getCustomer, settingsFromConfig } from '../src/engine/customerConfig'
 import { buildNoteFacts } from '../src/engine/noteFacts'
 import type { NoteFacts } from '../src/engine/noteFacts'
 import type { World } from '../src/engine/types'
@@ -38,7 +38,11 @@ export interface DraftResponse {
   draft: Draft
 }
 
+const customerIds = CUSTOMERS.map((c) => c.customer.id) as [string, ...string[]]
+
 const RequestSchema = z.object({
+  /** Which customer's rules to apply. Must be one of the known configs. */
+  customerId: z.enum(customerIds).default(DEFAULT_CUSTOMER_ID),
   skuId: z.string().max(20),
   marketId: z.string().max(20),
   nearDepletionWeight: z.number().min(0.5).max(1),
@@ -71,11 +75,12 @@ export async function handleDraftNote(
   }
   const parsed = RequestSchema.safeParse(body)
   if (!parsed.success) return json({ error: 'Invalid request' }, 400)
-  const { skuId, marketId, nearDepletionWeight, overrides } = parsed.data
+  const { customerId, skuId, marketId, nearDepletionWeight, overrides } = parsed.data
   if (Object.keys(overrides).length > 30) return json({ error: 'Too many overrides' }, 400)
 
-  // 2. Recompute facts server-side
-  const facts = buildNoteFacts(world, skuId, marketId, { ...DEFAULT_SETTINGS, nearDepletionWeight }, overrides)
+  // 2. Recompute facts server-side, with that customer's rules
+  const settings = { ...settingsFromConfig(getCustomer(customerId)), nearDepletionWeight }
+  const facts = buildNoteFacts(world, skuId, marketId, settings, overrides)
   if (!facts) return json({ error: 'No backorder for that SKU and market' }, 400)
   const fallback = (reason: FallbackReason): Response =>
     json({ source: 'fallback', reason, facts, draft: templateNote(facts) } satisfies DraftResponse)

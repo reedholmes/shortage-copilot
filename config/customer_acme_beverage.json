@@ -1,0 +1,46 @@
+{
+  "customer": {
+    "id": "acme_beverage",
+    "name": "Acme Beverage Co.",
+    "summary": "Protect the markets closest to running out. Priority accounts jump the line only when they would stock out. Move stock between a distributor's own markets before spending plant supply."
+  },
+  "forecast": {
+    "depletionWeightWeek1": 0.75,
+    "inTransitCountsAsOnHandWithinDays": 7
+  },
+  "allocation": {
+    "policy": "equal_days_of_cover",
+    "holdMarketsCoveredPastRun": true
+  },
+  "safetyBuffer": {
+    "minimumDaysPastRun": 7,
+    "highVelocityExtraDays": 3,
+    "volatileDemandExtraDays": 4,
+    "volatileDemandThreshold": 0.3
+  },
+  "priorityAccounts": {
+    "rule": "only_when_at_risk",
+    "accounts": [
+      { "distributorId": "D01", "name": "Summit Crest Distributing", "tier": "National account" },
+      { "distributorId": "D02", "name": "Gulfline Wine & Spirits", "tier": "Key distributor" },
+      { "distributorId": "D03", "name": "Pacific Bluff Beverage", "tier": "National account" },
+      { "distributorId": "D04", "name": "Empire Harbor Distributors", "tier": "Key distributor" }
+    ]
+  },
+  "transfers": {
+    "enabled": true,
+    "longThresholdDays": 90,
+    "leadTimeDays": 7,
+    "minimumCases": 10
+  },
+  "approval": {
+    "priorityAccounts": true,
+    "transfers": true,
+    "fillRateBelow": 0.5,
+    "lineOverCases": 200
+  },
+  "customerEmail": {
+    "tone": "direct and practical",
+    "signOff": "Supply Planning Team"
+  }
+}

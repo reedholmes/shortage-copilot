@@ -1,0 +1,46 @@
+{
+  "customer": {
+    "id": "bluestone_spirits",
+    "name": "Bluestone Wine & Spirits",
+    "summary": "Distributor contracts promise a fair share: every market that needs stock gets the same percentage of its order. Priority accounts are always served first. No transfers between states."
+  },
+  "forecast": {
+    "depletionWeightWeek1": 0.75,
+    "inTransitCountsAsOnHandWithinDays": 7
+  },
+  "allocation": {
+    "policy": "fair_share",
+    "holdMarketsCoveredPastRun": true
+  },
+  "safetyBuffer": {
+    "minimumDaysPastRun": 14,
+    "highVelocityExtraDays": 3,
+    "volatileDemandExtraDays": 4,
+    "volatileDemandThreshold": 0.3
+  },
+  "priorityAccounts": {
+    "rule": "always_first",
+    "accounts": [
+      { "distributorId": "D01", "name": "Summit Crest Distributing", "tier": "National account" },
+      { "distributorId": "D02", "name": "Gulfline Wine & Spirits", "tier": "Key distributor" },
+      { "distributorId": "D03", "name": "Pacific Bluff Beverage", "tier": "National account" },
+      { "distributorId": "D04", "name": "Empire Harbor Distributors", "tier": "Key distributor" }
+    ]
+  },
+  "transfers": {
+    "enabled": false,
+    "longThresholdDays": 90,
+    "leadTimeDays": 7,
+    "minimumCases": 10
+  },
+  "approval": {
+    "priorityAccounts": true,
+    "transfers": true,
+    "fillRateBelow": 0.6,
+    "lineOverCases": 150
+  },
+  "customerEmail": {
+    "tone": "formal and courteous",
+    "signOff": "Bluestone Customer Supply"
+  }
+}

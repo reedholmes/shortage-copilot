@@ -19,7 +19,8 @@ export type PriorityType = 'National account' | 'Key distributor' | null
 export interface Distributor {
   id: string
   name: string
-  priority: PriorityType
+  /** Only used when no customer config supplies a priority list (unit tests). */
+  priority?: PriorityType
 }
 
 /** One distributor operating in one state. A distributor can have several markets. */
@@ -71,8 +72,20 @@ export interface World {
   scenarios: Scenario[]
 }
 
-/** Every planning knob in one place. The UI exposes the blend slider. */
+/**
+ * Every planning knob in one place. Built from a customer config file
+ * (see src/engine/customerConfig.ts). The UI exposes the blend slider.
+ */
 export interface Settings {
+  /** How plant supply is split among markets that need it. */
+  allocationPolicy: 'equal_days_of_cover' | 'fair_share'
+  /** Hold orders for markets already covered past the run plus buffer. */
+  holdCoveredMarkets: boolean
+  /** When priority accounts jump the line. */
+  priorityRule: 'only_when_at_risk' | 'always_first'
+  /** Distributor id -> priority tier. If absent, the distributor's own tag is used. */
+  priorityAccounts?: Record<string, Exclude<PriorityType, null>>
+  transfersEnabled: boolean
   /** Depletion weight in week 1. It slides linearly to (1 - this) by the last week. */
   nearDepletionWeight: number
   baseBufferDays: number
@@ -121,7 +134,7 @@ export interface AccountLine {
   coverAfter: number
   stockoutBeforeRun: boolean
   /** The rule that decided this line. */
-  rule: 'FULL' | 'HOLD' | 'PRIORITY' | 'SPREAD' | 'RELEASED' | 'OVERRIDE' | 'NO ORDER'
+  rule: 'FULL' | 'HOLD' | 'PRIORITY' | 'SPREAD' | 'FAIR SHARE' | 'RELEASED' | 'OVERRIDE' | 'NO ORDER'
   action: Action
   reasons: string[]
   orders: OrderFill[]
@@ -173,4 +186,6 @@ export interface Plan {
   overAllocated: number
   /** Common cover level (days) reached by the spread step, if it ran. */
   spreadLevelDays: number | null
+  /** Share of each order filled, when the customer uses the fair-share policy. */
+  fairSharePct: number | null
 }

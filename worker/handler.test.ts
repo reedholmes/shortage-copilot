@@ -4,16 +4,18 @@
  */
 import { describe, expect, it, vi } from 'vitest'
 import worldJson from '../src/data/world.json'
-import { DEFAULT_SETTINGS, planSku } from '../src/engine/allocation'
+import { planSku } from '../src/engine/allocation'
+import { CUSTOMERS, settingsFromConfig } from '../src/engine/customerConfig'
 import type { World } from '../src/engine/types'
 import { handleDraftNote } from './handler'
 import type { DraftResponse, Env } from './handler'
 import { templateNote } from './note'
 
 const world = worldJson as World
+const [ACME, BLUESTONE] = CUSTOMERS.map(settingsFromConfig)
 // A real backordered market from the demo data.
-const backordered = planSku(world, 'AGS-750', DEFAULT_SETTINGS).lines.find((l) => l.backorderQty > 0)!
-const fullyShipped = planSku(world, 'CVK-1L', DEFAULT_SETTINGS).lines.find((l) => l.orderQty > 0)!
+const backordered = planSku(world, 'AGS-750', ACME).lines.find((l) => l.backorderQty > 0)!
+const fullyShipped = planSku(world, 'CVK-1L', ACME).lines.find((l) => l.orderQty > 0)!
 
 const AI_DRAFT = { subject: 'AI subject', body: 'AI body', summary: 'AI summary' }
 
@@ -120,6 +122,23 @@ describe('/api/draft-note', () => {
       expect(res.status).toBe(400)
     }
     expect(ai).not.toHaveBeenCalled()
+  })
+
+  it('rejects a customer that has no config', async () => {
+    const { env } = makeEnv()
+    const res = await handleDraftNote(post({ ...validBody, customerId: 'not_a_customer' }), env, vi.fn(async () => AI_DRAFT))
+    expect(res.status).toBe(400)
+  })
+
+  it("applies the requested customer's rules when recomputing the facts", async () => {
+    const { env } = makeEnv()
+    const ai = vi.fn(async () => AI_DRAFT)
+    const acme = await read(await handleDraftNote(post({ ...validBody, customerId: 'acme_beverage' }), env, ai))
+    const bluestoneLine = planSku(world, 'AGS-750', BLUESTONE).lines.find((l) => l.marketId === backordered.marketId)!
+    const bluestone = await read(await handleDraftNote(post({ ...validBody, customerId: 'bluestone_spirits' }), env, ai))
+    expect(acme.facts.backorderedCases).toBe(backordered.backorderQty)
+    expect(bluestone.facts.backorderedCases).toBe(bluestoneLine.backorderQty)
+    expect(bluestone.facts.incomingTransfer).toBeUndefined() // Bluestone doesn't do transfers
   })
 
   it('refuses markets with nothing backordered', async () => {

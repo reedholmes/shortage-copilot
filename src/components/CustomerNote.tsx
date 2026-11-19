@@ -11,6 +11,7 @@ import type { Settings, World } from '../engine/types'
 import { n } from '../ui/format'
 
 interface Props {
+  customerId: string
   world: World
   skuId: string
   setSkuId: (id: string) => void
@@ -38,14 +39,14 @@ const REASON_LABEL: Record<NonNullable<DraftResult['reason']>, string> = {
   ai_unavailable: "The AI service didn't respond. Showing the template version.",
 }
 
-export default function CustomerNote({ world, skuId, setSkuId, settings, overrides, marketId, setMarketId }: Props) {
+export default function CustomerNote({ customerId, world, skuId, setSkuId, settings, overrides, marketId, setMarketId }: Props) {
   const plan = planSku(world, skuId, settings, overrides)
   const affected = plan.lines.filter((l) => l.backorderQty > 0)
   const line = affected.find((l) => l.marketId === marketId) ?? affected[0]
   const facts = line ? buildNoteFacts(world, skuId, line.marketId, settings, overrides) : null
 
   // A draft belongs to the exact facts it was written from; if the facts change, it is stale.
-  const factsKey = JSON.stringify(facts)
+  const factsKey = customerId + JSON.stringify(facts)
   const [result, setResult] = useState<{ key: string; data: DraftResult } | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -62,6 +63,7 @@ export default function CustomerNote({ world, skuId, setSkuId, settings, overrid
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
+          customerId,
           skuId,
           marketId: line.marketId,
           nearDepletionWeight: settings.nearDepletionWeight,

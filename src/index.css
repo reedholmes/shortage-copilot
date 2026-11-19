@@ -176,3 +176,11 @@ table.mini { border-collapse: collapse; width: 100%; font-size: 13px; }
   .tiles { grid-template-columns: repeat(2, 1fr); }
   .detail-body, .note-grid { grid-template-columns: 1fr; }
 }
+
+/* Customer switcher and Compare customers screen */
+.customer-pick { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; font-weight: 600; }
+.customer-pick select { padding: 5px 8px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+tr.differs td { background: var(--amber-soft); }
+.compare-note { margin-top: 8px; }
+.compare-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+.compare-stats .delta { display: block; font-size: 12px; font-weight: 600; }

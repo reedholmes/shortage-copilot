@@ -22,6 +22,7 @@ import type {
   OrderFill,
   Plan,
   Position,
+  PriorityType,
   Settings,
   Sku,
   SkuSummary,
@@ -29,7 +30,12 @@ import type {
   World,
 } from './types'
 
+/** Same rules as config/customer_acme_beverage.json, minus the priority list (tests tag distributors directly). */
 export const DEFAULT_SETTINGS: Settings = {
+  allocationPolicy: 'equal_days_of_cover',
+  holdCoveredMarkets: true,
+  priorityRule: 'only_when_at_risk',
+  transfersEnabled: true,
   nearDepletionWeight: 0.75,
   baseBufferDays: 7,
   highVelocityExtraDays: 3,
@@ -172,6 +178,8 @@ interface Acct {
   pos: Position
   market: Market
   dist: Distributor
+  /** Priority tier from the customer config (or the distributor's own tag in tests). */
+  priority: PriorityType
   avgDaily: number
   effOnHand: number
   inboundBeforeRun: number
@@ -203,10 +211,14 @@ function buildAccounts(world: World, ctx: SkuContext, settings: Settings): Acct[
           .map((t) => t.qty),
       )
       const effOnHand = pos.onHand + inTransitCounted
+      const priority = settings.priorityAccounts
+        ? (settings.priorityAccounts[dist.id] ?? null)
+        : (dist.priority ?? null)
       return {
         pos,
         market,
         dist,
+        priority,
         avgDaily,
         effOnHand,
         inboundBeforeRun,
@@ -341,6 +353,37 @@ export function waterFill(items: FillItem[], supply: number): { ships: Map<strin
   return { ships, level }
 }
 
+/**
+ * Fair share: every market gets the same percentage of what it asked for.
+ * Simple and easy to defend contractually, but it ignores how close each market is
+ * to running out. Rounds down to whole cases, then hands leftovers to the biggest fractions.
+ */
+export function fairShare(items: FillItem[], supply: number): { ships: Map<string, number>; pct: number | null } {
+  const ships = new Map(items.map((i) => [i.id, 0]))
+  const live = items.filter((i) => i.cap > 0)
+  const avail = Math.floor(Math.max(0, supply))
+  const totalCap = sum(live.map((i) => i.cap))
+  if (avail <= 0 || !totalCap) return { ships, pct: avail <= 0 && totalCap ? 0 : null }
+  const pct = Math.min(1, avail / totalCap)
+  const raw = live.map((i) => ({ i, x: i.cap * pct }))
+  let left = avail
+  for (const r of raw) {
+    const f = Math.min(r.i.cap, Math.floor(r.x))
+    ships.set(r.i.id, f)
+    left -= f
+  }
+  raw.sort((a, b) => (b.x % 1) - (a.x % 1))
+  for (const r of raw) {
+    if (left <= 0) break
+    const cur = ships.get(r.i.id)!
+    if (cur < r.i.cap) {
+      ships.set(r.i.id, cur + 1)
+      left--
+    }
+  }
+  return { ships, pct }
+}
+
 // ---------------------------------------------------------------------------
 // Steps 3 to 6: the allocation itself
 // ---------------------------------------------------------------------------
@@ -351,10 +394,12 @@ interface AllocResult {
   ship: Map<string, number>
   rule: Map<string, Rule>
   level: number | null
+  /** Share of each order filled, when the fair-share policy ran. */
+  fairPct: number | null
   supplyAfterLocks: number
 }
 
-function allocate(accts: Acct[], ctx: SkuContext, overrides: Overrides): AllocResult {
+function allocate(accts: Acct[], ctx: SkuContext, settings: Settings, overrides: Overrides): AllocResult {
   const ship = new Map<string, number>(accts.map((a) => [a.market.id, 0]))
   const rule = new Map<string, Rule>()
   const id = (a: Acct) => a.market.id
@@ -381,45 +426,58 @@ function allocate(accts: Acct[], ctx: SkuContext, overrides: Overrides): AllocRe
       ship.set(id(a), a.orderQty)
       rule.set(id(a), 'FULL')
     }
-    return { ship, rule, level: null, supplyAfterLocks }
+    return { ship, rule, level: null, fairPct: null, supplyAfterLocks }
   }
 
-  // Step 5: hold orders for markets already covered to the run plus buffer.
+  const alwaysFirst = settings.priorityRule === 'always_first'
+
+  // Step 5: hold orders for markets already covered to the run plus buffer
+  // (if the customer holds at all; an "always first" priority account is never held).
   const holdLine = ctx.daysToRun + ctx.bufferDays
-  const held = ordering.filter((a) => baseCases(a) / a.avgDaily >= holdLine)
+  const held = settings.holdCoveredMarkets
+    ? ordering.filter((a) => baseCases(a) / a.avgDaily >= holdLine && !(alwaysFirst && a.priority))
+    : []
   for (const a of held) rule.set(id(a), 'HOLD')
   const candidates = ordering.filter((a) => !held.includes(a))
 
-  // Step 6a: priority accounts that would run out before the run jump the line.
-  // They get enough to reach the run date (not the buffer), capped at what they ordered.
-  const priorityAtRisk = candidates.filter((a) => a.dist.priority && baseCases(a) / a.avgDaily < ctx.daysToRun)
-  const pItems: FillItem[] = priorityAtRisk.map((a) => ({
+  // Step 6a: priority accounts jump the line.
+  //  - only_when_at_risk: only if they would run out before the run, and only up to what
+  //    gets them to the run date (not the buffer), capped at what they ordered.
+  //  - always_first: every priority account is filled first, up to its full order.
+  // If supply can't cover them all, they share it toward equal days of cover.
+  const priorityFirst = candidates.filter(
+    (a) => a.priority && (alwaysFirst || baseCases(a) / a.avgDaily < ctx.daysToRun),
+  )
+  const pItems: FillItem[] = priorityFirst.map((a) => ({
     id: id(a),
     base: baseCases(a),
     rate: a.avgDaily,
-    cap: Math.min(a.orderQty, Math.ceil(ctx.daysToRun * a.avgDaily - baseCases(a))),
+    cap: alwaysFirst ? a.orderQty : Math.min(a.orderQty, Math.ceil(ctx.daysToRun * a.avgDaily - baseCases(a))),
   }))
   const pFill = waterFill(pItems, supply)
-  for (const a of priorityAtRisk) {
+  for (const a of priorityFirst) {
     const q = pFill.ships.get(id(a)) ?? 0
     ship.set(id(a), q)
     if (q > 0) rule.set(id(a), 'PRIORITY')
     supply -= q
   }
 
-  // Steps 4 + 6b: spread what's left across all candidates, lowest cover first.
+  // Steps 4 + 6b: split what's left across all candidates, using the customer's policy.
+  //  - equal_days_of_cover: lowest cover first, rising together (water-fill)
+  //  - fair_share: everyone gets the same percentage of what they still need
   const items: FillItem[] = candidates.map((a) => ({
     id: id(a),
     base: baseCases(a) + ship.get(id(a))!,
     rate: a.avgDaily,
     cap: a.orderQty - ship.get(id(a))!,
   }))
-  const fill = waterFill(items, supply)
+  const fair = settings.allocationPolicy === 'fair_share'
+  const fill = fair ? { ...fairShare(items, supply), level: null } : { ...waterFill(items, supply), pct: null }
   for (const a of candidates) {
     const q = fill.ships.get(id(a)) ?? 0
     ship.set(id(a), ship.get(id(a))! + q)
     supply -= q
-    if (!rule.has(id(a))) rule.set(id(a), 'SPREAD')
+    if (!rule.has(id(a))) rule.set(id(a), fair ? 'FAIR SHARE' : 'SPREAD')
   }
 
   // Anything still left (rare) is released to held orders, spread the same way.
@@ -438,7 +496,7 @@ function allocate(accts: Acct[], ctx: SkuContext, overrides: Overrides): AllocRe
     }
   }
 
-  return { ship, rule, level: fill.level, supplyAfterLocks }
+  return { ship, rule, level: fill.level, fairPct: fill.pct, supplyAfterLocks }
 }
 
 // ---------------------------------------------------------------------------
@@ -473,9 +531,9 @@ export function planSku(
   const totalOrders = sum(accts.map((a) => a.orderQty))
   const isShort = sku.availableNow < totalOrders
 
-  const transfers = isShort ? suggestTransfers(accts, ctx, settings) : []
-  const recommended = allocate(accts, ctx, {})
-  const current = Object.keys(overrides).length ? allocate(accts, ctx, overrides) : recommended
+  const transfers = isShort && settings.transfersEnabled ? suggestTransfers(accts, ctx, settings) : []
+  const recommended = allocate(accts, ctx, settings, {})
+  const current = Object.keys(overrides).length ? allocate(accts, ctx, settings, overrides) : recommended
 
   const runDateTxt = fmtDate(ctx.runDate)
   const holdLine = ctx.daysToRun + ctx.bufferDays
@@ -520,8 +578,18 @@ export function planSku(
         reasons.push(`Covered past the run plus buffer, but supply was left after everyone else, so ${cs(ship)} released.`)
         break
       case 'PRIORITY':
+        if (settings.priorityRule === 'always_first')
+          reasons.push(
+            `${a.priority}: customer rule serves priority accounts first, up to the full order, whatever their cover (${days(coverBefore)} today).`,
+          )
+        else
+          reasons.push(
+            `${a.priority} at stockout risk: would run out in ${days(coverBefore)}, ${days(ctx.daysToRun - coverBefore)} before the run. Served first, up to what gets it to the run date.`,
+          )
+        break
+      case 'FAIR SHARE':
         reasons.push(
-          `${a.dist.priority} at stockout risk: would run out in ${days(coverBefore)}, ${days(ctx.daysToRun - coverBefore)} before the run. Served first, up to what gets it to the run date.`,
+          `Customer contract: every market that needs stock gets the same share of its order (${current.fairPct !== null ? Math.round(current.fairPct * 100) + '%' : 'n/a'}). This market gets ${cs(ship)} of ${cs(a.orderQty)} ordered, whatever its cover.`,
         )
         break
       case 'SPREAD':
@@ -569,7 +637,7 @@ export function planSku(
       distributorId: a.dist.id,
       distributorName: a.dist.name,
       state: a.market.state,
-      priority: a.dist.priority,
+      priority: a.priority,
       avgDaily: a.avgDaily,
       effOnHand: a.effOnHand,
       inboundBeforeRun: a.inboundBeforeRun,
@@ -632,6 +700,7 @@ export function planSku(
     unallocated: Math.max(0, sku.availableNow - shipped),
     overAllocated: Math.max(0, shipped - sku.availableNow),
     spreadLevelDays: current.level,
+    fairSharePct: current.fairPct,
   }
 }
 
